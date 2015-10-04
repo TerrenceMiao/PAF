@@ -1,3 +1,5 @@
 # Don’t commit the following directories
 data/
 
+# Or the files
+*.swp
