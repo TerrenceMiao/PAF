@@ -1,5 +1,6 @@
 ### Load data into MySQL by using LOAD DATA INFILE for fixed width data files
 
+```
 sql> use paf;
 
 sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_CODE.dat' INTO TABLE code FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n'
@@ -25,5 +26,6 @@ sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_GROUP.dat' 
 
 sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_POINT.dat' INTO TABLE delivery_point FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n'
 [2015-10-04 20:37:16] 13592848 rows affected in 1m 22s 521ms
+```
 
 
