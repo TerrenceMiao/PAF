@@ -44,26 +44,26 @@ CREATE TABLE IF NOT EXISTS bordering_locality (
 
 CREATE TABLE IF NOT EXISTS building_property_name (
     record_actn_code CHAR(1) NOT NULL,
-    delivery_point_id CHAR(8) NOT NULL,
+    delivy_point_id CHAR(8) NOT NULL,
     bldg_prop_name_1 CHAR(30) NOT NULL,
     bldg_prop_name_2 CHAR(30)
 );
 
 CREATE TABLE IF NOT EXISTS delivery_point_group (
     record_actn_code CHAR(1) NOT NULL,
-    delivery_point_group_id CHAR(8) NOT NULL,
+    delivy_point_group_id CHAR(8) NOT NULL,
     locality_id CHAR(8) NOT NULL,
     street_name CHAR(30) NOT NULL,
     street_type CHAR(4) NOT NULL,
     street_sfx CHAR(2),
     postal_delivery_type CHAR(11) NOT NULL,
-    delivery_point_group_did CHAR(8) NOT NULL
+    delivy_point_group_did CHAR(8) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS delivery_point (
     record_actn_code CHAR(1) NOT NULL,
-    delivery_point_id CHAR(8) NOT NULL,
-    delivery_point_group_id CHAR(8) NOT NULL,
+    delivy_point_id CHAR(8) NOT NULL,
+    delivy_point_group_id CHAR(8) NOT NULL,
     house_nbr_1 CHAR(5) NOT NULL,
     house_nbr_sfx_1 CHAR(1),
     house_nbr_2 CHAR(5) NOT NULL,
@@ -78,4 +78,3 @@ CREATE TABLE IF NOT EXISTS delivery_point (
     postal_delivery_nbr_sfx CHAR(3),
     primary_point_ind CHAR(1)
 );  
-
