@@ -29,3 +29,16 @@ sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_POINT.dat' 
 ```
 
 
+### Error "Data Too Long for column xxx" when load data into MySQL on Windows
+
+This is due to Fixed Width LOAD DATA INFILE doesn't work on Windows MySQL.
+
+A workaround solution to this issue is:
+
+```
+sql> use paf;
+
+LOAD DATA LOCAL INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_CODE.dat' INTO TABLE code (@row)
+SET record_actn_code = SUBSTR(@row,1,1), type_id = SUBSTR(@row,2,3), type_item = SUBSTR(@row,5,40), type_item_abbr = SUBSTR(@row,45,25), type_actn_code = SUBSTR(@row,70,1);
+[2015-10-11 20:28:03] 637 rows affected in 29ms
+```
