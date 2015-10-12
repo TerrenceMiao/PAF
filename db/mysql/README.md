@@ -76,13 +76,29 @@ mysql> SELECT * FROM delivery_point WHERE delivy_point_group_id = "00783106" and
 ### Query Postal Address by Delivery Point ID (DPID)
 
 Example, looking for DPID "45535128"'s Postal Address
+
 ```
-SELECT * FROM delivery_point WHERE delivy_point_id = "45535128";
--- house_nbr_1: 00035, delivy_point_group_id: 00592628
+mysql> SELECT * FROM delivery_point WHERE delivy_point_id = "45535128";
++------------------+-----------------+-----------------------+-------------+-----------------+-------------+-----------------+----------------+---------------+------------------+-----------------+---------+---------------------+-------------------------+-------------------------+-------------------+
+| record_actn_code | delivy_point_id | delivy_point_group_id | house_nbr_1 | house_nbr_sfx_1 | house_nbr_2 | house_nbr_sfx_2 | flat_unit_type | flat_unit_nbr | floor_level_type | floor_level_nbr | lot_nbr | postal_delivery_nbr | postal_delivery_nbr_pfx | postal_delivery_nbr_sfx | primary_point_ind |
++------------------+-----------------+-----------------------+-------------+-----------------+-------------+-----------------+----------------+---------------+------------------+-----------------+---------+---------------------+-------------------------+-------------------------+-------------------+
+| I                | 45535128        | 00592628              | 00035       |                 | 00000       |                 |                |               |                  |                 |         | 00000               |                         |                         | R                 |
++------------------+-----------------+-----------------------+-------------+-----------------+-------------+-----------------+----------------+---------------+------------------+-----------------+---------+---------------------+-------------------------+-------------------------+-------------------+
+1 row in set (8.31 sec)
 
-SELECT * FROM delivery_point_group WHERE delivy_point_group_id = "00592628";
--- locality_id: 00011762, street_name: BRADSHAW, street_type: ST
+mysql> SELECT * FROM delivery_point_group WHERE delivy_point_group_id = "00592628";
++------------------+-----------------------+-------------+-------------+-------------+------------+----------------------+------------------------+
+| record_actn_code | delivy_point_group_id | locality_id | street_name | street_type | street_sfx | postal_delivery_type | delivy_point_group_did |
++------------------+-----------------------+-------------+-------------+-------------+------------+----------------------+------------------------+
+| I                | 00592628              | 00011762    | BRADSHAW    | ST          |            |                      |                        |
++------------------+-----------------------+-------------+-------------+-------------+------------+----------------------+------------------------+
+1 row in set (0.18 sec)
 
-SELECT * FROM locality WHERE locality_id = "00011762";
--- locality_name: KINGSBURY, postcode: 3083, state: VIC
+mysql> SELECT * FROM locality WHERE locality_id = "00011762";
++------------------+-------------+---------------+----------+-------+--------------+
+| record_actn_code | locality_id | locality_name | postcode | state | locality_did |
++------------------+-------------+---------------+----------+-------+--------------+
+| I                | 00011762    | KINGSBURY     | 3083     | VIC   |              |
++------------------+-------------+---------------+----------+-------+--------------+
+1 row in set (0.01 sec)
 ```
