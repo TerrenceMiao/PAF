@@ -14,7 +14,7 @@ terrence@Silencer ~/Projects/PAF/db/mysql
 20:57:56 127 𝜆 /usr/local/mysql/bin/mysql -h localhost -u paf -ppassword -D paf < create_tables.sql
 ```
 
-### Query Delivery Point ID by Postal Address
+### Query Delivery Point ID (DPID) by Postal Address
 
 Example, looking address "18 Sandlewood Lane, Point Cook, VIC 3030"
 
@@ -71,4 +71,18 @@ mysql> SELECT * FROM delivery_point WHERE delivy_point_group_id = "00783106" and
 | I                | 51123887        | 00783106              | 00018       |                 | 00000       |                 |                |               |                  |                 |         | 00000               |                         |                         | R                 |
 +------------------+-----------------+-----------------------+-------------+-----------------+-------------+-----------------+----------------+---------------+------------------+-----------------+---------+---------------------+-------------------------+-------------------------+-------------------+
 1 row in set (8.56 sec)
+```
+
+### Query Postal Address by Delivery Point ID (DPID)
+
+Example, looking for DPID "45535128"'s Postal Address
+```
+SELECT * FROM delivery_point WHERE delivy_point_id = "45535128";
+-- house_nbr_1: 00035, delivy_point_group_id: 00592628
+
+SELECT * FROM delivery_point_group WHERE delivy_point_group_id = "00592628";
+-- locality_id: 00011762, street_name: BRADSHAW, street_type: ST
+
+SELECT * FROM locality WHERE locality_id = "00011762";
+-- locality_name: KINGSBURY, postcode: 3083, state: VIC
 ```
