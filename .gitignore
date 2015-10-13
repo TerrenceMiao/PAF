@@ -1,5 +1,7 @@
 # Don’t commit the following directories
-.idea
+.idea/
+.gradle/
+build/
 data/
 
 # Or the files
