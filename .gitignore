@@ -1,5 +1,7 @@
 # Don’t commit the following directories
+.idea
 data/
 
 # Or the files
+*.iml
 *.swp
