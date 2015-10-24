@@ -1,6 +1,7 @@
 package au.com.auspost.microservice.repositories;
 
 import au.com.auspost.microservice.autoconfigure.RepositoryConfiguration;
+import au.com.auspost.microservice.domain.Code;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by miaot on 13/10/2015.
@@ -44,8 +49,59 @@ public class CodeRepositoryTest {
     }
 
     @Test
-    public void testReadCode() {
+    public void testSaveReadCode() {
 
+        // setup code
+        Code code = new Code();
+        code.setRecordActnCode("I");
+        code.setTypeId("FLT");
+        code.setTypeItem("BASEMENT");
+        code.setTypeItemAbbr("B");
+        code.setTypeActnCode("V");
+
+        // save code, verify has ID value after save
+        // null before save
+        assertNull(code.getId());
+        codeRepository.save(code);
+        // not null after save
+        assertNotNull(code.getId());
+
+        // fetch from DB
+        Code fetchedCode = codeRepository.findOne(code.getId());
+
+        // should not be null
+        assertNotNull(fetchedCode);
+
+        // should equal
+        assertEquals(code.getId(), fetchedCode.getId());
+        assertEquals(code.getRecordActnCode(), fetchedCode.getRecordActnCode());
+        assertEquals(code.getTypeId(), fetchedCode.getTypeId());
+        assertEquals(code.getTypeItem(), fetchedCode.getTypeItem());
+        assertEquals(code.getTypeItemAbbr(), fetchedCode.getTypeItemAbbr());
+        assertEquals(code.getTypeActnCode(), fetchedCode.getTypeActnCode());
+
+        // update description and save
+        fetchedCode.setTypeItem("B");
+        codeRepository.save(fetchedCode);
+
+        // get from DB, should be updated
+        Code fetchedUpdatedCode = codeRepository.findOne(fetchedCode.getId());
+        assertEquals(fetchedCode.getTypeItem(), fetchedUpdatedCode.getTypeItem());
+
+        // verify count of products in DB
+        long codeCount = codeRepository.count();
+        assertEquals(codeCount, 1);
+
+        // get all codes, list should only have one
+        Iterable<Code> codes = codeRepository.findAll();
+
+        int count = 0;
+
+        for (Code c : codes) {
+            count++;
+        }
+
+        assertEquals(count, 1);
     }
 
 }
