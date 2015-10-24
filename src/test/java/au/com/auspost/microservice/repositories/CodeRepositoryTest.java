@@ -17,7 +17,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
  *
  * Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type
  * [org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping] found for dependency
- * [collection of org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping]: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {}
+ * [collection of org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping]: expected at least 1 bean
+ * which qualifies as autowire candidate for this dependency. Dependency annotations: {}
  *
  */
 @WebAppConfiguration

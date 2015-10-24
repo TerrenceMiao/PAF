@@ -71,13 +71,14 @@ public class Code {
 
     @Override
     public String toString() {
-        return "Code{" +
-                "recordActnCode='" + recordActnCode + '\'' +
-                ", typeId='" + typeId + '\'' +
-                ", typeItem='" + typeItem + '\'' +
-                ", typeItemAbbr='" + typeItemAbbr + '\'' +
-                ", typeActnCode='" + typeActnCode + '\'' +
-                '}';
+
+        return "Code{"
+                + "recordActnCode='" + recordActnCode + '\''
+                + ", typeId='" + typeId + '\''
+                + ", typeItem='" + typeItem + '\''
+                + ", typeItemAbbr='" + typeItemAbbr + '\''
+                + ", typeActnCode='" + typeActnCode + '\''
+                + '}';
     }
 
 }
