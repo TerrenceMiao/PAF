@@ -1,6 +1,6 @@
 package au.com.auspost.microservice.repositories;
 
-import au.com.auspost.microservice.autoconfigure.RepositoryConfiguration;
+import au.com.auspost.microservice.configuration.RepositoryConfiguration;
 import au.com.auspost.microservice.domain.Code;
 import org.junit.After;
 import org.junit.Before;

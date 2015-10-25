@@ -1,4 +1,4 @@
-package au.com.auspost.microservice.autoconfigure;
+package au.com.auspost.microservice.configuration;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.orm.jpa.EntityScan;
