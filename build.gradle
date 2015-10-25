@@ -1,27 +1,27 @@
 buildscript {
- 
-  ext {
-    nexus = {
-      credentials {
-        username nexusBuildUserToken
-        password nexusBuildPassToken
-      }
-      url nexusRepoURL
+
+    ext {
+        nexus = {
+            credentials {
+                username nexusBuildUserToken
+                password nexusBuildPassToken
+            }
+            url nexusRepoURL
+        }
     }
-  }
 
-  repositories {
-    maven(nexus)
-  }
+    repositories {
+        maven(nexus)
+    }
 
-  dependencies {
-    classpath("org.springframework.boot:spring-boot-gradle-plugin:${dependencyVersionSpringBootGradlePlugin}")
-    classpath("net.researchgate:gradle-release:${dependencyVersionGradleReleasePlugin}")
-  }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${dependencyVersionSpringBootGradlePlugin}")
+        classpath("net.researchgate:gradle-release:${dependencyVersionGradleReleasePlugin}")
+    }
 }
 
 repositories {
-  maven(nexus)
+    maven(nexus)
 }
 
 // IDE plugins
@@ -50,52 +50,52 @@ archivesBaseName = artifactId
 // configure plugins
 
 sonarRunner {
-  sonarProperties {
-    property 'sonar.projectKey', "${group}:${archivesBaseName}"
-    property 'sonar.projectName', "Microservice - ${archivesBaseName}"
-    property 'sonar.projectVersion', version
-    property "sonar.host.url", sonarHostURL
-    property "sonar.jdbc.url", sonarJDBCURL
-    property "sonar.jdbc.username", sonarJDBCUsername
-    property "sonar.jdbc.password", sonarJDBCPassword
-    property 'sonar.language', 'java'
-    property 'sonar.jacoco.reportPath', "${buildDir}/jacoco/jacoco.exec"
-    // property 'sonar.exclusions', 'au/com/auspost/project/resources/**/*'
-  }
+    sonarProperties {
+        property 'sonar.projectKey', "${group}:${archivesBaseName}"
+        property 'sonar.projectName', "Microservice - ${archivesBaseName}"
+        property 'sonar.projectVersion', version
+        property "sonar.host.url", sonarHostURL
+        property "sonar.jdbc.url", sonarJDBCURL
+        property "sonar.jdbc.username", sonarJDBCUsername
+        property "sonar.jdbc.password", sonarJDBCPassword
+        property 'sonar.language', 'java'
+        property 'sonar.jacoco.reportPath', "${buildDir}/jacoco/jacoco.exec"
+        // property 'sonar.exclusions', 'au/com/auspost/project/resources/**/*'
+    }
 }
 
 uploadArchives {
-  repositories {
-    mavenDeployer {
-      repository(url: nexusReleaseURL) {
-        authentication(userName: nexusBuildUserToken, password: nexusBuildPassToken);
-      }
-      snapshotRepository(url: nexusSnapshotURL) {
-        authentication(userName: nexusBuildUserToken, password: nexusBuildPassToken);
-      }
+    repositories {
+        mavenDeployer {
+            repository(url: nexusReleaseURL) {
+                authentication(userName: nexusBuildUserToken, password: nexusBuildPassToken);
+            }
+            snapshotRepository(url: nexusSnapshotURL) {
+                authentication(userName: nexusBuildUserToken, password: nexusBuildPassToken);
+            }
+        }
     }
-  }
 }
 
 jacoco {
-  toolVersion = "${dependencyVersionJacocoTool}"
-  reportsDir = file("${buildDir}/jacocoReportDir")
+    toolVersion = "${dependencyVersionJacocoTool}"
+    reportsDir = file("${buildDir}/jacocoReportDir")
 }
 
 test {
-  jacoco {
-    append = false
-    destinationFile = file("$buildDir/jacoco/jacoco.exec")
-    classDumpFile = file("$buildDir/jacoco/classpathdumps")
-  }
+    jacoco {
+        append = false
+        destinationFile = file("$buildDir/jacoco/jacoco.exec")
+        classDumpFile = file("$buildDir/jacoco/classpathdumps")
+    }
 }
 
 jacocoTestReport {
-  reports {
-    xml.enabled false
-    csv.enabled false
-    html.destination "${buildDir}/jacocoHtml"
-  }
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
 }
 
 release {
@@ -107,7 +107,7 @@ release {
 
 
 checkstyle {
-  toolVersion = "6.0"
+    toolVersion = "6.0"
 }
 
 // only tag a release if the upload of the artefacts to Nexus was successful
@@ -129,25 +129,27 @@ sourceSets.test.runtimeClasspath += [configurations.provided]
 eclipse.classpath.plusConfigurations += [configurations.provided]
 
 dependencies {
-  // web dependencies
-  // compile("au.com.auspost.boot:auspost-spring-boot-starter-web:${dependencyVersionAuspostSpringBoot}")
+    // web dependencies
+    // compile("au.com.auspost.boot:auspost-spring-boot-starter-web:${dependencyVersionAuspostSpringBoot}")
 
-  // service monitoring and stats (exposed via /_admin context path)
-  // compile("au.com.auspost.boot:auspost-spring-boot-starter-actuator:${dependencyVersionAuspostSpringBoot}")
+    // service monitoring and stats (exposed via /_admin context path)
+    // compile("au.com.auspost.boot:auspost-spring-boot-starter-actuator:${dependencyVersionAuspostSpringBoot}")
 
-  // swagger documentation
-  // compile("au.com.auspost.boot:auspost-spring-boot-starter-swagger:${dependencyVersionAuspostSpringBoot}")
+    // swagger documentation
+    // compile("au.com.auspost.boot:auspost-spring-boot-starter-swagger:${dependencyVersionAuspostSpringBoot}")
 
-  // database dependencies
-  // compile("au.com.auspost.boot:auspost-spring-boot-starter-data-jpa:${dependencyVersionAuspostSpringBoot}")
+    // database dependencies
+    // compile("au.com.auspost.boot:auspost-spring-boot-starter-data-jpa:${dependencyVersionAuspostSpringBoot}")
 
-  compile 'org.springframework.boot:spring-boot-starter:1.2.7.RELEASE'
-  compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.2.7.RELEASE'
-  compile 'org.springframework.boot:spring-boot-starter-web:1.2.7.RELEASE'
-  compile 'org.springframework.boot:spring-boot-starter-security:1.2.7.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter:1.2.7.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.2.7.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-web:1.2.7.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-security:1.2.7.RELEASE'
 
-  compile 'com.h2database:h2:1.4.190'
+    compile 'com.h2database:h2:1.4.190'
 
-  // test dependencies
-  testCompile("org.springframework.boot:spring-boot-starter-test:${dependencyVersionSpringBoot}")
+    compile 'mysql:mysql-connector-java'
+
+    // test dependencies
+    testCompile("org.springframework.boot:spring-boot-starter-test:${dependencyVersionSpringBoot}")
 }
