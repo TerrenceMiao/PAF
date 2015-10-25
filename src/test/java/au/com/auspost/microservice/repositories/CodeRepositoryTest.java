@@ -51,6 +51,9 @@ public class CodeRepositoryTest {
     @Test
     public void testSaveReadCode() {
 
+        // get original data rows count
+        long originalCodeCount = codeRepository.count();
+
         // setup code
         Code code = new Code();
         code.setRecordActnCode("I");
@@ -90,7 +93,7 @@ public class CodeRepositoryTest {
 
         // verify count of products in DB
         long codeCount = codeRepository.count();
-        assertEquals(codeCount, 1);
+        assertEquals(codeCount, originalCodeCount + 1);
 
         // get all codes, list should only have one
         Iterable<Code> codes = codeRepository.findAll();
@@ -101,7 +104,7 @@ public class CodeRepositoryTest {
             count++;
         }
 
-        assertEquals(count, 1);
+        assertEquals(count, originalCodeCount + 1);
     }
 
 }
