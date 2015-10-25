@@ -3,29 +3,29 @@
 ```
 sql> use paf;
 
-LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_CODE.dat' INTO TABLE code FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n'
-[2015-10-04 20:35:49] 637 rows affected in 10ms
+sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_CODE.dat' INTO TABLE code  FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n' (record_actn_code, type_id, type_item, type_item_abbr, type_actn_code)
+[2015-10-25 15:01:25] 637 rows affected in 17ms
 
-LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_STREET_ALTERNATE.dat' INTO TABLE street_alternate FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n'
-[2015-10-04 20:35:50] 589 rows affected in 240ms
+sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_STREET_ALTERNATE.dat' INTO TABLE street_alternate FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n' (record_actn_code, delivy_point_group_id, st_alt_street_name, st_alt_street_type, st_alt_street_sfx)
+[2015-10-25 15:01:33] 589 rows affected in 16ms
 
-LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_SYNONYM.dat' INTO TABLE synonym FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n'
-[2015-10-04 20:35:50] 6366 rows affected in 82ms
+sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_SYNONYM.dat' INTO TABLE synonym FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n' (record_actn_code, type_id, locality_id, synonym, postcode, type_actn_code)
+[2015-10-25 15:01:52] 6366 rows affected in 115ms
 
-LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_LOCALITY.dat' INTO TABLE locality FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n'
-[2015-10-04 20:35:50] 15790 rows affected in 117ms
+sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_LOCALITY.dat' INTO TABLE locality FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n' (record_actn_code, locality_id, locality_name, postcode, state, locality_did)
+[2015-10-25 15:02:30] 15790 rows affected in 194ms
 
-LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_BORDERING_LOCALITY.dat' INTO TABLE bordering_locality FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n'
-[2015-10-04 20:35:50] 78852 rows affected in 464ms
+sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_BORDERING_LOCALITY.dat' INTO TABLE bordering_locality FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n' (record_actn_code, parent_locality_id, bordering_locality_id, bordering_locality_name, bordering_postcode)
+[2015-10-25 15:02:50] 78852 rows affected in 473ms
 
-LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_BLDG_PROP_NAME.dat' INTO TABLE building_property_name FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n'
-[2015-10-04 20:35:51] 197457 rows affected in 784ms
+sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_BLDG_PROP_NAME.dat' INTO TABLE building_property_name FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n' (record_actn_code, delivy_point_id, bldg_prop_name_1, bldg_prop_name_2)
+[2015-10-25 15:03:13] 197457 rows affected in 907ms
 
-LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_GROUP.dat' INTO TABLE delivery_point_group FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n'
-[2015-10-04 20:35:53] 459033 rows affected in 2s 200ms
+sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_GROUP.dat' INTO TABLE delivery_point_group FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n' (record_actn_code, delivy_point_group_id, locality_id, street_name, street_type, street_sfx, postal_delivery_type, delivy_point_group_did)
+[2015-10-25 15:03:35] 459033 rows affected in 2s 318ms
 
-LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_POINT.dat' INTO TABLE delivery_point FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n'
-[2015-10-04 20:37:16] 13592848 rows affected in 1m 22s 521ms
+sql> LOAD DATA INFILE '/Users/terrence/Projects/PAF/data/PAF_V2016-0_POINT.dat' INTO TABLE delivery_point FIELDS TERMINATED BY '' LINES TERMINATED BY '\r\n' (record_actn_code, delivy_point_id, delivy_point_group_id, house_nbr_1, house_nbr_sfx_1, house_nbr_2, house_nbr_sfx_2, flat_unit_type, flat_unit_nbr, floor_level_type, floor_level_nbr, lot_nbr, postal_delivery_nbr, postal_delivery_nbr_pfx, postal_delivery_nbr_sfx, primary_point_ind)
+[2015-10-25 15:05:39] 13592848 rows affected in 1m 29s 258ms
 ```
 
 
