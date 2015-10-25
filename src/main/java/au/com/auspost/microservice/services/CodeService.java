@@ -18,7 +18,7 @@ public interface CodeService {
     class Impl implements CodeService {
 
         @Autowired
-        CodeRepository codeRepository;
+        private CodeRepository codeRepository;
 
         @Override
         public List<Code> getCodeListByTypeItem(String typeItem) {
