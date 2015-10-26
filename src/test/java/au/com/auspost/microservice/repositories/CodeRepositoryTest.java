@@ -33,12 +33,8 @@ import static org.junit.Assert.assertNull;
 @SpringApplicationConfiguration(classes = {RepositoryConfiguration.class})
 public class CodeRepositoryTest {
 
-    private CodeRepository codeRepository;
-
     @Autowired
-    public void setCodeRepository(CodeRepository codeRepository) {
-        this.codeRepository = codeRepository;
-    }
+    private CodeRepository codeRepository;
 
     @Before
     public void setUp() throws Exception {
@@ -55,6 +51,12 @@ public class CodeRepositoryTest {
 
         List<Code> codeList = codeRepository.findByTypeItem("FLOOR");
 
+        assertEquals("Wrong list size", 1, codeList.size());
+
+        assertEquals("Wrong Code Type Id", "FLT", codeList.get(0).getTypeId());
+        assertEquals("Wrong Code Type Item", "FLOOR", codeList.get(0).getTypeItem());
+        assertEquals("Wrong Code Type Item Abbr", "FL", codeList.get(0).getTypeItemAbbr());
+        assertEquals("Wrong Code Type Action Code", "V", codeList.get(0).getTypeActnCode());
     }
 
     @Test
