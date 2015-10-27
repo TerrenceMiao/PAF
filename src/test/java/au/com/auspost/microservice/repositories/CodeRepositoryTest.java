@@ -11,6 +11,8 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -31,12 +33,8 @@ import static org.junit.Assert.assertNull;
 @SpringApplicationConfiguration(classes = {RepositoryConfiguration.class})
 public class CodeRepositoryTest {
 
-    private CodeRepository codeRepository;
-
     @Autowired
-    public void setCodeRepository(CodeRepository codeRepository) {
-        this.codeRepository = codeRepository;
-    }
+    private CodeRepository codeRepository;
 
     @Before
     public void setUp() throws Exception {
@@ -49,7 +47,23 @@ public class CodeRepositoryTest {
     }
 
     @Test
+    public void testFindByTypeItem() {
+
+        List<Code> codeList = codeRepository.findByTypeItem("FLOOR");
+
+        assertEquals("Wrong list size", 1, codeList.size());
+
+        assertEquals("Wrong Code Type Id", "FLT", codeList.get(0).getTypeId());
+        assertEquals("Wrong Code Type Item", "FLOOR", codeList.get(0).getTypeItem());
+        assertEquals("Wrong Code Type Item Abbr", "FL", codeList.get(0).getTypeItemAbbr());
+        assertEquals("Wrong Code Type Action Code", "V", codeList.get(0).getTypeActnCode());
+    }
+
+    @Test
     public void testSaveReadCode() {
+
+        // get original data rows count
+        long originalCodeCount = codeRepository.count();
 
         // setup code
         Code code = new Code();
@@ -90,7 +104,7 @@ public class CodeRepositoryTest {
 
         // verify count of products in DB
         long codeCount = codeRepository.count();
-        assertEquals(codeCount, 1);
+        assertEquals(codeCount, originalCodeCount + 1);
 
         // get all codes, list should only have one
         Iterable<Code> codes = codeRepository.findAll();
@@ -101,7 +115,7 @@ public class CodeRepositoryTest {
             count++;
         }
 
-        assertEquals(count, 1);
+        assertEquals(count, originalCodeCount + 1);
     }
 
 }

@@ -1,7 +1,9 @@
 package au.com.auspost.microservice.repositories;
 
 import au.com.auspost.microservice.domain.Code;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -10,6 +12,9 @@ import java.util.List;
  */
 public interface CodeRepository extends CrudRepository<Code, Integer> {
 
-    List<Code> findByTypeItem(String typeItem);
+    String FIND_BY_TYPE_ITEM_QUERY = "SELECT c FROM Code c WHERE c.typeItem = :typeItem";
+
+    @Query(FIND_BY_TYPE_ITEM_QUERY)
+    List<Code> findByTypeItem(@Param("typeItem") String typeItem);
 
 }

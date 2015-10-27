@@ -1,6 +1,7 @@
 USE paf;
 
 CREATE TABLE IF NOT EXISTS code (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
     record_actn_code CHAR(1) NOT NULL,
     type_id CHAR(3) NOT NULL,
     type_item CHAR(40) NOT NULL,
@@ -9,6 +10,7 @@ CREATE TABLE IF NOT EXISTS code (
 );
 
 CREATE TABLE IF NOT EXISTS street_alternate (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
     record_actn_code CHAR(1) NOT NULL,
     delivy_point_group_id CHAR(8) NOT NULL,
     st_alt_street_name CHAR(30) NOT NULL,
@@ -17,6 +19,7 @@ CREATE TABLE IF NOT EXISTS street_alternate (
 );
 
 CREATE TABLE IF NOT EXISTS synonym (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
     record_actn_code CHAR(1) NOT NULL,
     type_id CHAR(3) NOT NULL,
     locality_id CHAR(8) NOT NULL,
@@ -26,6 +29,7 @@ CREATE TABLE IF NOT EXISTS synonym (
 );
 
 CREATE TABLE IF NOT EXISTS locality (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
     record_actn_code CHAR(1) NOT NULL,
     locality_id CHAR(8) NOT NULL,
     locality_name CHAR(46) NOT NULL,
@@ -35,6 +39,7 @@ CREATE TABLE IF NOT EXISTS locality (
 );
 
 CREATE TABLE IF NOT EXISTS bordering_locality (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
     record_actn_code CHAR(1) NOT NULL,
     parent_locality_id CHAR(8) NOT NULL,
     bordering_locality_id CHAR(8) NOT NULL,
@@ -43,6 +48,7 @@ CREATE TABLE IF NOT EXISTS bordering_locality (
 );
 
 CREATE TABLE IF NOT EXISTS building_property_name (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
     record_actn_code CHAR(1) NOT NULL,
     delivy_point_id CHAR(8) NOT NULL,
     bldg_prop_name_1 CHAR(30) NOT NULL,
@@ -50,6 +56,7 @@ CREATE TABLE IF NOT EXISTS building_property_name (
 );
 
 CREATE TABLE IF NOT EXISTS delivery_point_group (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
     record_actn_code CHAR(1) NOT NULL,
     delivy_point_group_id CHAR(8) NOT NULL,
     locality_id CHAR(8) NOT NULL,
@@ -61,6 +68,7 @@ CREATE TABLE IF NOT EXISTS delivery_point_group (
 );
 
 CREATE TABLE IF NOT EXISTS delivery_point (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
     record_actn_code CHAR(1) NOT NULL,
     delivy_point_id CHAR(8) NOT NULL,
     delivy_point_group_id CHAR(8) NOT NULL,
