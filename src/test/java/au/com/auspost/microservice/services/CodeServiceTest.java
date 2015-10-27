@@ -24,11 +24,15 @@ import static org.junit.Assert.assertEquals;
 @SpringApplicationConfiguration(classes = {RepositoryConfiguration.class})
 public class CodeServiceTest {
 
+    @Autowired
+    private CodeRepository codeRepository;
+
     private CodeService codeService = new CodeService.Impl();
 
     @Before
     public void setUp() throws Exception {
 
+        codeService.setCodeRepository(codeRepository);
     }
 
     @After

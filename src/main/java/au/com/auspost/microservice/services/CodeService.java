@@ -14,6 +14,9 @@ public interface CodeService {
 
     List<Code> getCodeListByTypeItem(String typeItem);
 
+    void setCodeRepository(CodeRepository codeRepository);
+
+
     @Service
     class Impl implements CodeService {
 
@@ -24,6 +27,11 @@ public interface CodeService {
         public List<Code> getCodeListByTypeItem(String typeItem) {
 
             return codeRepository.findByTypeItem(typeItem);
+        }
+
+        public void setCodeRepository(CodeRepository codeRepository) {
+
+            this.codeRepository = codeRepository;
         }
     }
 
