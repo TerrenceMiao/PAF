@@ -17,8 +17,8 @@ public class DeliveryPoint {
     private Integer id;
 
     private String recordActnCode;
-    private String deliveryPointId;
-    private String deliveryPointGroudId;
+    private String delivyPointId;
+    private String delivyPointGroupId;
     private String houseNbr1;
     private String houseNbrSfx1;
     private String houseNbr2;
@@ -49,20 +49,20 @@ public class DeliveryPoint {
         this.recordActnCode = recordActnCode;
     }
 
-    public String getDeliveryPointId() {
-        return deliveryPointId;
+    public String getDelivyPointId() {
+        return delivyPointId;
     }
 
-    public void setDeliveryPointId(String deliveryPointId) {
-        this.deliveryPointId = deliveryPointId;
+    public void setDelivyPointId(String delivyPointId) {
+        this.delivyPointId = delivyPointId;
     }
 
-    public String getDeliveryPointGroudId() {
-        return deliveryPointGroudId;
+    public String getDelivyPointGroupId() {
+        return delivyPointGroupId;
     }
 
-    public void setDeliveryPointGroudId(String deliveryPointGroudId) {
-        this.deliveryPointGroudId = deliveryPointGroudId;
+    public void setDelivyPointGroupId(String delivyPointGroupId) {
+        this.delivyPointGroupId = delivyPointGroupId;
     }
 
     public String getHouseNbr1() {
@@ -174,8 +174,8 @@ public class DeliveryPoint {
         return "DeliveryPoint{"
                 + "id=" + id
                 + ", recordActnCode='" + recordActnCode + '\''
-                + ", deliveryPointId='" + deliveryPointId + '\''
-                + ", deliveryPointGroudId='" + deliveryPointGroudId + '\''
+                + ", delivyPointId='" + delivyPointId + '\''
+                + ", delivyPointGroupId='" + delivyPointGroupId + '\''
                 + ", houseNbr1='" + houseNbr1 + '\''
                 + ", houseNbrSfx1='" + houseNbrSfx1 + '\''
                 + ", houseNbr2='" + houseNbr2 + '\''

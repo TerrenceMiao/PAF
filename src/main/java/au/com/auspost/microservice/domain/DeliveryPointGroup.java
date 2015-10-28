@@ -17,7 +17,7 @@ public class DeliveryPointGroup {
     private Integer id;
 
     private String recordActnCode;
-    private String deliveryPointGroudId;
+    private String delivyPointGroupId;
     private String localityId;
     private String streetName;
     private String streetType;
@@ -41,12 +41,12 @@ public class DeliveryPointGroup {
         this.recordActnCode = recordActnCode;
     }
 
-    public String getDeliveryPointGroudId() {
-        return deliveryPointGroudId;
+    public String getDelivyPointGroupId() {
+        return delivyPointGroupId;
     }
 
-    public void setDeliveryPointGroudId(String deliveryPointGroudId) {
-        this.deliveryPointGroudId = deliveryPointGroudId;
+    public void setDelivyPointGroupId(String delivyPointGroupId) {
+        this.delivyPointGroupId = delivyPointGroupId;
     }
 
     public String getLocalityId() {
@@ -102,7 +102,7 @@ public class DeliveryPointGroup {
         return "DeliveryPointGroup{"
                 + "id=" + id
                 + ", recordActnCode='" + recordActnCode + '\''
-                + ", deliveryPointGroudId='" + deliveryPointGroudId + '\''
+                + ", delivyPointGroupId='" + delivyPointGroupId + '\''
                 + ", localityId='" + localityId + '\''
                 + ", streetName='" + streetName + '\''
                 + ", streetType='" + streetType + '\''
