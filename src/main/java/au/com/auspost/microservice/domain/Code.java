@@ -71,9 +71,9 @@ public class Code {
 
     @Override
     public String toString() {
-
         return "Code{"
-                + "recordActnCode='" + recordActnCode + '\''
+                + "id=" + id
+                + ", recordActnCode='" + recordActnCode + '\''
                 + ", typeId='" + typeId + '\''
                 + ", typeItem='" + typeItem + '\''
                 + ", typeItemAbbr='" + typeItemAbbr + '\''
