@@ -21,8 +21,8 @@ public class DeliveryPointGroup {
     private String localityId;
     private String streetName;
     private String streetType;
-    private String postcode;
-    private String state;
+    private String streetSfx;
+    private String postalDeliveryType;
     private String delivyPointGroupDid;
 
     public Integer getId() {
@@ -73,20 +73,20 @@ public class DeliveryPointGroup {
         this.streetType = streetType;
     }
 
-    public String getPostcode() {
-        return postcode;
+    public String getStreetSfx() {
+        return streetSfx;
     }
 
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
+    public void setStreetSfx(String streetSfx) {
+        this.streetSfx = streetSfx;
     }
 
-    public String getState() {
-        return state;
+    public String getPostalDeliveryType() {
+        return postalDeliveryType;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setPostalDeliveryType(String postalDeliveryType) {
+        this.postalDeliveryType = postalDeliveryType;
     }
 
     public String getDelivyPointGroupDid() {
@@ -106,8 +106,8 @@ public class DeliveryPointGroup {
                 + ", localityId='" + localityId + '\''
                 + ", streetName='" + streetName + '\''
                 + ", streetType='" + streetType + '\''
-                + ", postcode='" + postcode + '\''
-                + ", state='" + state + '\''
+                + ", streetSfx='" + streetSfx + '\''
+                + ", postalDeliveryType='" + postalDeliveryType + '\''
                 + ", delivyPointGroupDid='" + delivyPointGroupDid + '\''
                 + '}';
     }
