@@ -8,7 +8,8 @@ public class PostalAddress {
     private String lotNumber;
     private String flatUnitNumber;
     private String floorLevelNumber;
-    private String houseNumber;
+    private String houseNumber1;
+    private String houseNumber2;
 
     private String streetName;
     private String streetType;
@@ -41,12 +42,20 @@ public class PostalAddress {
         this.floorLevelNumber = floorLevelNumber;
     }
 
-    public String getHouseNumber() {
-        return houseNumber;
+    public String getHouseNumber1() {
+        return houseNumber1;
     }
 
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
+    public void setHouseNumber1(String houseNumber1) {
+        this.houseNumber1 = houseNumber1;
+    }
+
+    public String getHouseNumber2() {
+        return houseNumber2;
+    }
+
+    public void setHouseNumber2(String houseNumber2) {
+        this.houseNumber2 = houseNumber2;
     }
 
     public String getStreetName() {
@@ -95,7 +104,8 @@ public class PostalAddress {
                 + "lotNumber='" + lotNumber + '\''
                 + ", flatUnitNumber='" + flatUnitNumber + '\''
                 + ", floorLevelNumber='" + floorLevelNumber + '\''
-                + ", houseNumber='" + houseNumber + '\''
+                + ", houseNumber1='" + houseNumber1 + '\''
+                + ", houseNumber2='" + houseNumber2 + '\''
                 + ", streetName='" + streetName + '\''
                 + ", streetType='" + streetType + '\''
                 + ", localityName='" + localityName + '\''
