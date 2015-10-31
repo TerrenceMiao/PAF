@@ -7,6 +7,8 @@ import au.com.auspost.microservice.dto.PostalAddress;
 import au.com.auspost.microservice.repositories.DeliveryPointGroupRepository;
 import au.com.auspost.microservice.repositories.DeliveryPointRepository;
 import au.com.auspost.microservice.repositories.LocalityRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,8 @@ public interface PostalAddressService {
     @Service
     class Impl implements PostalAddressService {
 
+        private static final Logger LOG = LoggerFactory.getLogger(PostalAddressService.class);
+
         @Autowired
         private LocalityRepository localityRepository;
         @Autowired
@@ -35,6 +39,8 @@ public interface PostalAddressService {
 
         @Override
         public String getDpidFromPostalAddress(PostalAddress postalAddress) {
+
+            LOG.info("Query for " + postalAddress);
 
             List<Locality> localityList = localityRepository.findByLocalityName(postalAddress.getLocalityName());
 
