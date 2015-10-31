@@ -1,10 +1,7 @@
 package au.com.auspost.microservice.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by terrence on 28/10/15.
@@ -19,9 +16,13 @@ public class DeliveryPoint {
     private String recordActnCode;
     private String delivyPointId;
     private String delivyPointGroupId;
+    @Column(name = "HOUSE_NBR_1")
     private String houseNbr1;
+    @Column(name = "HOUSE_NBR_SFX_1")
     private String houseNbrSfx1;
+    @Column(name = "HOUSE_NBR_2")
     private String houseNbr2;
+    @Column(name = "HOUSE_NBR_SFX_2")
     private String houseNbrSfx2;
     private String flatUnitType;
     private String flatUnitNbr;
