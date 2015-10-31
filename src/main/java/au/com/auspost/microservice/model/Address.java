@@ -29,11 +29,11 @@ public class Address implements Serializable {
     private String houseNumber2;
 
     @NotNull
-    @JsonProperty("suburb")
+    @JsonProperty("streetName")
     private String streetName;
 
     @NotNull
-    @JsonProperty("suburb")
+    @JsonProperty("streetType")
     private String streetType;
 
     @NotNull
