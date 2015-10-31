@@ -23,7 +23,7 @@ public class DeliveryPointGroup {
     private String streetType;
     private String postcode;
     private String state;
-    private String localityDid;
+    private String delivyPointGroupDid;
 
     public Integer getId() {
         return id;
@@ -89,12 +89,12 @@ public class DeliveryPointGroup {
         this.state = state;
     }
 
-    public String getLocalityDid() {
-        return localityDid;
+    public String getDelivyPointGroupDid() {
+        return delivyPointGroupDid;
     }
 
-    public void setLocalityDid(String localityDid) {
-        this.localityDid = localityDid;
+    public void setDelivyPointGroupDid(String delivyPointGroupDid) {
+        this.delivyPointGroupDid = delivyPointGroupDid;
     }
 
     @Override
@@ -108,7 +108,7 @@ public class DeliveryPointGroup {
                 + ", streetType='" + streetType + '\''
                 + ", postcode='" + postcode + '\''
                 + ", state='" + state + '\''
-                + ", localityDid='" + localityDid + '\''
+                + ", delivyPointGroupDid='" + delivyPointGroupDid + '\''
                 + '}';
     }
 
