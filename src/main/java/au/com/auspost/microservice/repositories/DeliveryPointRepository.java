@@ -13,10 +13,10 @@ import java.util.List;
 public interface DeliveryPointRepository extends CrudRepository<DeliveryPoint, Integer> {
 
     String FIND_BY_DELIVY_POINT_GROUP_ID_AND_HOUSE_NBR_1_QUERY
-            = "SELECT d FROM DeliveryPoint d WHERE d.delivyPointGroupId = :delivyPointGroupId and d.houseNbr1 = :houseNbr1";
+            = "SELECT dp FROM DeliveryPoint dp WHERE dp.delivyPointGroupId = :delivyPointGroupId and dp.houseNbr1 = :houseNbr1";
 
     @Query(FIND_BY_DELIVY_POINT_GROUP_ID_AND_HOUSE_NBR_1_QUERY)
     List<DeliveryPoint> findByDelivyPointGroupIdAndHouseNbr1(@Param("delivyPointGroupId") String delivyPointGroupId,
                                                              @Param("houseNbr1") String houseNbr1);
-    
+
 }

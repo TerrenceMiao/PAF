@@ -13,7 +13,7 @@ import java.util.List;
 public interface DeliveryPointGroupRepository extends CrudRepository<DeliveryPointGroup, Integer> {
 
     String FIND_BY_LOCALITY_ID_AND_STREET_NAME_AND_STREET_TYPE_QUERY
-            = "SELECT d FROM DeliveryPointGroup d WHERE d.localityId = :localityId AND d.streetName = :streetName AND d.streetType = :streetType";
+            = "SELECT dpg FROM DeliveryPointGroup dpg WHERE dpg.localityId = :localityId AND dpg.streetName = :streetName AND dpg.streetType = :streetType";
 
     @Query(FIND_BY_LOCALITY_ID_AND_STREET_NAME_AND_STREET_TYPE_QUERY)
     List<DeliveryPointGroup> findByLocalityIdAndStreetNameAndStreetType(@Param("localityId") String localityId,
