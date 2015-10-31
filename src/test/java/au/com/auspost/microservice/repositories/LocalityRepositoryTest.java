@@ -25,12 +25,14 @@ public class LocalityRepositoryTest {
     @Test
     public void testFindByLocalityName() throws Exception {
 
-        List<Locality> localityList = localityRepository.findByLocalityName("POINT COOK");
+        String localityName = "POINT COOK";
+
+        List<Locality> localityList = localityRepository.findByLocalityName(localityName);
 
         assertEquals("Wrong list size", 1, localityList.size());
 
         assertEquals("Wrong Locality Id", "00012220", localityList.get(0).getLocalityId());
-        assertEquals("Wrong Locality Name", "POINT COOK", localityList.get(0).getLocalityName());
+        assertEquals("Wrong Locality Name", localityName, localityList.get(0).getLocalityName());
         assertEquals("Wrong Postcode", "3030", localityList.get(0).getPostcode());
         assertEquals("Wrong State", "VIC", localityList.get(0).getState());
         assertEquals("Wrong Locality Did", "", localityList.get(0).getLocalityDid());
