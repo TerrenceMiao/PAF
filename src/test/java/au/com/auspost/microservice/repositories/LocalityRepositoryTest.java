@@ -44,7 +44,7 @@ public class LocalityRepositoryTest {
 
         List<Locality> localityList = localityRepository.findAllOrderedLocalities();
 
-        assertNotEquals("", 0, localityList.iterator());
+        assertNotEquals("Empty list returned", 0, localityList.size());
     }
 
 }

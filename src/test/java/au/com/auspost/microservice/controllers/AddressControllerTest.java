@@ -3,6 +3,7 @@ package au.com.auspost.microservice.controllers;
 import au.com.auspost.microservice.configuration.RepositoryConfiguration;
 import au.com.auspost.microservice.model.Address;
 import au.com.auspost.microservice.model.Dpid;
+import au.com.auspost.microservice.model.StreetType;
 import au.com.auspost.microservice.model.Suburb;
 import au.com.auspost.microservice.repositories.DeliveryPointGroupRepository;
 import au.com.auspost.microservice.repositories.DeliveryPointRepository;
@@ -84,6 +85,14 @@ public class AddressControllerTest {
         ResponseEntity<List<Suburb>> listResponseEntity = addressController.getAllOrderedLocalities();
 
         assertNotEquals("Empty Locality list returned", 0, listResponseEntity.getBody().size());
+    }
+
+    @Test
+    public void testGetAllStreetType() throws Exception {
+
+        ResponseEntity<List<StreetType>> listResponseEntity = addressController.getAllStreetType();
+
+        assertNotEquals("Empty Street Type list returned", 0, listResponseEntity.getBody().size());
     }
 
 }

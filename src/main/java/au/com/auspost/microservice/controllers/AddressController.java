@@ -5,6 +5,7 @@ import au.com.auspost.microservice.domain.Locality;
 import au.com.auspost.microservice.dto.PostalAddress;
 import au.com.auspost.microservice.model.Address;
 import au.com.auspost.microservice.model.Dpid;
+import au.com.auspost.microservice.model.StreetType;
 import au.com.auspost.microservice.model.Suburb;
 import au.com.auspost.microservice.services.PostalAddressService;
 import org.modelmapper.TypeToken;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -62,6 +64,24 @@ public class AddressController {
         List<Suburb> suburbList = Constants.MODEL_MAPPER.map(localityList, targetListType);
 
         return new ResponseEntity<>(suburbList, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = Constants.STREETS_REQUEST_PATH, method = {RequestMethod.GET}, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<StreetType>> getAllStreetType() {
+
+        LOG.info("To get all street type ...");
+
+        List<String> streetTypeStringList = postalAddressService.getAllStreetType();
+
+        List<StreetType> streetTypeList = new ArrayList<>();
+
+        for (String s : streetTypeStringList) {
+            StreetType streetType = new StreetType();
+            streetType.setStreetType(s);
+            streetTypeList.add(streetType);
+        }
+
+        return new ResponseEntity<>(streetTypeList, HttpStatus.OK);
     }
 
     public void setPostalAddressService(PostalAddressService postalAddressService) {

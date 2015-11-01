@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by terrence on 31/10/15.
@@ -41,6 +42,14 @@ public class DeliveryPointGroupRepositoryTest {
         assertEquals("Wrong Street Sfx", "", deliveryPointGroupList.get(0).getStreetSfx());
         assertEquals("Wrong Postal Delivery Type", "", deliveryPointGroupList.get(0).getPostalDeliveryType());
         assertEquals("Wrong Delivery Point Group Did", "", deliveryPointGroupList.get(0).getDelivyPointGroupDid());
+    }
+
+    @Test
+    public void testFindAllStreetType() throws Exception {
+
+        List<String> streetTypeList = deliveryPointGroupRepository.findAllStreetType();
+
+        assertNotEquals("Empty list returned", 0, streetTypeList.size());
     }
 
 }

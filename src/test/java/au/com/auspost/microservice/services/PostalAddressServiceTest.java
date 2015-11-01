@@ -82,4 +82,12 @@ public class PostalAddressServiceTest {
         assertNotEquals("Empty Locality list returned", 0, localityList.size());
     }
 
+    @Test
+    public void testFindAllStreetType() throws Exception {
+
+        List<String> streetTypeList = postalAddressService.getAllStreetType();
+
+        assertNotEquals("Empty list returned", 0, streetTypeList.size());
+    }
+
 }

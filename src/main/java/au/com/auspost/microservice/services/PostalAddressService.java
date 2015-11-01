@@ -21,6 +21,7 @@ public interface PostalAddressService {
 
     String getDpidFromPostalAddress(PostalAddress postalAddress);
     List<Locality> getAllOrderedLocalities();
+    List<String> getAllStreetType();
 
     void setLocalityRepository(LocalityRepository localityRepository);
     void setDeliveryPointGroupRepository(DeliveryPointGroupRepository deliveryPointGroupRepository);
@@ -58,6 +59,12 @@ public interface PostalAddressService {
         public List<Locality> getAllOrderedLocalities() {
 
             return localityRepository.findAllOrderedLocalities();
+        }
+
+        @Override
+        public List<String> getAllStreetType() {
+
+            return deliveryPointGroupRepository.findAllStreetType();
         }
 
         @Override
