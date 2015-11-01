@@ -8,7 +8,9 @@ import org.modelmapper.ModelMapper;
 public final class Constants {
 
     public static final String CURRENT_VERSION = "/v1";
+
     public static final String ADDRESS_REQUEST_PATH = CURRENT_VERSION + "/address";
+    public static final String SUBURBS_REQUEST_PATH = CURRENT_VERSION + "/suburbs";
 
     public static final ModelMapper MODEL_MAPPER = new ModelMapper();
 

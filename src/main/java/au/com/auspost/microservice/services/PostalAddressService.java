@@ -20,6 +20,7 @@ import java.util.List;
 public interface PostalAddressService {
 
     String getDpidFromPostalAddress(PostalAddress postalAddress);
+    List<Locality> getAllOrderedLocalities();
 
     void setLocalityRepository(LocalityRepository localityRepository);
     void setDeliveryPointGroupRepository(DeliveryPointGroupRepository deliveryPointGroupRepository);
@@ -51,6 +52,12 @@ public interface PostalAddressService {
                     deliveryPointGroupList.get(0).getDelivyPointGroupId(), postalAddress.getHouseNumber1());
 
             return deliveryPointList.get(0).getDelivyPointId();
+        }
+
+        @Override
+        public List<Locality> getAllOrderedLocalities() {
+
+            return localityRepository.findAllOrderedLocalities();
         }
 
         @Override

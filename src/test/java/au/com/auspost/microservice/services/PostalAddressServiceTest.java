@@ -1,6 +1,7 @@
 package au.com.auspost.microservice.services;
 
 import au.com.auspost.microservice.configuration.RepositoryConfiguration;
+import au.com.auspost.microservice.domain.Locality;
 import au.com.auspost.microservice.dto.PostalAddress;
 import au.com.auspost.microservice.repositories.DeliveryPointGroupRepository;
 import au.com.auspost.microservice.repositories.DeliveryPointRepository;
@@ -13,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by terrence on 31/10/15.
@@ -68,6 +72,14 @@ public class PostalAddressServiceTest {
         postalAddress.setPostcode(postcode);
 
         assertEquals("Wrong Delivery Point ID (DPID) returned", dpid, postalAddressService.getDpidFromPostalAddress(postalAddress));
+    }
+
+    @Test
+    public void testGetAllOrderedLocalities() throws Exception {
+
+        List<Locality> localityList = postalAddressService.getAllOrderedLocalities();
+
+        assertNotEquals("Empty Locality list returned", 0, localityList.size());
     }
 
 }
