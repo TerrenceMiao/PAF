@@ -75,20 +75,18 @@ public class AddressController {
 
         LOG.info("To get all street type ...");
 
-        List<String> streetTypeList = postalAddressService.getAllStreetType();
+        List<StreetType> streetTypeList = new ArrayList<>();
 
-        List<StreetType> streetTypes = new ArrayList<>();
-
-        for (String st : streetTypeList) {
+        for (String st : postalAddressService.getAllStreetType()) {
             StreetType streetType = new StreetType();
             streetType.setStreet(st);
-            streetTypes.add(streetType);
+            streetTypeList.add(streetType);
         }
 
-        StreetTypes modelStreetTypes = new StreetTypes();
-        modelStreetTypes.setStreetTypeList(streetTypes);
+        StreetTypes streetTypes = new StreetTypes();
+        streetTypes.setStreetTypeList(streetTypeList);
 
-        return new ResponseEntity<>(modelStreetTypes, HttpStatus.OK);
+        return new ResponseEntity<>(streetTypes, HttpStatus.OK);
     }
 
     public void setPostalAddressService(PostalAddressService postalAddressService) {
