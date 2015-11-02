@@ -4,7 +4,7 @@ import au.com.auspost.microservice.configuration.RepositoryConfiguration;
 import au.com.auspost.microservice.model.Address;
 import au.com.auspost.microservice.model.Dpid;
 import au.com.auspost.microservice.model.StreetType;
-import au.com.auspost.microservice.model.Suburb;
+import au.com.auspost.microservice.model.Suburbs;
 import au.com.auspost.microservice.repositories.DeliveryPointGroupRepository;
 import au.com.auspost.microservice.repositories.DeliveryPointRepository;
 import au.com.auspost.microservice.repositories.LocalityRepository;
@@ -82,9 +82,9 @@ public class AddressControllerTest {
     @Test
     public void testGetAllOrderedLocalities() throws Exception {
 
-        ResponseEntity<List<Suburb>> listResponseEntity = addressController.getAllOrderedLocalities();
+        ResponseEntity<Suburbs> suburbsResponseEntity = addressController.getAllOrderedLocalities();
 
-        assertNotEquals("Empty Locality list returned", 0, listResponseEntity.getBody().size());
+        assertNotEquals("Empty Locality list returned", 0, suburbsResponseEntity.getBody().getSuburbList().size());
     }
 
     @Test

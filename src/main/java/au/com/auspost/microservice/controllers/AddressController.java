@@ -7,6 +7,7 @@ import au.com.auspost.microservice.model.Address;
 import au.com.auspost.microservice.model.Dpid;
 import au.com.auspost.microservice.model.StreetType;
 import au.com.auspost.microservice.model.Suburb;
+import au.com.auspost.microservice.model.Suburbs;
 import au.com.auspost.microservice.services.PostalAddressService;
 import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +52,9 @@ public class AddressController {
     }
 
     @RequestMapping(value = Constants.SUBURBS_REQUEST_PATH, method = {RequestMethod.GET}, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Suburb>> getAllOrderedLocalities() {
+    public ResponseEntity<Suburbs> getAllOrderedLocalities() {
 
-        LOG.info("To get all ORDERED localities ...");
+        LOG.info("To get all ORDERED suburbs ...");
 
         List<Locality> localityList = postalAddressService.getAllOrderedLocalities();
 
@@ -63,7 +63,10 @@ public class AddressController {
 
         List<Suburb> suburbList = Constants.MODEL_MAPPER.map(localityList, targetListType);
 
-        return new ResponseEntity<>(suburbList, HttpStatus.OK);
+        Suburbs suburbs = new Suburbs();
+        suburbs.setSuburbList(suburbList);
+
+        return new ResponseEntity<>(suburbs, HttpStatus.OK);
     }
 
     @RequestMapping(value = Constants.STREETS_REQUEST_PATH, method = {RequestMethod.GET}, produces = APPLICATION_JSON_VALUE)
