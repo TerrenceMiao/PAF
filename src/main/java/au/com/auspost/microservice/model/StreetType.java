@@ -7,21 +7,21 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * Created by terrence on 1/11/15.
+ * Created by terrence on 3/11/15.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StreetType implements Serializable {
 
     @NotNull
     @JsonProperty("streetType")
-    private String streetType;
+    private String street;
 
-    public String getStreetType() {
-        return streetType;
+    public String getStreet() {
+        return street;
     }
 
-    public void setStreetType(String streetType) {
-        this.streetType = streetType;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
 }

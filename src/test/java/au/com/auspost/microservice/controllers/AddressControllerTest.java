@@ -3,7 +3,7 @@ package au.com.auspost.microservice.controllers;
 import au.com.auspost.microservice.configuration.RepositoryConfiguration;
 import au.com.auspost.microservice.model.Address;
 import au.com.auspost.microservice.model.Dpid;
-import au.com.auspost.microservice.model.StreetType;
+import au.com.auspost.microservice.model.StreetTypes;
 import au.com.auspost.microservice.model.Suburbs;
 import au.com.auspost.microservice.repositories.DeliveryPointGroupRepository;
 import au.com.auspost.microservice.repositories.DeliveryPointRepository;
@@ -18,8 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -90,9 +88,9 @@ public class AddressControllerTest {
     @Test
     public void testGetAllStreetType() throws Exception {
 
-        ResponseEntity<List<StreetType>> listResponseEntity = addressController.getAllStreetType();
+        ResponseEntity<StreetTypes> streetTypesResponseEntity = addressController.getAllStreetType();
 
-        assertNotEquals("Empty Street Type list returned", 0, listResponseEntity.getBody().size());
+        assertNotEquals("Empty Street Type list returned", 0, streetTypesResponseEntity.getBody().getStreetTypeList().size());
     }
 
 }

@@ -6,6 +6,7 @@ import au.com.auspost.microservice.dto.PostalAddress;
 import au.com.auspost.microservice.model.Address;
 import au.com.auspost.microservice.model.Dpid;
 import au.com.auspost.microservice.model.StreetType;
+import au.com.auspost.microservice.model.StreetTypes;
 import au.com.auspost.microservice.model.Suburb;
 import au.com.auspost.microservice.model.Suburbs;
 import au.com.auspost.microservice.services.PostalAddressService;
@@ -70,21 +71,24 @@ public class AddressController {
     }
 
     @RequestMapping(value = Constants.STREETS_REQUEST_PATH, method = {RequestMethod.GET}, produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<StreetType>> getAllStreetType() {
+    public ResponseEntity<StreetTypes> getAllStreetType() {
 
         LOG.info("To get all street type ...");
 
-        List<String> streetTypeStringList = postalAddressService.getAllStreetType();
+        List<String> streetTypeList = postalAddressService.getAllStreetType();
 
-        List<StreetType> streetTypeList = new ArrayList<>();
+        List<StreetType> streetTypes = new ArrayList<>();
 
-        for (String s : streetTypeStringList) {
+        for (String st : streetTypeList) {
             StreetType streetType = new StreetType();
-            streetType.setStreetType(s);
-            streetTypeList.add(streetType);
+            streetType.setStreet(st);
+            streetTypes.add(streetType);
         }
 
-        return new ResponseEntity<>(streetTypeList, HttpStatus.OK);
+        StreetTypes modelStreetTypes = new StreetTypes();
+        modelStreetTypes.setStreetTypeList(streetTypes);
+
+        return new ResponseEntity<>(modelStreetTypes, HttpStatus.OK);
     }
 
     public void setPostalAddressService(PostalAddressService postalAddressService) {
