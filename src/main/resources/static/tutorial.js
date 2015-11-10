@@ -49,6 +49,15 @@ var CommentForm = React.createClass({displayName: "CommentForm",
                 React.createElement("div", {className: "addressBox"},
                     React.createElement("input", {type: "text", className: "form-control", placeholder: "Street name", ref: "streetName"})
                 ),
+                React.createElement("div", {className: "addressBox"},
+                    React.createElement("input", {type: "text", className: "form-control", placeholder: "Suburb", ref: "suburb"})
+                ),
+                React.createElement("div", {className: "addressBox"},
+                    React.createElement("input", {type: "text", className: "form-control", placeholder: "State", ref: "state"})
+                ),
+                React.createElement("div", {className: "addressBox"},
+                    React.createElement("input", {type: "text", className: "form-control", placeholder: "Postcode", ref: "postcode"})
+                ),
                 React.createElement("input", {type: "submit", className: "btn btn-lg btn-primary btn-block", value: "Got it"}),
                 React.createElement("input", {type: "text", placeholder: "Your name", ref: "author"}),
                 React.createElement("input", {type: "text", placeholder: "Say something...", ref: "text"})
