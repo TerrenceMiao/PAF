@@ -42,8 +42,14 @@ var CommentForm = React.createClass({displayName: "CommentForm",
     },
     render: function () {
         return (
-            React.createElement("form", {className: "commentForm", onSubmit: this.handleSubmit}, 
-                React.createElement("input", {type: "text", placeholder: "Your name", ref: "author"}), 
+            React.createElement("form", {className: "commentForm", onSubmit: this.handleSubmit},
+                React.createElement("div", {className: "addressBox"},
+                    React.createElement("input", {type: "text", placeholder: "Street number", ref: "streetNumber"})
+                ),
+                React.createElement("div", {className: "addressBox"},
+                    React.createElement("input", {type: "text", placeholder: "Street name", ref: "streetName"})
+                ),
+                React.createElement("input", {type: "text", placeholder: "Your name", ref: "author"}),
                 React.createElement("input", {type: "text", placeholder: "Say something...", ref: "text"}), 
                 React.createElement("input", {type: "submit", value: "Post"})
             )
@@ -91,10 +97,11 @@ var CommentBox = React.createClass({displayName: "CommentBox",
     },
     render: function () {
         return (
-            React.createElement("div", {className: "commentBox"}, 
-                React.createElement("h1", null, "Comments"), 
-                React.createElement(CommentList, {data: this.state.data}), 
-                React.createElement(CommentForm, {onCommentSubmit: this.handleCommentSubmit})
+            React.createElement("div", {className: "commentBox"},
+                React.createElement("h1", null, "Postal Address"),
+                React.createElement(CommentForm, {onCommentSubmit: this.handleCommentSubmit}),
+                React.createElement("h1", null, "Comments"),
+                React.createElement(CommentList, {data: this.state.data})
             )
         );
     }
