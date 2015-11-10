@@ -19,8 +19,9 @@ var CommentList = React.createClass({displayName: "CommentList",
         var commentNodes = this.props.data.map(function (comment) {
             return (
                 React.createElement(Comment,
-                    {author: comment.author}, comment.text,
-                    comment.streetNumber + " " + comment.streetName, " " + comment.suburb + " " + comment.state + " " + comment.postcode
+                    {author: comment.author},
+                    comment.streetNumber + " " + comment.streetName + " " + comment.streetType,
+                    " " + comment.suburb + " " + comment.state + " " + comment.postcode
                 )
             );
         });
@@ -37,23 +38,23 @@ var CommentForm = React.createClass({displayName: "CommentForm",
         e.preventDefault();
 
         var author = this.refs.author.getDOMNode().value.trim();
-        var text = this.refs.text.getDOMNode().value.trim();
 
         var streetNumber = this.refs.streetNumber.getDOMNode().value.trim();
         var streetName = this.refs.streetName.getDOMNode().value.trim();
+        var streetType = this.refs.streetType.getDOMNode().value.trim();
         var suburb = this.refs.suburb.getDOMNode().value.trim();
         var state = this.refs.state.getDOMNode().value.trim();
         var postcode = this.refs.postcode.getDOMNode().value.trim();
 
-        this.props.onCommentSubmit({author: author, text: text,
-            streetNumber: streetNumber, streetName: streetName,
-            suburb: suburb, state: state, postcode: postcode
+        this.props.onCommentSubmit({
+            author: author,
+            streetNumber: streetNumber, streetName: streetName, streetType: streetType, suburb: suburb, state: state, postcode: postcode
         });
 
         this.refs.author.getDOMNode().value = '';
-        this.refs.text.getDOMNode().value = '';
         this.refs.streetNumber.getDOMNode().value = '';
         this.refs.streetName.getDOMNode().value = '';
+        this.refs.streetType.getDOMNode().value = '';
         this.refs.suburb.getDOMNode().value = '';
         this.refs.state.getDOMNode().value = '';
         this.refs.postcode.getDOMNode().value = '';
@@ -61,14 +62,14 @@ var CommentForm = React.createClass({displayName: "CommentForm",
     render: function () {
         return (
             React.createElement("form", {className: "form-address", onSubmit: this.handleSubmit},
+                React.createElement("input", {type: "text", className: "form-control", placeholder: "To whom", ref: "author"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street number", ref: "streetNumber"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street name", ref: "streetName"}),
+                React.createElement("input", {type: "text", className: "form-control", placeholder: "Street type", ref: "streetType"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Suburb", ref: "suburb"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "State", ref: "state"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Postcode", ref: "postcode"}),
-                React.createElement("input", {type: "submit", className: "btn btn-lg btn-primary btn-block", value: "Got it"}),
-                React.createElement("input", {type: "text", placeholder: "Your name", ref: "author"}),
-                React.createElement("input", {type: "text", placeholder: "Say something...", ref: "text"})
+                React.createElement("input", {type: "submit", className: "btn btn-lg btn-primary btn-block", value: "Got it"})
             )
         );
     }
