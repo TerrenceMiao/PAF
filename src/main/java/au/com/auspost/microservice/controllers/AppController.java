@@ -35,8 +35,8 @@ public class AppController {
     void init() {
 
         comments.addAll(Arrays.asList(
-                new Comment("Pete Hunt", "This is one comment"),
-                new Comment("Jordan Walke", "This is *another* comment")));
+                new Comment("Pete Hunt", "This is one comment", "111", "Bourke St", "Melbourne", "VIC", "3000"),
+                new Comment("Jordan Walke", "This is *another* comment", "80", "Collins St", "Melbourne", "VIC", "3000")));
     }
 
     @RequestMapping("/")
