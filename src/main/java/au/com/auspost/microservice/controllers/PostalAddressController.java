@@ -33,9 +33,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * Created by terrence on 31/10/15.
  */
 @RestController
-public class AddressController {
+public class PostalAddressController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(AddressController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PostalAddressController.class);
 
     @Autowired
     private PostalAddressService postalAddressService;
