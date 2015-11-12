@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -23,7 +24,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Controller
 public class AppController {
 
-    private static final List<PostalAddress> POSTAL_ADDRESS_LIST = new CopyOnWriteArrayList<>();
+    private static final CopyOnWriteArrayList<PostalAddress> POSTAL_ADDRESS_LIST = new CopyOnWriteArrayList<>();
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -42,8 +43,8 @@ public class AppController {
     @RequestMapping("/")
     String hello(Model model) throws JsonProcessingException {
 
-        String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, POSTAL_ADDRESS_LIST);
-        String initialData = objectMapper.writeValueAsString(POSTAL_ADDRESS_LIST);
+        String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, reversePostalAddressList());
+        String initialData = objectMapper.writeValueAsString(reversePostalAddressList());
 
         model.addAttribute("markup", markup);
         model.addAttribute("initialData", initialData);
@@ -55,7 +56,7 @@ public class AppController {
     @RequestMapping(value = "/postaladdress", method = RequestMethod.GET)
     List<PostalAddress> getPostalAddressList() {
 
-        return POSTAL_ADDRESS_LIST;
+        return reversePostalAddressList();
     }
 
     @ResponseBody
@@ -64,7 +65,16 @@ public class AppController {
 
         POSTAL_ADDRESS_LIST.add(postalAddress);
 
-        return POSTAL_ADDRESS_LIST;
+        return reversePostalAddressList();
+    }
+
+    private static List<PostalAddress> reversePostalAddressList() {
+
+        CopyOnWriteArrayList<PostalAddress> copyPostAddressList = (CopyOnWriteArrayList<PostalAddress>) POSTAL_ADDRESS_LIST.clone();
+
+        Collections.reverse(copyPostAddressList);
+
+        return copyPostAddressList;
     }
 
 }
