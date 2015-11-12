@@ -68,7 +68,7 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Suburb", ref: "localityName"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "State", ref: "state"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Postcode", ref: "postcode"}),
-                React.createElement("input", {type: "submit", className: "btn btn-lg btn-primary btn-block", value: "Got it"})
+                React.createElement("input", {type: "submit", className: "btn btn-lg btn-primary btn-block", value: "Generate QR Code"})
             )
         );
     }
@@ -117,7 +117,7 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
             React.createElement("div", {className: "postalAddressBox"},
                 React.createElement("h1", null, "Postal Address"),
                 React.createElement(PostalAddressForm, {onPostalAddressSubmit: this.handlePostalAddressSubmit}),
-                React.createElement("h1", null, "QR Code"),
+                React.createElement("h1", null, ""),
                 React.createElement(PostalAddressList, {data: this.state.data})
             )
         );
