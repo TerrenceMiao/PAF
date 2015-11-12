@@ -23,18 +23,18 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Controller
 public class AppController {
 
-    static final List<Comment> comments = new CopyOnWriteArrayList<>();
+    private static final List<Comment> POSTAL_ADDRESS_LIST = new CopyOnWriteArrayList<>();
 
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     @Autowired
-    JavaScriptEngine javaScriptEngine;
+    private JavaScriptEngine javaScriptEngine;
 
     @PostConstruct
     void init() {
 
-        comments.addAll(Arrays.asList(
+        POSTAL_ADDRESS_LIST.addAll(Arrays.asList(
                 new Comment("Pyotr Smirnov", "111", "Bourke", "St", "Melbourne", "VIC", "3000"),
                 new Comment("Johnny Walker", "80", "Collins", "St", "Melbourne", "VIC", "3000")));
     }
@@ -42,8 +42,8 @@ public class AppController {
     @RequestMapping("/")
     String hello(Model model) throws JsonProcessingException {
 
-        String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, comments);
-        String initialData = objectMapper.writeValueAsString(comments);
+        String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, POSTAL_ADDRESS_LIST);
+        String initialData = objectMapper.writeValueAsString(POSTAL_ADDRESS_LIST);
         model.addAttribute("markup", markup);
         model.addAttribute("initialData", initialData);
 
@@ -54,16 +54,16 @@ public class AppController {
     @RequestMapping(value = "/comments", method = RequestMethod.GET)
     List<Comment> getComments() {
 
-        return comments;
+        return POSTAL_ADDRESS_LIST;
     }
 
     @ResponseBody
     @RequestMapping(value = "/comments", method = RequestMethod.POST)
     List<Comment> postComments(@RequestBody Comment comment) {
 
-        comments.add(comment);
+        POSTAL_ADDRESS_LIST.add(comment);
 
-        return comments;
+        return POSTAL_ADDRESS_LIST;
     }
 
 }
