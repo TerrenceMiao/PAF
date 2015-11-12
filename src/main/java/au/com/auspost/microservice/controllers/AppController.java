@@ -1,7 +1,7 @@
 package au.com.auspost.microservice.controllers;
 
-import au.com.auspost.microservice.Comment;
 import au.com.auspost.microservice.JavaScriptEngine;
+import au.com.auspost.microservice.dto.PostalAddress;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +23,28 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Controller
 public class AppController {
 
-    static final List<Comment> comments = new CopyOnWriteArrayList<>();
+    private static final List<PostalAddress> POSTAL_ADDRESS_LIST = new CopyOnWriteArrayList<>();
 
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
     @Autowired
-    JavaScriptEngine javaScriptEngine;
+    private JavaScriptEngine javaScriptEngine;
 
     @PostConstruct
     void init() {
 
-        comments.addAll(Arrays.asList(
-                new Comment("Pete Hunt", "This is one comment"),
-                new Comment("Jordan Walke", "This is *another* comment")));
+        POSTAL_ADDRESS_LIST.addAll(Arrays.asList(
+                new PostalAddress("Pyotr Smirnov", "111", "Bourke", "St", "Melbourne", "VIC", "3000"),
+                new PostalAddress("Johnny Walker", "80", "Collins", "St", "Melbourne", "VIC", "3000")));
     }
 
     @RequestMapping("/")
     String hello(Model model) throws JsonProcessingException {
 
-        String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, comments);
-        String initialData = objectMapper.writeValueAsString(comments);
+        String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, POSTAL_ADDRESS_LIST);
+        String initialData = objectMapper.writeValueAsString(POSTAL_ADDRESS_LIST);
+
         model.addAttribute("markup", markup);
         model.addAttribute("initialData", initialData);
 
@@ -51,19 +52,19 @@ public class AppController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/comments", method = RequestMethod.GET)
-    List<Comment> getComments() {
+    @RequestMapping(value = "/postaladdress", method = RequestMethod.GET)
+    List<PostalAddress> getPostalAddressList() {
 
-        return comments;
+        return POSTAL_ADDRESS_LIST;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/comments", method = RequestMethod.POST)
-    List<Comment> postComments(@RequestBody Comment comment) {
+    @RequestMapping(value = "/postaladdress", method = RequestMethod.POST)
+    List<PostalAddress> addPostalAddressToList(@RequestBody PostalAddress postalAddress) {
 
-        comments.add(comment);
+        POSTAL_ADDRESS_LIST.add(postalAddress);
 
-        return comments;
+        return POSTAL_ADDRESS_LIST;
     }
 
 }

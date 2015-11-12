@@ -14,7 +14,10 @@ import java.util.function.Function;
 
 public class JavaScriptEngine {
 
+    private static final int BLOCK_SIZE_TO_READ = 4096;
+
     private final ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("js");
+
 
     public JavaScriptEngine polyfillToNashorn() {
 
@@ -81,7 +84,7 @@ public class JavaScriptEngine {
         StringBuilder out = new StringBuilder();
 
         try (InputStreamReader reader = new InputStreamReader(in, charset)) {
-            char[] buffer = new char[4096];
+            char[] buffer = new char[BLOCK_SIZE_TO_READ];
             int bytesRead;
 
             while ((bytesRead = reader.read(buffer)) != -1) {

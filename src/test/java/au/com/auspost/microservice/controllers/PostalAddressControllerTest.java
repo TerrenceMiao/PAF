@@ -27,7 +27,7 @@ import static org.junit.Assert.assertNotEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = {RepositoryConfiguration.class})
-public class AddressControllerTest {
+public class PostalAddressControllerTest {
 
     @Autowired
     private LocalityRepository localityRepository;
@@ -36,7 +36,7 @@ public class AddressControllerTest {
     @Autowired
     private DeliveryPointRepository deliveryPointRepository;
 
-    private AddressController addressController = new AddressController();
+    private PostalAddressController postalAddressController = new PostalAddressController();
 
     private PostalAddressService postalAddressService = new PostalAddressService.Impl();
 
@@ -47,7 +47,7 @@ public class AddressControllerTest {
         postalAddressService.setDeliveryPointGroupRepository(deliveryPointGroupRepository);
         postalAddressService.setDeliveryPointRepository(deliveryPointRepository);
 
-        addressController.setPostalAddressService(postalAddressService);
+        postalAddressController.setPostalAddressService(postalAddressService);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class AddressControllerTest {
 
         BindingResult bindingResult = new BeanPropertyBindingResult(address, "address");
 
-        ResponseEntity<Dpid> dpidResponseEntity = addressController.getDeliveryPointId(address, bindingResult);
+        ResponseEntity<Dpid> dpidResponseEntity = postalAddressController.getDeliveryPointId(address, bindingResult);
 
         assertEquals("Wrong Delivery Point ID (DPID) returned", dpid, dpidResponseEntity.getBody().getDpid());
     }
@@ -80,7 +80,7 @@ public class AddressControllerTest {
     @Test
     public void testGetAllOrderedLocalities() throws Exception {
 
-        ResponseEntity<Suburbs> suburbsResponseEntity = addressController.getAllOrderedLocalities();
+        ResponseEntity<Suburbs> suburbsResponseEntity = postalAddressController.getAllOrderedLocalities();
 
         assertNotEquals("Empty Locality list returned", 0, suburbsResponseEntity.getBody().getSuburbList().size());
     }
@@ -88,7 +88,7 @@ public class AddressControllerTest {
     @Test
     public void testGetAllStreetType() throws Exception {
 
-        ResponseEntity<StreetTypes> streetTypesResponseEntity = addressController.getAllStreetType();
+        ResponseEntity<StreetTypes> streetTypesResponseEntity = postalAddressController.getAllStreetType();
 
         assertNotEquals("Empty Street Type list returned", 0, streetTypesResponseEntity.getBody().getStreetTypeList().size());
     }
