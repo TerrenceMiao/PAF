@@ -6,7 +6,7 @@ var PostalAddress = React.createClass({displayName: "PostalAddress",
         var rawMarkup = converter.makeHtml(this.props.children.toString());
         return (
             React.createElement("div", {className: "postalAddress"},
-                React.createElement("h2", {className: "postalAddressAuthor"}, this.props.author),
+                React.createElement("h2", {className: "addressee"}, this.props.addressee),
                 React.createElement("span", {dangerouslySetInnerHTML: {__html: rawMarkup}})
             )
         );
@@ -19,7 +19,7 @@ var PostalAddressList = React.createClass({displayName: "PostalAddressList",
         var postalAddressNodes = this.props.data.map(function (postalAddress) {
             return (
                 React.createElement(PostalAddress,
-                    {author: postalAddress.author},
+                    {addressee: postalAddress.addressee},
                     postalAddress.houseNumber1 + " " + postalAddress.streetName + " " + postalAddress.streetType,
                     " " + postalAddress.localityName + " " + postalAddress.state + " " + postalAddress.postcode
                 )
@@ -36,7 +36,7 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
     handleSubmit: function (e) {
         e.preventDefault();
 
-        var author = this.refs.author.getDOMNode().value.trim();
+        var addressee = this.refs.addressee.getDOMNode().value.trim();
 
         var houseNumber1 = this.refs.houseNumber1.getDOMNode().value.trim();
         var streetName = this.refs.streetName.getDOMNode().value.trim();
@@ -45,16 +45,16 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
         var state = this.refs.state.getDOMNode().value.trim();
         var postcode = this.refs.postcode.getDOMNode().value.trim();
 
-        if (!author || !houseNumber1 || !streetName || !streetType || !localityName || !state || !postcode) {
+        if (!addressee || !houseNumber1 || !streetName || !streetType || !localityName || !state || !postcode) {
             return;
         }
 
         this.props.onPostalAddressSubmit({
-            author: author,
+            addressee: addressee,
             houseNumber1: houseNumber1, streetName: streetName, streetType: streetType, localityName: localityName, state: state, postcode: postcode
         });
 
-        this.refs.author.getDOMNode().value = '';
+        this.refs.addressee.getDOMNode().value = '';
         this.refs.houseNumber1.getDOMNode().value = '';
         this.refs.streetName.getDOMNode().value = '';
         this.refs.streetType.getDOMNode().value = '';
@@ -65,7 +65,7 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
     render: function () {
         return (
             React.createElement("form", {className: "form-address", onSubmit: this.handleSubmit},
-                React.createElement("input", {type: "text", className: "form-control", placeholder: "To whom", ref: "author"}),
+                React.createElement("input", {type: "text", className: "form-control", placeholder: "To whom", ref: "addressee"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street number", ref: "houseNumber1"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street name", ref: "streetName"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street type", ref: "streetType"}),

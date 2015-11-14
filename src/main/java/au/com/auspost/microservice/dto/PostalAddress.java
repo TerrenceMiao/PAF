@@ -5,7 +5,7 @@ package au.com.auspost.microservice.dto;
  */
 public class PostalAddress {
 
-    private String author;
+    private String addressee;
 
     private String lotNumber;
     private String flatUnitNumber;
@@ -23,9 +23,9 @@ public class PostalAddress {
     public PostalAddress() {
     }
 
-    public PostalAddress(String author, String houseNumber1, String streetName, String streetType, String localityName, String state, String postcode) {
+    public PostalAddress(String addressee, String houseNumber1, String streetName, String streetType, String localityName, String state, String postcode) {
 
-        this.author = author;
+        this.addressee = addressee;
 
         this.houseNumber1 = houseNumber1;
         this.streetName = streetName;
@@ -35,12 +35,12 @@ public class PostalAddress {
         this.postcode = postcode;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAddressee() {
+        return addressee;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAddressee(String addressee) {
+        this.addressee = addressee;
     }
 
     public String getLotNumber() {
@@ -126,7 +126,7 @@ public class PostalAddress {
     @Override
     public String toString() {
         return "PostalAddress{"
-                + "author='" + author + '\''
+                + "addressee='" + addressee + '\''
                 + ", lotNumber='" + lotNumber + '\''
                 + ", flatUnitNumber='" + flatUnitNumber + '\''
                 + ", floorLevelNumber='" + floorLevelNumber + '\''
