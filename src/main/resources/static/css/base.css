@@ -69,13 +69,16 @@ ul {
     padding: 15px;
     margin: 0 auto;
 }
+
 .form-address .form-address-heading,
 .form-address .checkbox {
     margin-bottom: 10px;
 }
+
 .form-address .checkbox {
     font-weight: normal;
 }
+
 .form-address .form-control {
     position: relative;
     height: auto;
@@ -86,6 +89,19 @@ ul {
     font-size: 16px;
     margin: 15px 0 15px 0;
 }
+
 .form-address .form-control:focus {
     z-index: 2;
 }
+
+.postalAddress {
+    margin: 30px 0 30px 0;
+}
+
+.qrcode {
+    float: left;
+    margin: 0 20px 20px 0;
+    width: 68px;
+    height: 68px;
+}
+

@@ -6,6 +6,7 @@ var PostalAddress = React.createClass({displayName: "PostalAddress",
         var rawMarkup = converter.makeHtml(this.props.children.toString());
         return (
             React.createElement("div", {className: "postalAddress"},
+                React.createElement("img", {className: "qrcode", src: "img/qrcode.png"}),
                 React.createElement("h2", {className: "addressee"}, this.props.addressee),
                 React.createElement("span", {dangerouslySetInnerHTML: {__html: rawMarkup}})
             )
