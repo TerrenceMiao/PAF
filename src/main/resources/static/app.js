@@ -45,6 +45,10 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
         var state = this.refs.state.getDOMNode().value.trim();
         var postcode = this.refs.postcode.getDOMNode().value.trim();
 
+        if (!author || !houseNumber1 || !streetName || !streetType || !localityName || !state || !postcode) {
+            return;
+        }
+
         this.props.onPostalAddressSubmit({
             author: author,
             houseNumber1: houseNumber1, streetName: streetName, streetType: streetType, localityName: localityName, state: state, postcode: postcode
