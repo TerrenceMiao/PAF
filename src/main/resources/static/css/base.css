@@ -94,14 +94,16 @@ ul {
     z-index: 2;
 }
 
+.addressee {
+    padding: 20px 0 25px 0;
+}
+
 .postalAddress {
     margin: 30px 0 30px 0;
 }
 
 .qrcode {
     float: left;
-    margin: 0 20px 20px 0;
-    width: 68px;
-    height: 68px;
+    margin: 0 30px 0 0;
 }
 

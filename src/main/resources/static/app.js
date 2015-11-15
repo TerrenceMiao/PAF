@@ -1,14 +1,61 @@
 var converter = new Showdown.converter();
 
+var QRCodeComponent = React.createClass({displayName: "QRCodeComponent",
+
+    propTypes: {
+        text: React.PropTypes.string.isRequired,
+        width: React.PropTypes.number,
+        height: React.PropTypes.number,
+        colorLight: React.PropTypes.string,
+        colorDark: React.PropTypes.string
+    },
+
+    getDefaultProps: function() {
+        return {
+            width: 128,
+            height: 128,
+            colorLight: '#FFFFFF',
+            colorDark: '#000000'
+        };
+    },
+
+    componentDidMount: function() {
+        this.update();
+    },
+
+    componentDidUpdate: function() {
+        this.update();
+    },
+
+    update: function() {
+        var qrcode = new QRCode(this.getDOMNode(), {
+            text: this.props.text,
+            width: this.props.width,
+            height: this.props.height,
+            colorDark: this.props.colorDark,
+            colorLight: this.props.colorLight
+        });
+
+        // For example: qrcode.makeCode("14382929 || Terrence Miao || 111 Bourke St, Melbourne VIC 3000");
+        qrcode.makeCode(this.getDOMNode());
+    },
+
+    render: function () {
+        return (
+            React.createElement("span")
+        );
+    }
+});
+
 var PostalAddress = React.createClass({displayName: "PostalAddress",
 
     render: function () {
         var rawMarkup = converter.makeHtml(this.props.children.toString());
         return (
             React.createElement("div", {className: "postalAddress"},
-                React.createElement("img", {className: "qrcode", src: "img/qrcode.png"}),
+                React.createElement("div", {id: "qrcode", className: "qrcode"}),
                 React.createElement("h2", {className: "addressee"}, this.props.addressee),
-                React.createElement("span", {dangerouslySetInnerHTML: {__html: rawMarkup}})
+                React.createElement("h4", {dangerouslySetInnerHTML: {__html: rawMarkup}})
             )
         );
     }
@@ -126,50 +173,6 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
                 React.createElement(PostalAddressList, {data: this.state.data})
             )
         );
-    }
-});
-
-var QRCodeComponent = React.createClass({displayName: "QRCodeComponent",
-
-    propTypes: {
-        text: React.PropTypes.string.isRequired,
-        width: React.PropTypes.number,
-        height: React.PropTypes.number,
-        colorLight: React.PropTypes.string,
-        colorDark: React.PropTypes.string
-    },
-
-    getDefaultProps: function() {
-        return {
-            width: 128,
-            height: 128,
-            colorLight: '#FFFFFF',
-            colorDark: '#000000'
-        };
-    },
-
-    componentDidMount: function() {
-        this.update();
-    },
-
-    componentDidUpdate: function() {
-        this.update();
-    },
-
-    update: function() {
-        var qrcode = new QRCode(this.getDOMNode(), {
-            text: this.props.text,
-            width: this.props.width,
-            height: this.props.height,
-            colorDark: this.props.colorDark,
-            colorLight: this.props.colorLight
-        });
-
-        qrcode.makeCode("14382929 || Terrence Miao || 111 Bourke St, Melbourne VIC 3000");
-    },
-
-    render: function () {
-        return React.createElement("span")
     }
 });
 
