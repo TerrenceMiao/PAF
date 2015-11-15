@@ -28,6 +28,8 @@ var QRCodeComponent = React.createClass({displayName: "QRCodeComponent",
     },
 
     update: function() {
+        $(this.getDOMNode()).html('');
+
         var qrcode = new QRCode(this.getDOMNode(), {
             text: this.props.text,
             width: this.props.width,
@@ -36,8 +38,7 @@ var QRCodeComponent = React.createClass({displayName: "QRCodeComponent",
             colorLight: this.props.colorLight
         });
 
-        // For example: qrcode.makeCode("14382929 || Terrence Miao || 111 Bourke St, Melbourne VIC 3000");
-        qrcode.makeCode(this.getDOMNode());
+        qrcode.makeCode(this.props.text);
     },
 
     render: function () {
@@ -186,7 +187,7 @@ function renderOnClient(postalAddresses) {
     );
 
     React.render(
-        React.createElement(QRCodeComponent), document.getElementById('qrcode')
+        React.createElement(QRCodeComponent, {text: "14382929 || Terrence Miao || 111 Bourke St, Melbourne VIC 3000"}), document.getElementById('qrcode')
     );
 }
 
