@@ -54,7 +54,8 @@ var PostalAddress = React.createClass({displayName: "PostalAddress",
         var rawMarkup = converter.makeHtml(this.props.children.toString());
         return (
             React.createElement("div", {className: "postalAddress"},
-                React.createElement("div", {id: "qrcode", className: "qrcode"}),
+                React.createElement("div", {id: guid(), name: "qrcode", className: "qrcode",
+                    title: this.props.addressee + " || " + this.props.children.toString()}),
                 React.createElement("h2", {className: "addressee"}, this.props.addressee),
                 React.createElement("h4", {dangerouslySetInnerHTML: {__html: rawMarkup}})
             )
@@ -186,9 +187,14 @@ function renderOnClient(postalAddresses) {
         React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 2000}), document.getElementById('content')
     );
 
-    React.render(
-        React.createElement(QRCodeComponent, {text: "14382929 || Terrence Miao || 111 Bourke St, Melbourne VIC 3000"}), document.getElementById('qrcode')
-    );
+    var qrcodeList = document.getElementsByName('qrcode');
+
+    for (var i = 0; i < qrcodeList.length; i++) {
+        React.render(
+            React.createElement(QRCodeComponent, {text: qrcodeList[i].title}), qrcodeList[i]
+        );
+    }
+
 }
 
 function renderOnServer(postalAddresses) {
@@ -198,4 +204,15 @@ function renderOnServer(postalAddresses) {
     return React.renderToString(
         React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 2000})
     );
+}
+
+function guid() {
+
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
