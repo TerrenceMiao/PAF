@@ -154,6 +154,8 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
             contentType: 'application/json',
             success: function (data) {
                 this.setState({data: data});
+                // Force to redrew ALL QR Code
+                renderOnClient();
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -179,9 +181,9 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
 });
 
 
-function renderOnClient(postalAddresses) {
+function renderOnClient(postalAddressList) {
 
-    var data = postalAddresses || [];
+    var data = postalAddressList || [];
 
     React.render(
         React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 2000}), document.getElementById('content')
@@ -197,9 +199,9 @@ function renderOnClient(postalAddresses) {
 
 }
 
-function renderOnServer(postalAddresses) {
+function renderOnServer(postalAddressList) {
 
-    var data = Java.from(postalAddresses);
+    var data = Java.from(postalAddressList);
 
     return React.renderToString(
         React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 2000})
