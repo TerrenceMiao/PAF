@@ -1,5 +1,7 @@
 package au.com.auspost.microservice.dto;
 
+import java.util.Objects;
+
 /**
  * Created by terrence on 31/10/15.
  */
@@ -23,7 +25,8 @@ public class PostalAddress {
     public PostalAddress() {
     }
 
-    public PostalAddress(String addressee, String houseNumber1, String streetName, String streetType, String localityName, String state, String postcode) {
+    public PostalAddress(String addressee, String houseNumber1, String streetName, String streetType,
+            String localityName, String state, String postcode) {
 
         this.addressee = addressee;
 
@@ -138,6 +141,37 @@ public class PostalAddress {
                 + ", postcode='" + postcode + '\''
                 + ", state='" + state + '\''
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        PostalAddress that = (PostalAddress) o;
+
+        return Objects.equals(lotNumber, that.lotNumber)
+                && Objects.equals(flatUnitNumber, that.flatUnitNumber)
+                && Objects.equals(floorLevelNumber, that.floorLevelNumber)
+                && Objects.equals(houseNumber1, that.houseNumber1)
+                && Objects.equals(houseNumber2, that.houseNumber2)
+                && Objects.equals(streetName, that.streetName)
+                && Objects.equals(streetType, that.streetType)
+                && Objects.equals(localityName, that.localityName)
+                && Objects.equals(postcode, that.postcode)
+                && Objects.equals(state, that.state);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(lotNumber, flatUnitNumber, floorLevelNumber, houseNumber1, houseNumber2,
+                streetName, streetType, localityName, postcode, state);
     }
 
 }

@@ -10,6 +10,7 @@ import au.com.auspost.microservice.repositories.LocalityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public interface PostalAddressService {
         private DeliveryPointRepository deliveryPointRepository;
 
         @Override
+        @Cacheable(value = "dpidCache")
         public String getDpidFromPostalAddress(PostalAddress postalAddress) {
 
             LOG.info("Query for " + postalAddress);
