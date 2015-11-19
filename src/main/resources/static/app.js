@@ -69,8 +69,7 @@ var PostalAddressList = React.createClass({displayName: "PostalAddressList",
         var postalAddressNodes = this.props.data.map(function (postalAddress) {
             return (
                 React.createElement(PostalAddress,
-                    {dpid: postalAddress.dpid},
-                    {addressee: postalAddress.addressee},
+                    {dpid: postalAddress.dpid, addressee: postalAddress.addressee},
                     postalAddress.houseNumber1 + " " + postalAddress.streetName + " " + postalAddress.streetType,
                     " " + postalAddress.localityName + " " + postalAddress.state + " " + postalAddress.postcode
                 )
@@ -87,8 +86,6 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
     handleSubmit: function (e) {
         e.preventDefault();
 
-        var dpid = this.refs.dpid.getDOMNode().value.trim();
-
         var addressee = this.refs.addressee.getDOMNode().value.trim();
 
         var houseNumber1 = this.refs.houseNumber1.getDOMNode().value.trim();
@@ -103,13 +100,11 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
         }
 
         this.props.onPostalAddressSubmit({
-            dpid: dpid,
             addressee: addressee,
             houseNumber1: houseNumber1, streetName: streetName, streetType: streetType,
             localityName: localityName, state: state, postcode: postcode
         });
 
-        this.refs.dpid.getDOMNode().value = '';
         this.refs.addressee.getDOMNode().value = '';
         this.refs.houseNumber1.getDOMNode().value = '';
         this.refs.streetName.getDOMNode().value = '';
@@ -121,7 +116,6 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
     render: function () {
         return (
             React.createElement("form", {className: "form-address", onSubmit: this.handleSubmit},
-                React.createElement("input", {type: "text", className: "form-control", placeholder: "DPID", ref: "dpid"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "To whom", ref: "addressee"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street number", ref: "houseNumber1"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street name", ref: "streetName"}),
