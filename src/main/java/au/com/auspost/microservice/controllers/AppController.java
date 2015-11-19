@@ -24,7 +24,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Controller
 public class AppController {
 
-    private static CopyOnWriteArrayList<PostalAddress> POSTAL_ADDRESS_LIST;
+    private static CopyOnWriteArrayList<PostalAddress> postalAddressList;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -61,7 +61,7 @@ public class AppController {
     @RequestMapping(value = "/postaladdress", method = RequestMethod.POST)
     List<PostalAddress> addPostalAddressToList(@RequestBody PostalAddress postalAddress) {
 
-        POSTAL_ADDRESS_LIST.add(postalAddress);
+        postalAddressList.add(postalAddress);
 
         return reversePostalAddressList();
     }
@@ -75,7 +75,7 @@ public class AppController {
 
     private static List<PostalAddress> reversePostalAddressList() {
 
-        CopyOnWriteArrayList<PostalAddress> copyPostAddressList = (CopyOnWriteArrayList<PostalAddress>) POSTAL_ADDRESS_LIST.clone();
+        CopyOnWriteArrayList<PostalAddress> copyPostAddressList = (CopyOnWriteArrayList<PostalAddress>) postalAddressList.clone();
 
         Collections.reverse(copyPostAddressList);
 
@@ -84,10 +84,9 @@ public class AppController {
 
     private void initiatePostalAddressList() {
 
-        POSTAL_ADDRESS_LIST = new CopyOnWriteArrayList<>();
+        postalAddressList = new CopyOnWriteArrayList<>();
 
-        POSTAL_ADDRESS_LIST.addAll(Arrays.asList(
-                new PostalAddress("Pyotr Smirnov", "111", "Bourke", "St", "Melbourne", "VIC", "3000"),
+        postalAddressList.addAll(Arrays.asList(new PostalAddress("Pyotr Smirnov", "111", "Bourke", "St", "Melbourne", "VIC", "3000"),
                 new PostalAddress("Johnny Walker", "80", "Collins", "St", "Melbourne", "VIC", "3000")));
     }
 
