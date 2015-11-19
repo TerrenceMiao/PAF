@@ -86,8 +86,10 @@ public class AppController {
 
         postalAddressList = new CopyOnWriteArrayList<>();
 
-        postalAddressList.addAll(Arrays.asList(new PostalAddress("Pyotr Smirnov", "111", "Bourke", "St", "Melbourne", "VIC", "3000"),
-                new PostalAddress("Johnny Walker", "80", "Collins", "St", "Melbourne", "VIC", "3000")));
+        postalAddressList.addAll(Arrays.asList(
+                new PostalAddress("32815985", "Pyotr Smirnov", "111", "Bourke", "St", "Melbourne", "VIC", "3000"),
+                new PostalAddress("31515566", "Johnny Walker", "80", "Collins", "St", "Melbourne", "VIC", "3000"))
+        );
     }
 
 }

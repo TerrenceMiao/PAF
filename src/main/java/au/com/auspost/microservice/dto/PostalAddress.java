@@ -7,6 +7,8 @@ import java.util.Objects;
  */
 public class PostalAddress {
 
+    private String dpid;
+
     private String addressee;
 
     private String lotNumber;
@@ -25,8 +27,10 @@ public class PostalAddress {
     public PostalAddress() {
     }
 
-    public PostalAddress(String addressee, String houseNumber1, String streetName, String streetType,
+    public PostalAddress(String dpid, String addressee, String houseNumber1, String streetName, String streetType,
             String localityName, String state, String postcode) {
+
+        this.dpid = dpid;
 
         this.addressee = addressee;
 
@@ -36,6 +40,14 @@ public class PostalAddress {
         this.localityName = localityName;
         this.state = state;
         this.postcode = postcode;
+    }
+
+    public String getDpid() {
+        return dpid;
+    }
+
+    public void setDpid(String dpid) {
+        this.dpid = dpid;
     }
 
     public String getAddressee() {
@@ -129,7 +141,8 @@ public class PostalAddress {
     @Override
     public String toString() {
         return "PostalAddress{"
-                + "addressee='" + addressee + '\''
+                + "dpid ='" + dpid + '\''
+                + ", addressee='" + addressee + '\''
                 + ", lotNumber='" + lotNumber + '\''
                 + ", flatUnitNumber='" + flatUnitNumber + '\''
                 + ", floorLevelNumber='" + floorLevelNumber + '\''
@@ -170,8 +183,8 @@ public class PostalAddress {
     @Override
     public int hashCode() {
 
-        return Objects.hash(lotNumber, flatUnitNumber, floorLevelNumber, houseNumber1, houseNumber2,
-                streetName, streetType, localityName, postcode, state);
+        return Objects.hash(lotNumber, flatUnitNumber, floorLevelNumber, houseNumber1, houseNumber2, streetName, streetType,
+                localityName, postcode, state);
     }
 
 }
