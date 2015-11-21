@@ -2,7 +2,7 @@ package au.com.auspost.microservice.utils;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by terrence on 21/11/15.

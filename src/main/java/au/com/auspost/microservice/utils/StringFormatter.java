@@ -3,7 +3,10 @@ package au.com.auspost.microservice.utils;
 /**
  * Created by terrence on 21/11/15.
  */
-public class StringFormatter {
+public final class StringFormatter {
+
+    private StringFormatter() {
+    }
 
     public static String padLeftWithZero(String str, int n) {
 
