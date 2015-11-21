@@ -20,7 +20,6 @@ public class App extends SpringBootServletInitializer {
 
         return new JavaScriptEngine().polyfillToNashorn()
                 .loadFromClassPath("META-INF/resources/webjars/react/0.14.0/react.min.js")
-                .loadFromClassPath("META-INF/resources/webjars/showdown/0.3.1/compressed/showdown.js")
                 .loadFromClassPath("static/app.js");
     }
 

@@ -1,5 +1,3 @@
-var converter = new Showdown.converter();
-
 var QRCodeComponent = React.createClass({displayName: "QRCodeComponent",
 
     propTypes: {
@@ -51,13 +49,12 @@ var QRCodeComponent = React.createClass({displayName: "QRCodeComponent",
 var PostalAddress = React.createClass({displayName: "PostalAddress",
 
     render: function () {
-        var rawMarkup = converter.makeHtml(this.props.children.toString());
         return (
             React.createElement("div", {className: "postalAddress"},
                 React.createElement("div", {id: guid(), name: "qrcode", className: "qrcode",
                     title: this.props.dpid + " || " + this.props.addressee + " || " + this.props.children.toString()}),
                 React.createElement("h2", {className: "addressee"}, this.props.addressee),
-                React.createElement("h4", {dangerouslySetInnerHTML: {__html: rawMarkup}})
+                React.createElement("h4", {dangerouslySetInnerHTML: {__html: this.props.children.toString()}})
             )
         );
     }
