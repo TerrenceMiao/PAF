@@ -1,5 +1,6 @@
 package au.com.auspost.microservice.services;
 
+import au.com.auspost.microservice.Constants;
 import au.com.auspost.microservice.domain.DeliveryPoint;
 import au.com.auspost.microservice.domain.DeliveryPointGroup;
 import au.com.auspost.microservice.domain.Locality;
@@ -7,6 +8,7 @@ import au.com.auspost.microservice.dto.PostalAddress;
 import au.com.auspost.microservice.repositories.DeliveryPointGroupRepository;
 import au.com.auspost.microservice.repositories.DeliveryPointRepository;
 import au.com.auspost.microservice.repositories.LocalityRepository;
+import au.com.auspost.microservice.utils.StringFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +54,8 @@ public interface PostalAddressService {
                     localityList.get(0).getLocalityId(), postalAddress.getStreetName(), postalAddress.getStreetType());
 
             List<DeliveryPoint> deliveryPointList = deliveryPointRepository.findByDelivyPointGroupIdAndHouseNbr1(
-                    deliveryPointGroupList.get(0).getDelivyPointGroupId(), postalAddress.getHouseNumber1());
+                    deliveryPointGroupList.get(0).getDelivyPointGroupId(),
+                    StringFormatter.padLeftWithZero(postalAddress.getHouseNumber1(), Constants.STREETS_NUMBER_LENGTH));
 
             return deliveryPointList.get(0).getDelivyPointId();
         }

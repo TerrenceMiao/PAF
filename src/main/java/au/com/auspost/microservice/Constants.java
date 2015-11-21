@@ -13,6 +13,8 @@ public final class Constants {
     public static final String SUBURBS_REQUEST_PATH = CURRENT_VERSION + "/suburbs";
     public static final String STREETS_REQUEST_PATH = CURRENT_VERSION + "/streets";
 
+    public static final int STREETS_NUMBER_LENGTH = 5;
+
     public static final ModelMapper MODEL_MAPPER = new ModelMapper();
 
     private Constants() {

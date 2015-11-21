@@ -2,11 +2,13 @@ package au.com.auspost.microservice.controllers;
 
 import au.com.auspost.microservice.JavaScriptEngine;
 import au.com.auspost.microservice.dto.PostalAddress;
+import au.com.auspost.microservice.services.PostalAddressService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +33,9 @@ public class AppController {
 
     @Autowired
     private JavaScriptEngine javaScriptEngine;
+
+    @Autowired
+    private PostalAddressService postalAddressService;
 
     @PostConstruct
     void init() {
@@ -60,6 +65,8 @@ public class AppController {
     @ResponseBody
     @RequestMapping(value = "/postaladdress", method = RequestMethod.POST)
     List<PostalAddress> addPostalAddressToList(@RequestBody PostalAddress postalAddress) {
+
+        postalAddress.setDpid(postalAddressService.getDpidFromPostalAddress(postalAddress));
 
         postalAddressList.add(postalAddress);
 
