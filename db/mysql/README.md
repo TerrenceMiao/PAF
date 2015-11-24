@@ -36,6 +36,18 @@ mysql> SELECT * FROM delivery_point_group WHERE locality_id = "00012220" AND str
 +--------+------------------+-----------------------+-------------+-------------+-------------+------------+----------------------+------------------------+
 1 row in set (0.71 sec)
 
+mysql> SELECT DISTINCT street_type FROM delivery_point_group WHERE  street_type != '' ORDER BY street_type;
++-------------+
+| street_type |
++-------------+
+| LANE        |
++-------------+
+| RD          |
++-------------+
+| ST          |
++-------------+
+3 row in set (0.012 sec)
+
 mysql> SELECT * FROM synonym WHERE locality_id = "00012220";
 +------+------------------+---------+-------------+-----------------+----------+----------------+
 | id   | record_actn_code | type_id | locality_id | synonym         | postcode | type_actn_code |
