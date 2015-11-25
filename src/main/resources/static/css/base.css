@@ -81,7 +81,7 @@ ul {
 
 .form-address .form-control {
     position: relative;
-    height: auto;
+    height: 45px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
