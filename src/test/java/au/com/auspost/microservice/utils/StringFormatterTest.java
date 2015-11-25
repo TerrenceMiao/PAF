@@ -16,6 +16,7 @@ public class StringFormatterTest {
         assertEquals("Incorrect string padding", "00018", StringFormatter.padLeftWithZero("18", 5));
         assertEquals("Incorrect string padding", "03040", StringFormatter.padLeftWithZero("3040", 5));
         assertEquals("Incorrect string padding", "10050", StringFormatter.padLeftWithZero("10050", 5));
+        assertEquals("Incorrect string padding", "100050", StringFormatter.padLeftWithZero("100050", 5));
     }
 
 }
