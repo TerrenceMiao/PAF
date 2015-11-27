@@ -157,8 +157,6 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
             contentType: 'application/json',
             success: function (data) {
                 this.setState({data: data});
-                // Force to redrew ALL QR Code
-                renderOnClient();
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
