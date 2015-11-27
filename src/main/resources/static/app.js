@@ -51,8 +51,9 @@ var PostalAddress = React.createClass({displayName: "PostalAddress",
     render: function () {
         return (
             React.createElement("div", {className: "postalAddress"},
-                React.createElement("div", {id: guid(), name: "qrcode", className: "qrcode",
-                    title: this.props.dpid + " || " + this.props.addressee + " || " + this.props.children.toString()}),
+                React.createElement("div", {className: "qrcode"},
+                    React.createElement(QRCodeComponent, {text: this.props.dpid + " || " + this.props.addressee + " || " + this.props.children.toString()})
+                ),
                 React.createElement("h2", {className: "addressee"}, this.props.addressee),
                 React.createElement("h4", {dangerouslySetInnerHTML: {__html: this.props.children.toString()}})
             )
@@ -190,15 +191,6 @@ function renderOnClient(postalAddressList) {
     React.render(
         React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 2000}), document.getElementById('content')
     );
-
-    var qrcodeList = document.getElementsByName('qrcode');
-
-    for (var i = 0; i < qrcodeList.length; i++) {
-        React.render(
-            React.createElement(QRCodeComponent, {text: qrcodeList[i].title}), qrcodeList[i]
-        );
-    }
-
 }
 
 function renderOnServer(postalAddressList) {
