@@ -15,6 +15,8 @@ public final class Constants {
 
     public static final int STREETS_NUMBER_LENGTH = 5;
 
+    public static final String EMPTY_STRING = "";
+
     public static final ModelMapper MODEL_MAPPER = new ModelMapper();
 
     private Constants() {

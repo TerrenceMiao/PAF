@@ -50,14 +50,35 @@ public interface PostalAddressService {
 
             List<Locality> localityList = localityRepository.findByLocalityName(postalAddress.getLocalityName());
 
+            if (localityList.size() == 0) {
+                LOG.warn("Locality list is empty for locality [{}]", postalAddress.getLocalityName());
+
+                return Constants.EMPTY_STRING;
+            }
+
             List<DeliveryPointGroup> deliveryPointGroupList = deliveryPointGroupRepository.findByLocalityIdAndStreetNameAndStreetType(
                     localityList.get(0).getLocalityId(), postalAddress.getStreetName(), postalAddress.getStreetType());
+
+            if (deliveryPointGroupList.size() == 0) {
+                LOG.warn("Delivery Point Group list is empty for locality id [{}], street name [{}], street type [{}]",
+                        localityList.get(0).getLocalityId(), postalAddress.getStreetName(), postalAddress.getStreetType());
+
+                return Constants.EMPTY_STRING;
+            }
 
             List<DeliveryPoint> deliveryPointList = deliveryPointRepository.findByDelivyPointGroupIdAndHouseNbr1(
                     deliveryPointGroupList.get(0).getDelivyPointGroupId(),
                     StringFormatter.padLeftWithZero(postalAddress.getHouseNumber1(), Constants.STREETS_NUMBER_LENGTH));
 
-            return deliveryPointList.get(0).getDelivyPointId();
+            if (deliveryPointList.size() == 0) {
+                LOG.warn("Delivery Point list is empty for delivery point group id [{}], house number [{}]",
+                        deliveryPointGroupList.get(0).getDelivyPointGroupId(),
+                        StringFormatter.padLeftWithZero(postalAddress.getHouseNumber1(), Constants.STREETS_NUMBER_LENGTH));
+
+                return Constants.EMPTY_STRING;
+            } else {
+                return deliveryPointList.get(0).getDelivyPointId();
+            }
         }
 
         @Override
