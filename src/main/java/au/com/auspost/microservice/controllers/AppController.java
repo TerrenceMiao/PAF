@@ -67,9 +67,12 @@ public class AppController {
     @RequestMapping(value = "/postaladdress", method = RequestMethod.POST)
     List<PostalAddress> addPostalAddressToList(@RequestBody PostalAddress postalAddress) {
 
-        postalAddress.setDpid(postalAddressService.getDpidFromPostalAddress(postalAddress));
+        String dpid = postalAddressService.getDpidFromPostalAddress(postalAddress);
 
-        postalAddressList.add(postalAddress);
+        if (!dpid.isEmpty()) {
+            postalAddress.setDpid(dpid);
+            postalAddressList.add(postalAddress);
+        }
 
         return reversePostalAddressList();
     }

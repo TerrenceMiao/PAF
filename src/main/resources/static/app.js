@@ -103,13 +103,13 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
             localityName: localityName, state: state, postcode: postcode
         });
 
-        this.refs.addressee.getDOMNode().value = '';
-        this.refs.houseNumber1.getDOMNode().value = '';
-        this.refs.streetName.getDOMNode().value = '';
-        this.refs.streetType.getDOMNode().value = '';
-        this.refs.localityName.getDOMNode().value = '';
-        this.refs.state.getDOMNode().value = '';
-        this.refs.postcode.getDOMNode().value = '';
+        //this.refs.addressee.getDOMNode().value = '';
+        //this.refs.houseNumber1.getDOMNode().value = '';
+        //this.refs.streetName.getDOMNode().value = '';
+        //this.refs.streetType.getDOMNode().value = '';
+        //this.refs.localityName.getDOMNode().value = '';
+        //this.refs.state.getDOMNode().value = '';
+        //this.refs.postcode.getDOMNode().value = '';
     },
     render: function () {
         return (
