@@ -36,15 +36,15 @@ mysql> SELECT * FROM delivery_point_group WHERE locality_id = "00012220" AND str
 +--------+------------------+-----------------------+-------------+-------------+-------------+------------+----------------------+------------------------+
 1 row in set (0.71 sec)
 
-mysql> SELECT DISTINCT street_type FROM delivery_point_group WHERE  street_type != '' ORDER BY street_type;
+mysql> SELECT DISTINCT CONCAT(UCASE(MID(street_type,1,1)),LCASE(MID(street_type,2))) AS street_type FROM delivery_point_group WHERE  street_type != '' ORDER BY street_type;
 +-------------+
 | street_type |
 +-------------+
-| LANE        |
+| Lane        |
 +-------------+
-| RD          |
+| Rd          |
 +-------------+
-| ST          |
+| St          |
 +-------------+
 3 row in set (0.012 sec)
 

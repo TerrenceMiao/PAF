@@ -15,7 +15,8 @@ public interface DeliveryPointGroupRepository extends CrudRepository<DeliveryPoi
     String FIND_BY_LOCALITY_ID_AND_STREET_NAME_AND_STREET_TYPE_QUERY
             = "SELECT dpg FROM DeliveryPointGroup dpg WHERE dpg.localityId = :localityId AND dpg.streetName = :streetName AND dpg.streetType = :streetType";
 
-    String FIND_ALL_STREET_TYPE_QUERY = "SELECT DISTINCT dpg.streetType FROM DeliveryPointGroup dpg ORDER BY dpg.streetType";
+    String FIND_ALL_STREET_TYPE_QUERY
+            = "SELECT DISTINCT CONCAT(UCASE(MID(dpg.streetType,1,1)),LCASE(MID(dpg.streetType,2))) FROM DeliveryPointGroup dpg ORDER BY dpg.streetType";
 
     @Query(FIND_BY_LOCALITY_ID_AND_STREET_NAME_AND_STREET_TYPE_QUERY)
     List<DeliveryPointGroup> findByLocalityIdAndStreetNameAndStreetType(@Param("localityId") String localityId,
