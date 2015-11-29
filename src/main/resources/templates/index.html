@@ -18,9 +18,9 @@
     <script type="text/javascript" th:inline="javascript">
         $(function () {
             var initialData = JSON.parse(/*[[${initialData}]]*/ '[]');
-            var streetTypeList = /*[[${streetTypeList}]]*/ '[]';
+            var streetTypeData = /*[[${streetTypeList}]]*/ '[]';
 
-            renderOnClient(initialData);
+            renderOnClient(initialData, streetTypeData);
         });
     </script>
 

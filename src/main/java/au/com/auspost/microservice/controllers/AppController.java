@@ -45,9 +45,9 @@ public class AppController {
     @RequestMapping("/")
     String hello(Model model) throws JsonProcessingException {
 
-        String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, reversePostalAddressList());
-        String initialData = objectMapper.writeValueAsString(reversePostalAddressList());
         List<String> streetTypeList = postalAddressService.getAllStreetType();
+        String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, reversePostalAddressList(), streetTypeList);
+        String initialData = objectMapper.writeValueAsString(reversePostalAddressList());
 
         model.addAttribute("markup", markup);
         model.addAttribute("initialData", initialData);

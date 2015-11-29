@@ -117,7 +117,7 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "To whom", ref: "addressee"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street number", ref: "houseNumber1"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street name", ref: "streetName"}),
-                React.createElement("select", {className: "form-control", ref: "streetType"}, renderStreetTypeOptions()),
+                React.createElement("select", {className: "form-control", ref: "streetType"}, renderStreetTypeOptions(this.props.streetTypeData)),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Suburb", ref: "localityName"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "State", ref: "state"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Postcode", ref: "postcode"}),
@@ -169,7 +169,7 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
         return (
             React.createElement("div", {className: "postalAddressBox"},
                 React.createElement("h1", null, "Postal Address"),
-                React.createElement(PostalAddressForm, {onPostalAddressSubmit: this.handlePostalAddressSubmit}),
+                React.createElement(PostalAddressForm, {streetTypeData: this.props.streetTypeData, onPostalAddressSubmit: this.handlePostalAddressSubmit}),
                 React.createElement("h1", null, ""),
                 React.createElement(PostalAddressList, {data: this.state.data})
             )
@@ -177,43 +177,37 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
     }
 });
 
-function renderStreetTypeOptions() {
-
-    var streetTypeList = [
-        '','Accs','Ally','Ambl','App','Arc','Ave','Bch','Bdge','Bdwy','Bend','Brae','Brce','Brk','Brow','Bvd','Bypa','Caus','Cct','Ch','Cir','Cl',
-        'Clt','Cmmn','Cnr','Cnwy','Con','Cove','Cps','Crcs','Cres','Crsg','Crss','Crst','Cso','Ct','Ctr','Cttg','Ctyd','Dale','Dell','Devn','Dr',
-        'Drwy','Edge','Elb','End','Ent','Esp','Est','Fawy','Fitr','Flat','Folw','Frnt','Frtg','Fshr','Ftrk','Fwy','Gap','Gdn','Gdns','Gld','Glen',
-        'Gly','Gr','Gra','Grn','Gte','Hill','Hts','Hwy','Jnc','Key','Lane','Ldg','Line','Link','Lkt','Lnwy','Loop','Mall','Mew','Mews','Mndr','Mwy',
-        'Nook','Otlk','Park','Part','Pass','Path','Pde','Phwy','Pkt','Pkwy','Pl','Plza','Pnt','Port','Prom','Psge','Qdrt','Quad','Qy','Qys','Ramp',
-        'Rch','Rd','Rdge','Rds','Rdwy','Res','Rest','Ride','Ring','Rise','Rmbl','Rnd','Rnge','Row','Rte','Rtt','Run','Rvr','Sbwy','Slpe','Spur','Sq',
-        'St','Stps','Strp','Swy','Tarn','Tce','Top','Tor','Trk','Trl','Turn','Vale','View','Vsta','Walk','Way','Whrf','Wkwy','Wynd'];
+function renderStreetTypeOptions(streetTypeData) {
 
     var streetTypeOptions = [];
 
-    for (var i = 0; i < streetTypeList.length; i++) {
+    for (var i = 0; i < streetTypeData.length; i++) {
         streetTypeOptions.push(
-            React.createElement("option", {value: streetTypeList[i]}, streetTypeList[i])
+            React.createElement("option", {value: streetTypeData[i]}, streetTypeData[i])
         );
     }
 
     return streetTypeOptions;
 }
 
-function renderOnClient(postalAddressList) {
+function renderOnClient(postalAddressList, streetTypeList) {
 
     var data = postalAddressList || [];
+    var streetTypeData = streetTypeList || [];
 
     React.render(
-        React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 200000}), document.getElementById('content')
+        React.createElement(
+            PostalAddressBox, {data: data, streetTypeData: streetTypeData, url: "postaladdress.json", pollInterval: 200000}), document.getElementById('content')
     );
 }
 
-function renderOnServer(postalAddressList) {
+function renderOnServer(postalAddressList, streetTypeList) {
 
     var data = Java.from(postalAddressList);
+    var streetTypeData = Java.from(streetTypeList);
 
     return React.renderToString(
-        React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 200000})
+        React.createElement(PostalAddressBox, {data: data, streetTypeData: streetTypeData, url: "postaladdress.json", pollInterval: 200000})
     );
 }
 
