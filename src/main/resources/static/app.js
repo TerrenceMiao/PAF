@@ -117,11 +117,7 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "To whom", ref: "addressee"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street number", ref: "houseNumber1"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street name", ref: "streetName"}),
-                React.createElement("select", {className: "form-control", ref: "streetType"},
-                    React.createElement("option", {value: "LANE"}, "LANE"),
-                    React.createElement("option", {value: "RD"}, "RD"),
-                    React.createElement("option", {value: "ST"}, "ST")
-                ),
+                React.createElement("select", {className: "form-control", ref: "streetType"}, renderStreetTypeOptions()),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Suburb", ref: "localityName"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "State", ref: "state"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Postcode", ref: "postcode"}),
@@ -181,13 +177,34 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
     }
 });
 
+function renderStreetTypeOptions() {
+
+    var streetTypeList = [
+        '','Accs','Ally','Ambl','App','Arc','Ave','Bch','Bdge','Bdwy','Bend','Brae','Brce','Brk','Brow','Bvd','Bypa','Caus','Cct','Ch','Cir','Cl',
+        'Clt','Cmmn','Cnr','Cnwy','Con','Cove','Cps','Crcs','Cres','Crsg','Crss','Crst','Cso','Ct','Ctr','Cttg','Ctyd','Dale','Dell','Devn','Dr',
+        'Drwy','Edge','Elb','End','Ent','Esp','Est','Fawy','Fitr','Flat','Folw','Frnt','Frtg','Fshr','Ftrk','Fwy','Gap','Gdn','Gdns','Gld','Glen',
+        'Gly','Gr','Gra','Grn','Gte','Hill','Hts','Hwy','Jnc','Key','Lane','Ldg','Line','Link','Lkt','Lnwy','Loop','Mall','Mew','Mews','Mndr','Mwy',
+        'Nook','Otlk','Park','Part','Pass','Path','Pde','Phwy','Pkt','Pkwy','Pl','Plza','Pnt','Port','Prom','Psge','Qdrt','Quad','Qy','Qys','Ramp',
+        'Rch','Rd','Rdge','Rds','Rdwy','Res','Rest','Ride','Ring','Rise','Rmbl','Rnd','Rnge','Row','Rte','Rtt','Run','Rvr','Sbwy','Slpe','Spur','Sq',
+        'St','Stps','Strp','Swy','Tarn','Tce','Top','Tor','Trk','Trl','Turn','Vale','View','Vsta','Walk','Way','Whrf','Wkwy','Wynd'];
+
+    var streetTypeOptions = [];
+
+    for (var i = 0; i < streetTypeList.length; i++) {
+        streetTypeOptions.push(
+            React.createElement("option", {value: streetTypeList[i]}, streetTypeList[i])
+        );
+    }
+
+    return streetTypeOptions;
+}
 
 function renderOnClient(postalAddressList) {
 
     var data = postalAddressList || [];
 
     React.render(
-        React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 2000}), document.getElementById('content')
+        React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 200000}), document.getElementById('content')
     );
 }
 
@@ -196,7 +213,7 @@ function renderOnServer(postalAddressList) {
     var data = Java.from(postalAddressList);
 
     return React.renderToString(
-        React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 2000})
+        React.createElement(PostalAddressBox, {data: data, url: "postaladdress.json", pollInterval: 200000})
     );
 }
 

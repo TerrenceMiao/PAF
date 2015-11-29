@@ -47,9 +47,11 @@ public class AppController {
 
         String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, reversePostalAddressList());
         String initialData = objectMapper.writeValueAsString(reversePostalAddressList());
+        List<String> streetTypeList = postalAddressService.getAllStreetType();
 
         model.addAttribute("markup", markup);
         model.addAttribute("initialData", initialData);
+        model.addAttribute("streetTypeList", streetTypeList);
 
         return "index";
     }
