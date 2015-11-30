@@ -79,6 +79,8 @@ var PostalAddressList = React.createClass({displayName: "PostalAddressList",
     }
 });
 
+var length = 0;
+
 var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
 
     handleSubmit: function (e) {
@@ -102,15 +104,26 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
             houseNumber1: houseNumber1, streetName: streetName, streetType: streetType,
             localityName: localityName, state: state, postcode: postcode
         });
-
-        //this.refs.addressee.getDOMNode().value = '';
-        //this.refs.houseNumber1.getDOMNode().value = '';
-        //this.refs.streetName.getDOMNode().value = '';
-        //this.refs.streetType.getDOMNode().value = '';
-        //this.refs.localityName.getDOMNode().value = '';
-        //this.refs.state.getDOMNode().value = '';
-        //this.refs.postcode.getDOMNode().value = '';
     },
+
+    componentDidUpdate: function () {
+        if (length === 0) {
+            length = this.props.data.length;
+        } else if (length === this.props.data.length) {
+            this.refs.addressee.getDOMNode().value = '';
+            this.refs.houseNumber1.getDOMNode().value = '';
+            this.refs.streetName.getDOMNode().value = '';
+            this.refs.streetType.getDOMNode().value = '';
+            this.refs.localityName.getDOMNode().value = '';
+            this.refs.state.getDOMNode().value = '';
+            this.refs.postcode.getDOMNode().value = '';
+
+            length = 0;
+        } else {
+            length = 0;
+        }
+    },
+
     render: function () {
         return (
             React.createElement("form", {className: "form-address", onSubmit: this.handleSubmit},
@@ -141,6 +154,7 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
             }.bind(this)
         });
     },
+
     handlePostalAddressSubmit: function (postalAddress) {
         var postalAddresses = this.state.data;
         var newPostalAddresses = postalAddresses.concat([postalAddress]);
@@ -159,17 +173,21 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
             }.bind(this)
         });
     },
+
     getInitialState: function () {
         return {data: this.props.data || []};
     },
+
     componentDidMount: function () {
         setInterval(this.loadPostalAddressListFromServer, this.props.pollInterval);
     },
+
     render: function () {
         return (
             React.createElement("div", {className: "postalAddressBox"},
                 React.createElement("h1", null, "Postal Address"),
-                React.createElement(PostalAddressForm, {streetTypeData: this.props.streetTypeData, onPostalAddressSubmit: this.handlePostalAddressSubmit}),
+                React.createElement(PostalAddressForm, {data: this.state.data, streetTypeData: this.props.streetTypeData,
+                    onPostalAddressSubmit: this.handlePostalAddressSubmit}),
                 React.createElement("h1", null, ""),
                 React.createElement(PostalAddressList, {data: this.state.data})
             )
@@ -178,7 +196,6 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
 });
 
 function renderStreetTypeOptions(streetTypeData) {
-
     var streetTypeOptions = [];
 
     for (var i = 0; i < streetTypeData.length; i++) {
@@ -191,7 +208,6 @@ function renderStreetTypeOptions(streetTypeData) {
 }
 
 function renderOnClient(postalAddressList, streetTypeList) {
-
     var data = postalAddressList || [];
     var streetTypeData = streetTypeList || [];
 
@@ -202,7 +218,6 @@ function renderOnClient(postalAddressList, streetTypeList) {
 }
 
 function renderOnServer(postalAddressList, streetTypeList) {
-
     var data = Java.from(postalAddressList);
     var streetTypeData = Java.from(streetTypeList);
 
