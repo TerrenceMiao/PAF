@@ -79,8 +79,6 @@ var PostalAddressList = React.createClass({displayName: "PostalAddressList",
     }
 });
 
-var length = 0;
-
 var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
 
     handleSubmit: function (e) {
@@ -106,10 +104,27 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
         });
     },
 
+    currentPostalAddressListSize: 0,
+
+    isDpidFound: function(postalAddressListSize) {
+        if (this.currentPostalAddressListSize === 0) {
+            // Client side update, at first in this place
+            this.currentPostalAddressListSize = postalAddressListSize;
+            return false;
+        } else if (this.currentPostalAddressListSize === postalAddressListSize) {
+            // Server side update, as SsAME size Postal Address list as Client size update means DPID found. Reset form.
+            this.currentPostalAddressListSize = 0;
+            return true;
+        } else {
+            // Server side update, DIFFERENT size Postal Address list as Client size update means DPID NOT found. Reset variable.
+            this.currentPostalAddressListSize = 0;
+            return false;
+        }
+    },
+
     componentDidUpdate: function () {
-        if (length === 0) {
-            length = this.props.data.length;
-        } else if (length === this.props.data.length) {
+        if (this.isDpidFound(this.props.postalAddressListSize)) {
+            // Reset form
             this.refs.addressee.getDOMNode().value = '';
             this.refs.houseNumber1.getDOMNode().value = '';
             this.refs.streetName.getDOMNode().value = '';
@@ -117,10 +132,6 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
             this.refs.localityName.getDOMNode().value = '';
             this.refs.state.getDOMNode().value = '';
             this.refs.postcode.getDOMNode().value = '';
-
-            length = 0;
-        } else {
-            length = 0;
         }
     },
 
@@ -186,7 +197,7 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
         return (
             React.createElement("div", {className: "postalAddressBox"},
                 React.createElement("h1", null, "Postal Address"),
-                React.createElement(PostalAddressForm, {data: this.state.data, streetTypeData: this.props.streetTypeData,
+                React.createElement(PostalAddressForm, {postalAddressListSize: this.state.data.length, streetTypeData: this.props.streetTypeData,
                     onPostalAddressSubmit: this.handlePostalAddressSubmit}),
                 React.createElement("h1", null, ""),
                 React.createElement(PostalAddressList, {data: this.state.data})
