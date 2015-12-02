@@ -1,10 +1,14 @@
 package au.com.auspost.microservice.controllers;
 
+import au.com.auspost.microservice.Constants;
 import au.com.auspost.microservice.JavaScriptEngine;
+import au.com.auspost.microservice.domain.Locality;
 import au.com.auspost.microservice.dto.PostalAddress;
+import au.com.auspost.microservice.model.Suburb;
 import au.com.auspost.microservice.services.PostalAddressService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -46,12 +51,19 @@ public class AppController {
     String hello(Model model) throws JsonProcessingException {
 
         List<String> streetTypeList = postalAddressService.getAllStreetType();
-        String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, reversePostalAddressList(), streetTypeList);
+
+        List<Locality> localityList = postalAddressService.getAllOrderedLocalities();
+        // Define the target type
+        Type targetListType = new TypeToken<List<Suburb>>() { }.getType();
+        List<Suburb> suburbList = Constants.MODEL_MAPPER.map(localityList, targetListType);
+
+        String markup = javaScriptEngine.invokeFunction("renderOnServer", String::valueOf, reversePostalAddressList(), streetTypeList, suburbList);
         String initialData = objectMapper.writeValueAsString(reversePostalAddressList());
 
         model.addAttribute("markup", markup);
         model.addAttribute("initialData", initialData);
         model.addAttribute("streetTypeList", streetTypeList);
+        model.addAttribute("suburbList", suburbList);
 
         return "index";
     }

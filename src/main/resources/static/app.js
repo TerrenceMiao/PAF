@@ -142,7 +142,7 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street number", ref: "houseNumber1"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Street name", ref: "streetName"}),
                 React.createElement("select", {className: "form-control", ref: "streetType"}, renderStreetTypeOptions(this.props.streetTypeData)),
-                React.createElement("input", {type: "text", className: "form-control", placeholder: "Suburb", ref: "localityName"}),
+                React.createElement("select", {className: "form-control", ref: "localityName"}, renderSuburbOptions(this.props.suburbData)),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "State", ref: "state"}),
                 React.createElement("input", {type: "text", className: "form-control", placeholder: "Postcode", ref: "postcode"}),
                 React.createElement("input", {type: "submit", className: "btn btn-lg btn-primary btn-block", value: "Generate QR Code"})
@@ -197,8 +197,12 @@ var PostalAddressBox = React.createClass({displayName: "PostalAddressBox",
         return (
             React.createElement("div", {className: "postalAddressBox"},
                 React.createElement("h1", null, "Postal Address"),
-                React.createElement(PostalAddressForm, {postalAddressListSize: this.state.data.length, streetTypeData: this.props.streetTypeData,
-                    onPostalAddressSubmit: this.handlePostalAddressSubmit}),
+                React.createElement(PostalAddressForm, {
+                    postalAddressListSize: this.state.data.length,
+                    streetTypeData: this.props.streetTypeData,
+                    suburbData: this.props.suburbData,
+                    onPostalAddressSubmit: this.handlePostalAddressSubmit
+                }),
                 React.createElement("h1", null, ""),
                 React.createElement(PostalAddressList, {data: this.state.data})
             )
@@ -218,22 +222,39 @@ function renderStreetTypeOptions(streetTypeData) {
     return streetTypeOptions;
 }
 
-function renderOnClient(postalAddressList, streetTypeList) {
+function renderSuburbOptions(suburbData) {
+    var suburbOptions = [];
+
+    for (var i = 0; i < suburbData.length; i++) {
+        suburbOptions.push(
+            React.createElement("option", {value: suburbData[i].localityName},
+                suburbData[i].localityName + " " + suburbData[i].state + " " + suburbData[i].postcode)
+        );
+    }
+
+    return suburbOptions;
+}
+
+function renderOnClient(postalAddressList, streetTypeList, suburbList) {
     var data = postalAddressList || [];
     var streetTypeData = streetTypeList || [];
+    var suburbData = suburbList || [];
 
     React.render(
         React.createElement(
-            PostalAddressBox, {data: data, streetTypeData: streetTypeData, url: "postaladdress.json", pollInterval: 200000}), document.getElementById('content')
+            PostalAddressBox, {data: data, streetTypeData: streetTypeData, suburbData: suburbData,
+                url: "postaladdress.json", pollInterval: 200000}), document.getElementById('content')
     );
 }
 
-function renderOnServer(postalAddressList, streetTypeList) {
+function renderOnServer(postalAddressList, streetTypeList, suburbList) {
     var data = Java.from(postalAddressList);
     var streetTypeData = Java.from(streetTypeList);
+    var suburbData = Java.from(suburbList);
 
     return React.renderToString(
-        React.createElement(PostalAddressBox, {data: data, streetTypeData: streetTypeData, url: "postaladdress.json", pollInterval: 200000})
+        React.createElement(PostalAddressBox, {data: data, streetTypeData: streetTypeData, suburbData: suburbData,
+            url: "postaladdress.json", pollInterval: 200000})
     );
 }
 
