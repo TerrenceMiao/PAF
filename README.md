@@ -20,9 +20,3 @@ QR as Postal Address tries to solve this issue.
 QR as Postal Address searches SAME real time address data used in Mail / Parcel centres, verify input Postal Address, finds matched address and generates a QR code with DPID, Addressee and Postal Address in it.
 
 This service potentially could be used by anyone who wants to benefit from Australia Post country wide service. There is no registration, no login required, no private questions asked, and it's free. Go online, input postal address, generate QR code, print on a label, stick label on parcels or letters, and send.
-
-Win-win:
-
-For Post customers, enjoy accurate and on-time delivery services.
-
-For Post business, reduce operating cost. 
