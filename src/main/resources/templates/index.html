@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-    <meta charset="UTF-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <title>QR as Postal Address</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/base.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="css/maps.css" rel="stylesheet" />
 </head>
 
 <body>
-
-    <div id="content" th:utext="${markup}"></div>
+    <div class="wrapper">
+        <div class="left">
+            <div id="content" th:utext="${markup}"></div>
+        </div>
+        <div class="right">
+            <div id="locationField">
+                <input id="autocomplete" type="hidden" />
+            </div>
+            <div id="controls">
+                <form name="controls">
+                    <input type="radio" name="type" value="establishment" onclick="search()" checked="checked" />All<br/>
+                    <input type="radio" name="type" value="restaurant" onclick="search()" />Restaurants<br/>
+                    <input type="radio" name="type" value="lodging" onclick="search()" />Lodging
+                </form>
+            </div>
+            <div id="map_canvas"></div>
+            <div id="listing" onscroll="reviewsScroll()"><table id="resultsTable"><tbody id="results"></tbody></table></div>
+            <div id="reviews"></div>
+        </div>
+    </div>
 
     <script src="http://fb.me/react-0.14.0.js" th:src="@{/webjars/react/0.14.0/react.min.js}"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js" th:src="@{/webjars/jquery/1.11.3/jquery.min.js}"></script>
+    <script src="../static/google-maps.js" th:src="google-maps.js"></script>
     <script src="../static/qrcode.js" th:src="qrcode.js"></script>
+    <script src="../static/maps.js" th:src="maps.js"></script>
     <script src="../static/app.js" th:src="app.js"></script>
     <script type="text/javascript" th:inline="javascript">
         $(function () {
@@ -22,6 +44,9 @@
             var suburbData = /*[[${suburbList}]]*/ '[]';
 
             renderOnClient(initialData, streetTypeData, suburbData);
+
+            // initiate Google Maps
+            initializeMaps();
         });
     </script>
 

@@ -36,7 +36,7 @@ h1 {
     border-bottom: 1px solid #ddd;
     font-size: 2.5em;
     font-weight: bold;
-    margin: 0 0 15px;
+    margin: 0 35px 15px 0;
     padding: 0;
     text-align: center;
 }
@@ -60,6 +60,11 @@ p, ul {
 
 ul {
     padding-left: 30px;
+}
+
+input[type=radio] {
+    margin: 4px 8px 0;
+    line-height: normal;
 }
 
 

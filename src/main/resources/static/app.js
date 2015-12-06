@@ -81,6 +81,8 @@ var PostalAddressList = React.createClass({displayName: "PostalAddressList",
 
 var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
 
+    formSubmit: false,
+
     handleSubmit: function (e) {
         e.preventDefault();
 
@@ -102,22 +104,39 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
             houseNumber1: houseNumber1, streetName: streetName, streetType: streetType,
             localityName: localityName, state: state, postcode: postcode
         });
+
+        this.formSubmit = true;
     },
 
-    currentPostalAddressListSize: 0,
+    clientPostalAddressListSize: 0,
+    serverPostalAddressListSize: 0,
 
     isDpidFound: function(postalAddressListSize) {
-        if (this.currentPostalAddressListSize === 0) {
-            // Client side update, at first in this place
-            this.currentPostalAddressListSize = postalAddressListSize;
-            return false;
-        } else if (this.currentPostalAddressListSize === postalAddressListSize) {
-            // Server side update, as SsAME size Postal Address list as Client size update means DPID found. Reset form.
-            this.currentPostalAddressListSize = 0;
-            return true;
+        if (this.formSubmit) {
+            if (this.clientPostalAddressListSize === 0) {
+                // Client side update, at first in this place
+                this.clientPostalAddressListSize = postalAddressListSize;
+                return false;
+            } else {
+                // Server side update
+                this.formSubmit = false;
+                this.serverPostalAddressListSize = postalAddressListSize;
+
+                if (this.clientPostalAddressListSize === this.serverPostalAddressListSize) {
+                    // As SAME size Postal Address list as Client size update means DPID found
+                    this.clientPostalAddressListSize = 0;
+                    this.serverPostalAddressListSize = 0;
+
+                    return true;
+                } else {
+                    // DIFFERENT size Postal Address list as Client size update means DPID NOT found
+                    this.clientPostalAddressListSize = 0;
+                    this.serverPostalAddressListSize = 0;
+
+                    return false;
+                }
+            }
         } else {
-            // Server side update, DIFFERENT size Postal Address list as Client size update means DPID NOT found. Reset variable.
-            this.currentPostalAddressListSize = 0;
             return false;
         }
     },
@@ -127,8 +146,19 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
         this.refs.localityName.getDOMNode().value = '';
     },
 
+    /*
+     * Called every 2000ms due to form submit every 2000ms
+     */
     componentDidUpdate: function () {
         if (this.isDpidFound(this.props.postalAddressListSize)) {
+            // Get valid address
+            var houseNumber1 = this.refs.houseNumber1.getDOMNode().value.trim();
+            var streetName = this.refs.streetName.getDOMNode().value.trim();
+            var streetType = this.refs.streetType.getDOMNode().value.trim();
+            var localityName = this.refs.localityName.getDOMNode().value.trim();
+            var state = this.refs.state.getDOMNode().value.trim();
+            var postcode = this.refs.postcode.getDOMNode().value.trim();
+
             // Reset form
             this.refs.addressee.getDOMNode().value = '';
             this.refs.houseNumber1.getDOMNode().value = '';
@@ -137,6 +167,12 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
             this.refs.localityName.getDOMNode().value = '';
             this.refs.state.getDOMNode().value = '';
             this.refs.postcode.getDOMNode().value = '';
+
+            // Draw place on map
+            document.getElementById('autocomplete').value = houseNumber1 + " " + streetName + " " + streetType + ", "
+                + localityName + ", " + state + ", Australia";
+
+            doQuery();
         }
     },
 
@@ -261,7 +297,7 @@ function renderOnClient(postalAddressList, streetTypeList, suburbList) {
     React.render(
         React.createElement(
             PostalAddressBox, {data: data, streetTypeData: streetTypeData, suburbData: suburbData,
-                url: "postaladdress.json", pollInterval: 200000}), document.getElementById('content')
+                url: "postaladdress.json", pollInterval: 2000}), document.getElementById('content')
     );
 }
 
@@ -272,7 +308,8 @@ function renderOnServer(postalAddressList, streetTypeList, suburbList) {
 
     return React.renderToString(
         React.createElement(PostalAddressBox, {data: data, streetTypeData: streetTypeData, suburbData: suburbData,
-            url: "postaladdress.json", pollInterval: 200000})
+            url: "postaladdress.json", pollInterval: 2000})
     );
 }
+
 
