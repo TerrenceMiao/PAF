@@ -26,11 +26,11 @@ function initializeMaps() {
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     places = new google.maps.places.PlacesService(map);
 
-    //google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
-    //autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
-    //google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    //    showSelectedPlace();
-    //});
+    google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
+    autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        showSelectedPlace();
+    });
 }
 
 function doQuery() {
@@ -69,8 +69,11 @@ function addResults(results, status, p) {
 
 function tilesLoaded() {
     google.maps.event.clearListeners(map, 'tilesloaded');
-    google.maps.event.addListener(map, 'zoom_changed', search);
+
+    // Have to disable "zoom_changed" event due to it flushes searched location
+    //google.maps.event.addListener(map, 'zoom_changed', search);
     google.maps.event.addListener(map, 'dragend', search);
+
     search();
 }
 
@@ -173,11 +176,9 @@ function clearResults() {
 
 function getDetails(result, i) {
     return function() {
-        //places.getDetails({reference: result.reference}, showInfoWindow(i));
         places.getDetails({reference: result.reference}, showDetails(i));
     }
 }
-
 
 function showDetails(i) {
     return function(place, status) {
@@ -197,6 +198,10 @@ function showDetails(i) {
 }
 
 function showReviews(reviews) {
+    if (reviews === undefined) {
+        return;
+    }
+
     var reviewsDiv = document.getElementById('reviews');
     while (reviewsDiv.hasChildNodes()) {
         reviewsDiv.removeChild(reviewsDiv.childNodes[0]);
@@ -275,23 +280,6 @@ function getAspectsTable(aspects) {
     return scoresTable;
 }
 
-
-function showInfoWindow(i) {
-    return function(place, status) {
-        if (iw) {
-            iw.close();
-            iw = null;
-        }
-
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-            iw = new google.maps.InfoWindow({
-                content: getIWContent(place)
-            });
-            iw.open(map, markers[i]);
-        }
-    }
-}
-
 function getIWContent(place) {
     var content = "";
     content += '<table><tr><td>';
@@ -301,50 +289,50 @@ function getIWContent(place) {
     return content;
 }
 
-//function getIWContent(place) {
-//    var content = '';
-//    content += '<table>';
-//    content += '<tr class="iw_table_row">';
-//    content += '<td style="text-align: right"><img class="iwPlaceIcon" src="' + place.icon + '"/></td>';
-//    content += '<td><b><a href="' + place.url + '">' + place.name + '</a></b></td></tr>';
-//    content += '<tr class="iw_table_row"><td class="iw_attribute_name">Address:</td><td>' + place.vicinity + '</td></tr>';
-//    if (place.formatted_phone_number) {
-//        content += '<tr class="iw_table_row"><td class="iw_attribute_name">Telephone:</td><td>' + place.formatted_phone_number + '</td></tr>';
-//    }
-//    if (place.rating) {
-//        var ratingHtml = '';
-//        for (var i = 0; i < 5; i++) {
-//            if (place.rating < (i + 0.5)) {
-//                ratingHtml += '&#10025;';
-//            } else {
-//                ratingHtml += '&#10029;';
-//            }
-//        }
-//        content += '<tr class="iw_table_row"><td class="iw_attribute_name">Rating:</td><td><span id="rating">' + ratingHtml + '</span></td></tr>';
-//    }
-//    if (place.website) {
-//        var fullUrl = place.website;
-//        var website = hostnameRegexp.exec(place.website);
-//        if (website == null) {
-//            website = 'http://' + place.website + '/';
-//            fullUrl = website;
-//        }
-//        content += '<tr class="iw_table_row"><td class="iw_attribute_name">Website:</td><td><a href="' + fullUrl + '">' + website + '</a></td></tr>';
-//    }
-//    if (place.opening_hours) {
-//        var dayToday = (new Date()).getDay();
-//        var periods = place['opening_hours'].periods;
-//        var hours_html = '';
-//        for (var i = 0; i < periods.length; i++) {
-//            if (periods[i].open.day == dayToday) {
-//                hours_html += periods[i].open.time + ' - ' + periods[i].close.time + '<br/>';
-//            }
-//        }
-//        content += '<tr class="iw_table_row"><td class="iw_attribute_name">Open today: </td><td>' + hours_html + '</td></tr>';
-//    }
-//    content += '</table>';
-//    return content;
-//}
+function getIWContentLodging(place) {
+    var content = '';
+    content += '<table>';
+    content += '<tr class="iw_table_row">';
+    content += '<td style="text-align: right"><img class="iwPlaceIcon" src="' + place.icon + '"/></td>';
+    content += '<td><b><a href="' + place.url + '">' + place.name + '</a></b></td></tr>';
+    content += '<tr class="iw_table_row"><td class="iw_attribute_name">Address:</td><td>' + place.vicinity + '</td></tr>';
+    if (place.formatted_phone_number) {
+        content += '<tr class="iw_table_row"><td class="iw_attribute_name">Telephone:</td><td>' + place.formatted_phone_number + '</td></tr>';
+    }
+    if (place.rating) {
+        var ratingHtml = '';
+        for (var i = 0; i < 5; i++) {
+            if (place.rating < (i + 0.5)) {
+                ratingHtml += '&#10025;';
+            } else {
+                ratingHtml += '&#10029;';
+            }
+        }
+        content += '<tr class="iw_table_row"><td class="iw_attribute_name">Rating:</td><td><span id="rating">' + ratingHtml + '</span></td></tr>';
+    }
+    if (place.website) {
+        var fullUrl = place.website;
+        var website = hostnameRegexp.exec(place.website);
+        if (website == null) {
+            website = 'http://' + place.website + '/';
+            fullUrl = website;
+        }
+        content += '<tr class="iw_table_row"><td class="iw_attribute_name">Website:</td><td><a href="' + fullUrl + '">' + website + '</a></td></tr>';
+    }
+    if (place.opening_hours) {
+        var dayToday = (new Date()).getDay();
+        var periods = place['opening_hours'].periods;
+        var hours_html = '';
+        for (var i = 0; i < periods.length; i++) {
+            if (periods[i].open.day == dayToday) {
+                hours_html += periods[i].open.time + ' - ' + periods[i].close.time + '<br/>';
+            }
+        }
+        content += '<tr class="iw_table_row"><td class="iw_attribute_name">Open today: </td><td>' + hours_html + '</td></tr>';
+    }
+    content += '</table>';
+    return content;
+}
 
 function reviewsScroll() {
     var listing = document.getElementById('listing');

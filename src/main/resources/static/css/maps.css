@@ -14,7 +14,7 @@
     height: 360px;
     overflow: auto;
     left: 401px;
-    top: 65px;
+    top: 68px;
     cursor: pointer;
     border-right: 1px solid lightgrey;
 }
@@ -40,7 +40,6 @@
 }
 
 #resultsTable {
-    width: 100%;
     font-size: 12px;
     border-collapse: collapse;
 }
@@ -96,7 +95,7 @@
 #reviews {
     position:absolute;
     width: 600px;
-    top: 382px;
+    top: 440px;
     height: 298px;
     overflow: auto;
 }
