@@ -116,7 +116,7 @@ mysql> SELECT * FROM delivery_point WHERE delivy_point_group_id = "00625292" AND
 
 ### Query Postal Address by Delivery Point ID (DPID)
 
-Example, looking for DPID "45535128"'s Postal Address
+Example, looking for DPID **"45535128"** Postal Address
 
 ```
 mysql> SELECT * FROM delivery_point WHERE delivy_point_id = "45535128";
