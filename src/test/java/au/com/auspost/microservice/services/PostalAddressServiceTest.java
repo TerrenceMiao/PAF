@@ -51,7 +51,7 @@ public class PostalAddressServiceTest {
     }
 
     @Test
-    public void testGetDpidFromPostalAddress() throws Exception {
+    public void testGetDpidFromPostalAddressOneSuburb() throws Exception {
 
         String houseNumber1 = "00018";
         String streetName = "Sandlewood";
@@ -68,6 +68,46 @@ public class PostalAddressServiceTest {
         postalAddress.setStreetName(streetName);
         postalAddress.setStreetType(streetType);
         postalAddress.setLocalityName(localityName);
+        postalAddress.setState(state);
+        postalAddress.setPostcode(postcode);
+
+        assertEquals("Wrong Delivery Point ID (DPID) returned", dpid, postalAddressService.getDpidFromPostalAddress(postalAddress));
+    }
+
+    @Test
+    public void testGetDpidFromPostalAddressTwoSameSuburbs() throws Exception {
+
+        String houseNumber1 = "00006";
+        String streetName = "Scott";
+        String streetType = "St";
+        String localityName = "KEW";
+        String state = "VIC";
+        String postcode = "3101";
+
+        String dpid = "49670273";
+
+        postalAddress = new PostalAddress();
+
+        postalAddress.setHouseNumber1(houseNumber1);
+        postalAddress.setStreetName(streetName);
+        postalAddress.setStreetType(streetType);
+        postalAddress.setLocalityName(localityName);
+        postalAddress.setState(state);
+        postalAddress.setPostcode(postcode);
+
+        assertEquals("Wrong Delivery Point ID (DPID) returned", dpid, postalAddressService.getDpidFromPostalAddress(postalAddress));
+
+        houseNumber1 = "00009";
+        streetName = "Glen Haven";
+        streetType = "Dr";
+        state = "NSW";
+        postcode = "2439";
+
+        dpid = "47499803";
+
+        postalAddress.setHouseNumber1(houseNumber1);
+        postalAddress.setStreetName(streetName);
+        postalAddress.setStreetType(streetType);
         postalAddress.setState(state);
         postalAddress.setPostcode(postcode);
 

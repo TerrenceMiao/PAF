@@ -40,6 +40,37 @@ public class LocalityRepositoryTest {
     }
 
     @Test
+    public void testFindByLocalityNameAndStateAndPostcode() throws Exception {
+
+        String localityName = "KEW";
+        String state = "VIC";
+        String postcode = "3101";
+
+        List<Locality> localityList = localityRepository.findByLocalityNameAndStateAndPostcode(localityName, state, postcode);
+
+        assertEquals("Wrong list size", 1, localityList.size());
+
+        assertEquals("Wrong Locality Id", "00003419", localityList.get(0).getLocalityId());
+        assertEquals("Wrong Locality Name", localityName, localityList.get(0).getLocalityName());
+        assertEquals("Wrong State", state, localityList.get(0).getState());
+        assertEquals("Wrong Postcode", postcode, localityList.get(0).getPostcode());
+        assertEquals("Wrong Locality Did", "", localityList.get(0).getLocalityDid());
+
+        state = "NSW";
+        postcode = "2439";
+
+        localityList = localityRepository.findByLocalityNameAndStateAndPostcode(localityName, state, postcode);
+
+        assertEquals("Wrong list size", 1, localityList.size());
+
+        assertEquals("Wrong Locality Id", "00009711", localityList.get(0).getLocalityId());
+        assertEquals("Wrong Locality Name", localityName, localityList.get(0).getLocalityName());
+        assertEquals("Wrong State", state, localityList.get(0).getState());
+        assertEquals("Wrong Postcode", postcode, localityList.get(0).getPostcode());
+        assertEquals("Wrong Locality Did", "28009711", localityList.get(0).getLocalityDid());
+    }
+
+    @Test
     public void testFindAllOrderedLocalities() throws Exception {
 
         List<Locality> localityList = localityRepository.findAllOrderedLocalities();

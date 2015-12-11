@@ -102,7 +102,8 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
         this.props.onPostalAddressSubmit({
             addressee: addressee,
             houseNumber1: houseNumber1, streetName: streetName, streetType: streetType,
-            localityName: localityName, state: state, postcode: postcode
+            localityName: localityName, state: state, postcode: postcode,
+            localityNameStatePostcode: ''
         });
 
         this.formSubmit = true;
@@ -143,7 +144,7 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
 
     componentDidMount: function() {
         this.refs.streetType.getDOMNode().value = '';
-        this.refs.localityName.getDOMNode().value = '';
+        this.refs.localityNameStatePostcode.getDOMNode().value = '';
     },
 
     /*
@@ -168,6 +169,8 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
             this.refs.state.getDOMNode().value = '';
             this.refs.postcode.getDOMNode().value = '';
 
+            this.refs.localityNameStatePostcode.getDOMNode().value = '';
+
             // Draw place on map
             document.getElementById('autocomplete').value = houseNumber1 + " " + streetName + " " + streetType + ", "
                 + localityName + ", " + state + ", Australia";
@@ -178,7 +181,8 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
 
     suburbChange: function(event){
         for (var i = 0; i < this.props.suburbData.length; i++) {
-            if (this.props.suburbData[i].localityName === event.target.value) {
+            if (this.props.suburbData[i].localityName + " " + this.props.suburbData[i].state + " " + this.props.suburbData[i].postcode === event.target.value) {
+                this.refs.localityName.getDOMNode().value = this.props.suburbData[i].localityName;
                 this.refs.state.getDOMNode().value = this.props.suburbData[i].state;
                 this.refs.postcode.getDOMNode().value = this.props.suburbData[i].postcode;
             }
@@ -194,9 +198,10 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
                 React.createElement("select", {className: "form-control", ref: "streetType"},
                     renderStreetTypeOptions(this.props.streetTypeData)
                 ),
-                React.createElement("select", {className: "form-control", ref: "localityName", onChange: this.suburbChange},
+                React.createElement("select", {className: "form-control", ref: "localityNameStatePostcode", onChange: this.suburbChange},
                     renderSuburbOptions(this.props.suburbData)
                 ),
+                React.createElement("input", {type: "hidden", className: "form-control", placeholder: "Suburb", ref: "localityName"}),
                 React.createElement("input", {type: "hidden", className: "form-control", placeholder: "State", ref: "state"}),
                 React.createElement("input", {type: "hidden", className: "form-control", placeholder: "Postcode", ref: "postcode"}),
                 React.createElement("input", {type: "submit", className: "btn btn-lg btn-primary btn-block", value: "Generate QR Code"})
@@ -281,7 +286,7 @@ function renderSuburbOptions(suburbData) {
 
     for (var i = 0; i < suburbData.length; i++) {
         suburbOptions.push(
-            React.createElement("option", {value: suburbData[i].localityName},
+            React.createElement("option", {value: suburbData[i].localityName + " " + suburbData[i].state + " " + suburbData[i].postcode},
                 suburbData[i].localityName + " " + suburbData[i].state + " " + suburbData[i].postcode)
         );
     }

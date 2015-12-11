@@ -48,7 +48,8 @@ public interface PostalAddressService {
 
             LOG.info("Query for " + postalAddress);
 
-            List<Locality> localityList = localityRepository.findByLocalityName(postalAddress.getLocalityName());
+            List<Locality> localityList = localityRepository.findByLocalityNameAndStateAndPostcode(
+                    postalAddress.getLocalityName(), postalAddress.getState(), postalAddress.getPostcode());
 
             if (localityList.size() == 0) {
                 LOG.warn("Locality list is empty for locality [{}]", postalAddress.getLocalityName());
