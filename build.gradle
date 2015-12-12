@@ -38,7 +38,6 @@ apply plugin: 'maven'
 
 // code quality plugins
 apply plugin: 'checkstyle'
-apply plugin: 'sonar-runner'
 
 // release plugins
 apply plugin: 'net.researchgate.release'
@@ -48,22 +47,6 @@ group = groupId
 archivesBaseName = artifactId
 
 // configure plugins
-
-sonarRunner {
-    sonarProperties {
-        property 'sonar.projectKey', "${group}:${archivesBaseName}"
-        property 'sonar.projectName', "Microservice - ${archivesBaseName}"
-        property 'sonar.projectVersion', version
-        property "sonar.host.url", sonarHostURL
-        property "sonar.jdbc.url", sonarJDBCURL
-        property "sonar.jdbc.username", sonarJDBCUsername
-        property "sonar.jdbc.password", sonarJDBCPassword
-        property 'sonar.language', 'java'
-        property 'sonar.jacoco.reportPath', "${buildDir}/jacoco/jacoco.exec"
-        // property 'sonar.exclusions', 'org/paradise/project/resources/**/*'
-    }
-}
-
 uploadArchives {
     repositories {
         mavenDeployer {
