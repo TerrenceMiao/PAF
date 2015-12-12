@@ -60,7 +60,7 @@ sonarRunner {
         property "sonar.jdbc.password", sonarJDBCPassword
         property 'sonar.language', 'java'
         property 'sonar.jacoco.reportPath', "${buildDir}/jacoco/jacoco.exec"
-        // property 'sonar.exclusions', 'au/com/auspost/project/resources/**/*'
+        // property 'sonar.exclusions', 'org/paradise/project/resources/**/*'
     }
 }
 
@@ -129,18 +129,6 @@ sourceSets.test.runtimeClasspath += [configurations.provided]
 eclipse.classpath.plusConfigurations += [configurations.provided]
 
 dependencies {
-    // web dependencies
-    // compile("au.com.auspost.boot:auspost-spring-boot-starter-web:${dependencyVersionAuspostSpringBoot}")
-
-    // service monitoring and stats (exposed via /_admin context path)
-    // compile("au.com.auspost.boot:auspost-spring-boot-starter-actuator:${dependencyVersionAuspostSpringBoot}")
-
-    // swagger documentation
-    // compile("au.com.auspost.boot:auspost-spring-boot-starter-swagger:${dependencyVersionAuspostSpringBoot}")
-
-    // database dependencies
-    // compile("au.com.auspost.boot:auspost-spring-boot-starter-data-jpa:${dependencyVersionAuspostSpringBoot}")
-
     compile 'org.springframework.boot:spring-boot-starter:1.2.7.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.2.7.RELEASE'
     compile 'org.springframework.boot:spring-boot-starter-web:1.2.7.RELEASE'
