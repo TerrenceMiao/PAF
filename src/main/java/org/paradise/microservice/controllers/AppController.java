@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -98,7 +99,7 @@ public class AppController {
 
     private static List<PostalAddress> reversePostalAddressList() {
 
-        CopyOnWriteArrayList<PostalAddress> copyPostAddressList = (CopyOnWriteArrayList<PostalAddress>) postalAddressList.clone();
+        List<PostalAddress> copyPostAddressList = new ArrayList<>(postalAddressList);
 
         Collections.reverse(copyPostAddressList);
 
