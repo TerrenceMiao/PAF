@@ -15,9 +15,16 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${dependencyVersionSpringBootGradlePlugin}")
-        classpath("net.researchgate:gradle-release:${dependencyVersionGradleReleasePlugin}")
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${dependencyVersionSpringBootGradlePlugin}"
+        classpath "net.researchgate:gradle-release:${dependencyVersionGradleReleasePlugin}"
+        classpath "mysql:mysql-connector-java:${dependencyVersionMySQLConnector}"
+        classpath "com.h2database:h2:${dependencyVersionH2}"
     }
+}
+
+// Liquibase plugin
+plugins {
+    id 'org.liquibase.gradle' version '1.2.0'
 }
 
 repositories {
@@ -45,6 +52,29 @@ apply plugin: 'net.researchgate.release'
 // project artifact info
 group = groupId
 archivesBaseName = artifactId
+
+liquibase {
+    activities {
+        main {
+            changeLogFile 'src/main/resources/db/changelog/changelog.groovy'
+            url 'jdbc:mysql://localhost:3306/paf'
+            username 'paf'
+            password 'password'
+        }
+//        second {
+//            changeLogFile 'second.groovy'
+//            url 'jdbc:h2:db/springbootdb;FILE_LOCK=NO'
+//            username 'sa'
+//            password ''
+//            changeLogParameters([ myToken: 'myvalue',
+//                                  second: 'secondValue'])
+//        }
+    }
+
+//    runList = project.ext.runList
+//    runList = 'main, second'
+    runList = 'main'
+}
 
 // configure plugins
 uploadArchives {
@@ -120,7 +150,10 @@ dependencies {
 
     compile "com.h2database:h2:${dependencyVersionH2}"
 
-    compile "mysql:mysql-connector-java"
+    compile "mysql:mysql-connector-java:${dependencyVersionMySQLConnector}"
+
+    // liquibase
+    compile "org.liquibase:liquibase-core:${dependencyVersionLiquibase}"
 
     // model and dto object mapper
     compile "org.modelmapper:modelmapper:${dependencyVersionModelMapper}"
