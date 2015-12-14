@@ -19,16 +19,8 @@ buildscript {
         classpath "net.researchgate:gradle-release:${dependencyVersionGradleReleasePlugin}"
         classpath "mysql:mysql-connector-java:${dependencyVersionMySQLConnector}"
         classpath "com.h2database:h2:${dependencyVersionH2}"
+        classpath "org.liquibase:liquibase-gradle-plugin:${dependencyVersionLiquibasePlugin}"
     }
-}
-
-// Liquibase plugin
-plugins {
-    id 'org.liquibase.gradle' version '1.2.0'
-}
-
-repositories {
-    maven(nexus)
 }
 
 // IDE plugins
@@ -49,31 +41,35 @@ apply plugin: 'checkstyle'
 // release plugins
 apply plugin: 'net.researchgate.release'
 
+// Liquibase plugin
+apply plugin: 'org.liquibase.gradle'
+
+repositories {
+    maven(nexus)
+}
+
 // project artifact info
 group = groupId
 archivesBaseName = artifactId
 
+// read extra properties
+Properties applicationProperties = new Properties()
+new File("src/main/resources/application.properties").withInputStream { stream ->
+    applicationProperties.load(stream)
+}
+
 liquibase {
     activities {
-        main {
+        db {
             changeLogFile 'src/main/resources/db/changelog/changelog.groovy'
-            url 'jdbc:mysql://localhost:3306/paf'
-            username 'paf'
-            password 'password'
+            url applicationProperties."spring.datasource.url"
+            username applicationProperties."spring.datasource.username"
+            password applicationProperties."spring.datasource.password"
         }
-//        second {
-//            changeLogFile 'second.groovy'
-//            url 'jdbc:h2:db/springbootdb;FILE_LOCK=NO'
-//            username 'sa'
-//            password ''
-//            changeLogParameters([ myToken: 'myvalue',
-//                                  second: 'secondValue'])
-//        }
     }
 
 //    runList = project.ext.runList
-//    runList = 'main, second'
-    runList = 'main'
+    runList = 'db'
 }
 
 // configure plugins
