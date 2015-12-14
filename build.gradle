@@ -61,7 +61,8 @@ new File("src/main/resources/application.properties").withInputStream { stream -
 liquibase {
     activities {
         db {
-            changeLogFile 'src/main/resources/db/changelog/changelog.groovy'
+//            changeLogFile 'src/main/resources/db/changelog/changelog.groovy'
+            changeLogFile 'src/main/resources/db/changelog/changelog.xml'
             url applicationProperties."spring.datasource.url"
             username applicationProperties."spring.datasource.username"
             password applicationProperties."spring.datasource.password"

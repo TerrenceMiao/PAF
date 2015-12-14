@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="miaot (generated)" id="1450132525670-1">
+        <createTable tableName="code">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="record_actn_code" type="VARCHAR(255)"/>
+            <column name="type_actn_code" type="VARCHAR(255)"/>
+            <column name="type_id" type="VARCHAR(255)"/>
+            <column name="type_item" type="VARCHAR(255)"/>
+            <column name="type_item_abbr" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="miaot (generated)" id="1450132525670-2">
+        <createTable tableName="delivery_point">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="delivy_point_group_id" type="VARCHAR(255)"/>
+            <column name="delivy_point_id" type="VARCHAR(255)"/>
+            <column name="flat_unit_nbr" type="VARCHAR(255)"/>
+            <column name="flat_unit_type" type="VARCHAR(255)"/>
+            <column name="floor_level_nbr" type="VARCHAR(255)"/>
+            <column name="floor_level_type" type="VARCHAR(255)"/>
+            <column name="house_nbr_1" type="VARCHAR(255)"/>
+            <column name="house_nbr_2" type="VARCHAR(255)"/>
+            <column name="house_nbr_sfx_1" type="VARCHAR(255)"/>
+            <column name="house_nbr_sfx_2" type="VARCHAR(255)"/>
+            <column name="lot_nbr" type="VARCHAR(255)"/>
+            <column name="postal_delivery_nbr" type="VARCHAR(255)"/>
+            <column name="postal_delivery_nbr_pfx" type="VARCHAR(255)"/>
+            <column name="postal_delivery_nbr_sfx" type="VARCHAR(255)"/>
+            <column name="primary_point_ind" type="VARCHAR(255)"/>
+            <column name="record_actn_code" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="miaot (generated)" id="1450132525670-3">
+        <createTable tableName="delivery_point_group">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="delivy_point_group_did" type="VARCHAR(255)"/>
+            <column name="delivy_point_group_id" type="VARCHAR(255)"/>
+            <column name="locality_id" type="VARCHAR(255)"/>
+            <column name="postal_delivery_type" type="VARCHAR(255)"/>
+            <column name="record_actn_code" type="VARCHAR(255)"/>
+            <column name="street_name" type="VARCHAR(255)"/>
+            <column name="street_sfx" type="VARCHAR(255)"/>
+            <column name="street_type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="miaot (generated)" id="1450132525670-4">
+        <createTable tableName="locality">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="locality_did" type="VARCHAR(255)"/>
+            <column name="locality_id" type="VARCHAR(255)"/>
+            <column name="locality_name" type="VARCHAR(255)"/>
+            <column name="postcode" type="VARCHAR(255)"/>
+            <column name="record_actn_code" type="VARCHAR(255)"/>
+            <column name="state" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="miaot (generated)" id="1450132525670-5">
+        <createTable tableName="person">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
