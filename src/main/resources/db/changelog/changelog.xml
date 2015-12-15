@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="miaot (generated)" id="1450132525670-1">
+    <changeSet author="miaot (generated)" id="1450138453192-1">
         <createTable tableName="code">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -12,7 +12,7 @@
             <column name="type_item_abbr" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="miaot (generated)" id="1450132525670-2">
+    <changeSet author="miaot (generated)" id="1450138453192-2">
         <createTable tableName="delivery_point">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -35,7 +35,7 @@
             <column name="record_actn_code" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="miaot (generated)" id="1450132525670-3">
+    <changeSet author="miaot (generated)" id="1450138453192-3">
         <createTable tableName="delivery_point_group">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -50,7 +50,7 @@
             <column name="street_type" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="miaot (generated)" id="1450132525670-4">
+    <changeSet author="miaot (generated)" id="1450138453192-4">
         <createTable tableName="locality">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>
@@ -63,7 +63,7 @@
             <column name="state" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="miaot (generated)" id="1450132525670-5">
+    <changeSet author="miaot (generated)" id="1450138453192-5">
         <createTable tableName="person">
             <column autoIncrement="true" name="id" type="INT">
                 <constraints primaryKey="true"/>

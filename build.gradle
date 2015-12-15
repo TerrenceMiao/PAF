@@ -61,11 +61,53 @@ new File("src/main/resources/application.properties").withInputStream { stream -
 liquibase {
     activities {
         db {
+            // match Liquibase on command line:
+            /*
+               - generateChangeLog Generate a complete changelog for target database and stores it in changeLogFile
+               "$JAVA_HOME/bin/java" -jar liquibase.jar --changeLogFile=database.changelog-master.xml
+                                     --username=testdb --password=password --url=jdbc:mysql://localhost:3306/testdb
+                                     --driver=com.mysql.jdbc.Driver --classpath=mysql-connector-java-5.1.26-bin.jar
+                                     --logLevel=DEBUG --logFile=log.txt
+                                     generateChangeLog
+
+               - export data
+               "$JAVA_HOME/bin/java" -jar liquibase.jar --changeLogFile=database.changelog-master.data.xml
+                                     --username=testdb --password=password --url=jdbc:mysql://localhost:3306/testdb
+                                     --driver=com.mysql.jdbc.Driver --classpath=mysql-connector-java-5.1.26-bin.jar
+                                     --logLevel=DEBUG --logFile=log.txt
+                                     --diffTypes="data"
+                                     generateChangeLog
+
+                - diffChangeLog Generate a changelog between old database to new database and stores it in changeLogFile
+               "$JAVA_HOME/bin/java" -jar liquibase.jar
+                                     --username=testdb --password=password --url=jdbc:mysql://localhost:3306/testdb
+                                     --driver=com.mysql.jdbc.Driver --classpath=mysql-connector-java-5.1.26-bin.jar
+                                     --logLevel=DEBUG --logFile=log.txt
+                                     --referenceUrl=jdbc:mysql://localhost:3306/paf
+                                     --referenceUsername=paf --referencePassword=password diffChangeLog
+
+                - update Use changeLogFile's changeSet to patch target database
+
+                - updateSQL Writes SQL to update database to current version to STDOUT
+
+                - changeLogSync Update target database's version with changeLogFile. Those patches won't apply during
+                  further updates
+
+                - status Check if changeLogFile's changeSets where applied
+            */
+            // support Groovy DSL output
 //            changeLogFile 'src/main/resources/db/changelog/changelog.groovy'
-            changeLogFile 'src/main/resources/db/changelog/changelog.xml'
+//            changeLogFile 'src/main/resources/db/changelog/changelog.data.groovy'
+            // support XML output
+//            changeLogFile 'src/main/resources/db/changelog/changelog.xml'
+//            changeLogFile 'src/main/resources/db/changelog/changelog.data.xml'
             url applicationProperties."spring.datasource.url"
             username applicationProperties."spring.datasource.username"
             password applicationProperties."spring.datasource.password"
+            referenceUrl applicationProperties."spring.datasource.test.url"
+            referenceUsername applicationProperties."spring.datasource.test.username"
+            referencePassword applicationProperties."spring.datasource.test.password"
+//            diffTypes 'data'
         }
     }
 
