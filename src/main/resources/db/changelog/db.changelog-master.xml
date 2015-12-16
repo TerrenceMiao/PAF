@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="terrence (generated)" id="1450200020735-1">
+        <createTable tableName="bordering_locality">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="record_actn_code" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_locality_id" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bordering_locality_id" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bordering_locality_name" type="CHAR(46)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bordering_postcode" type="CHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-2">
+        <createTable tableName="building_property_name">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="record_actn_code" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delivy_point_id" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bldg_prop_name_1" type="CHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bldg_prop_name_2" type="CHAR(30)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-3">
+        <createTable tableName="code">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="record_actn_code" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_id" type="CHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_item" type="CHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_item_abbr" type="CHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_actn_code" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-4">
+        <createTable tableName="delivery_point">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="record_actn_code" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delivy_point_id" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delivy_point_group_id" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="house_nbr_1" type="CHAR(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="house_nbr_sfx_1" type="CHAR(1)"/>
+            <column name="house_nbr_2" type="CHAR(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="house_nbr_sfx_2" type="CHAR(1)"/>
+            <column name="flat_unit_type" type="CHAR(7)"/>
+            <column name="flat_unit_nbr" type="CHAR(7)"/>
+            <column name="floor_level_type" type="CHAR(2)"/>
+            <column name="floor_level_nbr" type="CHAR(5)"/>
+            <column name="lot_nbr" type="CHAR(6)"/>
+            <column name="postal_delivery_nbr" type="CHAR(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="postal_delivery_nbr_pfx" type="CHAR(3)"/>
+            <column name="postal_delivery_nbr_sfx" type="CHAR(3)"/>
+            <column name="primary_point_ind" type="CHAR(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-5">
+        <createTable tableName="delivery_point_group">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="record_actn_code" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delivy_point_group_id" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locality_id" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street_name" type="CHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street_type" type="CHAR(4)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="street_sfx" type="CHAR(2)"/>
+            <column name="postal_delivery_type" type="CHAR(11)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delivy_point_group_did" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-6">
+        <createTable tableName="locality">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="record_actn_code" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locality_id" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locality_name" type="CHAR(46)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="postcode" type="CHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="CHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locality_did" type="CHAR(8)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-7">
+        <createTable tableName="street_alternate">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="record_actn_code" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delivy_point_group_id" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="st_alt_street_name" type="CHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="st_alt_street_type" type="CHAR(4)"/>
+            <column name="st_alt_street_sfx" type="CHAR(2)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-8">
+        <createTable tableName="synonym">
+            <column autoIncrement="true" name="id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="record_actn_code" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_id" type="CHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locality_id" type="CHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="synonym" type="CHAR(46)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="postcode" type="CHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_actn_code" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-9">
+        <addUniqueConstraint columnNames="delivy_point_group_id" constraintName="delivy_point_group_id_index" tableName="delivery_point_group"/>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-10">
+        <addUniqueConstraint columnNames="delivy_point_id" constraintName="delivy_point_id_index" tableName="delivery_point"/>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-11">
+        <addUniqueConstraint columnNames="locality_id" constraintName="locality_id_index" tableName="locality"/>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-12">
+        <createIndex indexName="delivy_point_group_id_index" tableName="delivery_point">
+            <column name="delivy_point_group_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-13">
+        <createIndex indexName="locality_id_index" tableName="delivery_point_group">
+            <column name="locality_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-14">
+        <createIndex indexName="locality_id_index" tableName="synonym">
+            <column name="locality_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-15">
+        <createIndex indexName="locality_name_index" tableName="locality">
+            <column name="locality_name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-16">
+        <createIndex indexName="parent_locality_id_index" tableName="bordering_locality">
+            <column name="parent_locality_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="terrence (generated)" id="1450200020735-17">
+        <createIndex indexName="postcode_index" tableName="locality">
+            <column name="postcode"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

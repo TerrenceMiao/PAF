@@ -94,6 +94,12 @@ liquibase {
                   further updates
 
                 - status Check if changeLogFile's changeSets where applied
+
+                - migrate
+                "$JAVA_HOME/bin/java" -jar liquibase.jar --changeLogFile=db.changelog-master.xml
+                                      --username=testdb --password=password --url=jdbc:mysql://localhost:3306/testdb
+                                      --driver=com.mysql.jdbc.Driver --classpath=mysql-connector-java-5.1.38-bin.jar
+                                      migrate
             */
             // support Groovy DSL output
 //            changeLogFile 'src/main/resources/db/changelog/changelog.groovy'
