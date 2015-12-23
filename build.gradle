@@ -209,4 +209,7 @@ dependencies {
 
     // test dependencies
     testCompile "org.springframework.boot:spring-boot-starter-test:${dependencyVersionSpringBoot}"
+
+    // JUnit Toolbox
+    testCompile "com.googlecode.junit-toolbox:junit-toolbox:${dependencyVersionJUnitToolbox}"
 }
