@@ -207,9 +207,17 @@ dependencies {
     compile "org.webjars:react:${dependencyVersionReactJS}"
     compile "org.webjars:jquery:${dependencyVersionJQuery}"
 
+    // Groovy
+    compile "org.codehaus.groovy:groovy-all:${dependencyVersionGroovy}"
+
     // test dependencies
     testCompile "org.springframework.boot:spring-boot-starter-test:${dependencyVersionSpringBoot}"
 
     // JUnit Toolbox
     testCompile "com.googlecode.junit-toolbox:junit-toolbox:${dependencyVersionJUnitToolbox}"
+
+    // mandatory dependencies for using Spock
+    testCompile "org.spockframework:spock-core:${dependencyVersionSpock}"
+    testCompile "org.codehaus.groovy.modules.http-builder:http-builder:${dependencyVersionHttpBuilder}"
+
 }
