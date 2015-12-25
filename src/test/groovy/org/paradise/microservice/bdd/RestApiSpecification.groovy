@@ -1,8 +1,13 @@
+package org.paradise.microservice.bdd
+
 import groovyx.net.http.RESTClient
 import org.paradise.microservice.Constants
 import spock.lang.Specification
 import spock.lang.Unroll
 
+/**
+ * Created by terrence on 25/12/2015.
+ */
 class RestApiSpecification extends Specification {
 
     RESTClient restClient = new RESTClient("http://localhost:8080")
@@ -68,13 +73,13 @@ class RestApiSpecification extends Specification {
 
         when:
         def response = restClient.post(path: Constants.ADDRESS_REQUEST_PATH,
-                                       requestContentType: 'application/json',
-                                       body: ["houseNumber": "00018",
-                                              "streetName": "Sandlewood",
-                                              "streetType": "Lane",
-                                              "suburb": "POINT COOK",
-                                              "state": "VIC",
-                                              "postcode": "3030"])
+                requestContentType: 'application/json',
+                body: ["houseNumber": "00018",
+                       "streetName": "Sandlewood",
+                       "streetType": "Lane",
+                       "suburb": "POINT COOK",
+                       "state": "VIC",
+                       "postcode": "3030"])
 
         then:
         response.status == 200
