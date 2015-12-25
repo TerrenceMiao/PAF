@@ -14,7 +14,7 @@ import spock.lang.Unroll
  */
 @ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = [App])
 @WebIntegrationTest
-class RestApiSpecification extends Specification {
+class ApiSuburbSpec extends Specification {
 
     RESTClient restClient = new RESTClient("http://localhost:8080")
 
@@ -53,49 +53,6 @@ class RestApiSpecification extends Specification {
 //        2851             | "NSW"         | "AARONS PASS"
 //        ...
 //        6536             | "WA"          | "ZUYTDORP"
-    }
-
-    def 'Check ALL street types have been returned'() {
-
-        given: "An API client"
-        int totalNumberOfStreetTypes = 147
-
-        when: "Invoke to retrieve ALL unique street types of Postal Address"
-        def response = restClient.get(path: Constants.STREETS_REQUEST_PATH)
-
-        then: "HTTP status OK (200)"
-        response.status == 200
-
-        and: "Correct number of ALL street types returned"
-        response.responseData.streetTypes.size == totalNumberOfStreetTypes
-
-        and: "Correct street type of 1st record"
-        response.responseData.streetTypes[0].streetType == "Accs"
-
-        and: "Correct street type of last record"
-        response.responseData.streetTypes[totalNumberOfStreetTypes - 1].streetType == "Wynd"
-    }
-
-    def 'Check correct DPID has been returned by a postal address'() {
-
-        given: "An API client"
-        String dpid = "51123887"
-
-        when: "Invoke to retrieve DPID of a Postal Address"
-        def response = restClient.post(path: Constants.ADDRESS_REQUEST_PATH,
-                requestContentType: 'application/json',
-                body: ["houseNumber": "00018",
-                       "streetName": "Sandlewood",
-                       "streetType": "Lane",
-                       "suburb": "POINT COOK",
-                       "state": "VIC",
-                       "postcode": "3030"])
-
-        then: "HTTP status OK (200)"
-        response.status == 200
-
-        and: "Correct DPID of the postal address queried"
-        response.responseData.dpid == dpid
     }
 
 }

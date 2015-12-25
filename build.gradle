@@ -166,7 +166,6 @@ release {
     }
 }
 
-
 checkstyle {
     toolVersion = "6.0"
 }
