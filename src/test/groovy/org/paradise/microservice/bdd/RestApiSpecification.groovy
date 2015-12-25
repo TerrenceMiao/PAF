@@ -39,7 +39,7 @@ class RestApiSpecification extends Specification {
 //        response.responseData.suburbs.postcode == expectedPostcode
 //        response.responseData.suburbs.state == expectedState
 //        response.responseData.suburbs.suburb == expectedSuburb
-//
+
 //        where:
 //        expectedPostcode | expectedState | expectedSuburb
 //        2851             | "NSW"         | "AARONS PASS"

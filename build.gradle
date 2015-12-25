@@ -44,6 +44,9 @@ apply plugin: 'net.researchgate.release'
 // Liquibase plugin
 apply plugin: 'org.liquibase.gradle'
 
+// build and run Spock test
+apply plugin: 'groovy'
+
 repositories {
     maven(nexus)
 }
