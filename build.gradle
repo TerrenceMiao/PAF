@@ -182,12 +182,19 @@ targetCompatibility = 1.8
 // Add a provided configuration.
 // This is used to add jar dependencies that are needed for compile time only
 // but should not be bundled in the war/ear projects.
-configurations { provided }
-sourceSets.main.compileClasspath += configurations.provided
-sourceSets.test.compileClasspath += configurations.provided
-sourceSets.test.runtimeClasspath += configurations.provided
+configurations {
+    provided
+}
+
+sourceSets {
+    main.compileClasspath += configurations.provided
+    test.compileClasspath += configurations.provided
+    test.runtimeClasspath += configurations.provided
+}
+
 // optional: if using 'eclipse' plugin
-eclipse.classpath.plusConfigurations += configurations.provided
+//eclipse.classpath.plusConfigurations += configurations.provided
+
 
 dependencies {
     compile "org.springframework.boot:spring-boot-starter:${dependencyVersionSpringBoot}"
