@@ -1,22 +1,12 @@
 package org.paradise.microservice.bdd.api
 
-import groovyx.net.http.RESTClient
-import org.paradise.microservice.App
 import org.paradise.microservice.Constants
-import org.springframework.boot.test.SpringApplicationContextLoader
-import org.springframework.boot.test.WebIntegrationTest
-import org.springframework.test.context.ContextConfiguration
-import spock.lang.Specification
 import spock.lang.Unroll
 
 /**
  * Created by terrence on 25/12/2015.
  */
-@ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = [App])
-@WebIntegrationTest
-class ApiSuburbSpec extends Specification {
-
-    RESTClient restClient = new RESTClient("http://localhost:8080")
+class ApiSuburbSpec extends ApiAbstractSpec {
 
     @Unroll("Check matches #expectedPostcode, #expectedState, #expectedState")
     def 'Check ALL suburbs have been returned'() {

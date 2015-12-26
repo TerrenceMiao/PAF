@@ -1,21 +1,11 @@
 package org.paradise.microservice.bdd.api
 
-import groovyx.net.http.RESTClient
-import org.paradise.microservice.App
 import org.paradise.microservice.Constants
-import org.springframework.boot.test.SpringApplicationContextLoader
-import org.springframework.boot.test.WebIntegrationTest
-import org.springframework.test.context.ContextConfiguration
-import spock.lang.Specification
 
 /**
  * Created by terrence on 25/12/2015.
  */
-@ContextConfiguration(loader = SpringApplicationContextLoader.class, classes = [App])
-@WebIntegrationTest
-class ApiDpidSpec extends Specification {
-
-    RESTClient restClient = new RESTClient("http://localhost:8080")
+class ApiDpidSpec extends ApiAbstractSpec {
 
     def 'Check correct DPID has been returned by postal address - 18 Sandlewood Lane, Point Cook VIC 3030'() {
 
