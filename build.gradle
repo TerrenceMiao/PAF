@@ -144,6 +144,10 @@ jacoco {
 }
 
 test {
+    // The default value is 1 (no parallel test execution)
+    // Comment out due to performance actually downgraded
+//    maxParallelForks = 2
+
     jacoco {
         append = false
         destinationFile = file("$buildDir/jacoco/jacoco.exec")
