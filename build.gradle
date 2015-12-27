@@ -149,6 +149,8 @@ test {
         destinationFile = file("$buildDir/jacoco/jacoco.exec")
         classDumpFile = file("$buildDir/jacoco/classpathdumps")
     }
+
+    exclude '**/*TestSuite.class', '**/*SpecSuite.class'
 }
 
 jacocoTestReport {
