@@ -1,3 +1,5 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
 buildscript {
 
     ext {
@@ -8,6 +10,9 @@ buildscript {
             }
             url nexusRepoURL
         }
+
+        // The drivers we want to use
+        drivers = ["firefox", "chrome", "phantomJs"]
     }
 
     repositories {
@@ -46,6 +51,8 @@ apply plugin: 'org.liquibase.gradle'
 
 // build and run Spock test
 apply plugin: 'groovy'
+
+apply from: "gradle/osSpecificDownloads.gradle"
 
 repositories {
     maven(nexus)
@@ -143,6 +150,37 @@ jacoco {
     reportsDir = file("${buildDir}/jacocoReportDir")
 }
 
+drivers.each { driver ->
+    task "${driver}Test"(type: Test) {
+        reports {
+            html.destination = reporting.file("$name/tests")
+            junitXml.destination = file("$buildDir/test-results/$name")
+        }
+
+        outputs.upToDateWhen { false }  // Always run tests
+
+        systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
+        systemProperty "geb.env", driver
+
+        // If you wanted to set the baseUrl in your build…
+        // systemProperty "geb.build.baseUrl", "http://localhost:8080"
+    }
+}
+
+chromeTest {
+    dependsOn unzipChromeDriver
+
+    def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
+    systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename).absolutePath
+}
+
+phantomJsTest {
+    dependsOn unzipPhantomJs
+
+    def phantomJsFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "phantomjs.exe" : "bin/phantomjs"
+    systemProperty "phantomjs.binary.path", new File(unzipPhantomJs.outputs.files.singleFile, phantomJsFilename).absolutePath
+}
+
 test {
     // The default value is 1 (no parallel test execution)
     // Comment out due to performance actually downgraded
@@ -155,6 +193,10 @@ test {
     }
 
     exclude '**/*TestSuite.class', '**/*SpecSuite.class'
+
+//    dependsOn drivers.collect { tasks["${it}Test"] }
+//    enabled = false
+    exclude '**/*QRAsPostalAddressSpec.class'
 }
 
 jacocoTestReport {
@@ -243,4 +285,18 @@ dependencies {
     testCompile "org.spockframework:spock-spring:${dependencyVersionSpock}"
 
     testCompile "org.codehaus.groovy.modules.http-builder:http-builder:${dependencyVersionHttpBuilder}"
+
+    // If using Spock, need to depend on geb-spock
+    testCompile "org.gebish:geb-spock:${dependencyVersionGeb}"
+    // Geb
+    testCompile "org.gebish:geb-junit4:${dependencyVersionGeb}"
+
+    // Drivers
+    testCompile "org.seleniumhq.selenium:selenium-chrome-driver:${dependencyVersionSeleniumDriver}"
+    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:${dependencyVersionSeleniumDriver}"
+    // Using a custom version of phantomjs driver for now as the original one does not support WebDriver > 2.43.1
+    testCompile("com.codeborne:phantomjsdriver:${dependencyVersionPhantomJsDriver}") {
+    // PhantomJs driver pulls in a different selenium version
+        transitive = false
+    }
 }
