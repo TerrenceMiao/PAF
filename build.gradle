@@ -236,7 +236,10 @@ dependencies {
     testCompile "com.googlecode.junit-toolbox:junit-toolbox:${dependencyVersionJUnitToolbox}"
 
     // mandatory dependencies for using Spock
-    testCompile "org.spockframework:spock-core:${dependencyVersionSpock}"
+    testCompile ("org.spockframework:spock-core:${dependencyVersionSpock}") {
+        exclude group: "org.codehaus.groovy"
+    }
+
     testCompile "org.spockframework:spock-spring:${dependencyVersionSpock}"
 
     testCompile "org.codehaus.groovy.modules.http-builder:http-builder:${dependencyVersionHttpBuilder}"
