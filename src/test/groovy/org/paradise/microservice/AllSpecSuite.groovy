@@ -1,10 +1,10 @@
-package org.paradise.microservice.bdd
+package org.paradise.microservice
 
 import org.junit.runner.RunWith
 import org.junit.runners.Suite
-import org.paradise.microservice.bdd.api.ApiDpidSpec
-import org.paradise.microservice.bdd.api.ApiStreetTypeSpec
-import org.paradise.microservice.bdd.api.ApiSuburbSpec
+import org.paradise.microservice.api.ApiDpidSpec
+import org.paradise.microservice.api.ApiStreetTypeSpec
+import org.paradise.microservice.api.ApiSuburbSpec
 import spock.lang.Specification
 
 /**

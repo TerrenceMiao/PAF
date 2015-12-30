@@ -1,4 +1,4 @@
-package org.paradise.microservice.bdd.api
+package org.paradise.microservice.api
 
 import groovyx.net.http.RESTClient
 import org.paradise.microservice.App

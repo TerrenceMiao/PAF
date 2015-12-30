@@ -1,4 +1,4 @@
-package org.paradise.microservice.bdd
+package org.paradise.microservice
 
 import com.googlecode.junittoolbox.ParallelSuite
 import com.googlecode.junittoolbox.SuiteClasses

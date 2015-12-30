@@ -1,4 +1,4 @@
-package org.paradise.microservice.bdd.api
+package org.paradise.microservice.api
 
 import org.paradise.microservice.Constants
 
