@@ -46,3 +46,22 @@ $GRADLE_HOME/bin/gradle clean -Dtest.single=AllSpecSuite test
 
 [sequentialSpecSuite]: https://raw.githubusercontent.com/TerrenceMiao/PAF/master/doc/All%20BDD%20tests%20run%20in%20sequential.png "BDD Spec Suite run in sequential"
 
+  * Run cross browsers Geb BDD test
+
+```
+$GRADLE_HOME/bin/gradle clean chromeTest
+
+$GRADLE_HOME/bin/gradle clean firefoxTest
+
+$GRADLE_HOME/bin/gradle clean phantomJsTest
+```
+
+Testing reports can be found under:
+
+```
+$PROJECT_HOME/build/reports/tests/index.html
+
+$PROJECT_HOME/build/reports/chromeTest/
+$PROJECT_HOME/build/reports/firefoxTest/
+$PROJECT_HOME/build/reports/phantomJsTest/
+```
