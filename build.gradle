@@ -152,18 +152,21 @@ jacoco {
 
 drivers.each { driver ->
     task "${driver}Test"(type: Test) {
-        reports {
-            html.destination = reporting.file("$name/tests")
-            junitXml.destination = file("$buildDir/test-results/$name")
-        }
+//        reports {
+//            html.destination = reporting.file("$name/tests")
+//            junitXml.destination = file("$buildDir/test-results/$name")
+//        }
 
-        outputs.upToDateWhen { false }  // Always run tests
+        // Always run tests
+        outputs.upToDateWhen { false }
 
         systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
         systemProperty "geb.env", driver
 
         // If you wanted to set the baseUrl in your build…
         // systemProperty "geb.build.baseUrl", "http://localhost:8080"
+
+        exclude '**/*TestSuite.class', '**/*SpecSuite.class'
     }
 }
 
@@ -194,6 +197,7 @@ test {
 
     exclude '**/*TestSuite.class', '**/*SpecSuite.class'
 
+    // Disable Functional test
 //    dependsOn drivers.collect { tasks["${it}Test"] }
 //    enabled = false
     exclude '**/QRAsPostalAddressSpec.class'
