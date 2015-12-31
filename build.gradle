@@ -196,7 +196,7 @@ test {
 
 //    dependsOn drivers.collect { tasks["${it}Test"] }
 //    enabled = false
-    exclude '**/*QRAsPostalAddressSpec.class'
+    exclude '**/QRAsPostalAddressSpec.class'
 }
 
 jacocoTestReport {

@@ -1,3 +1,5 @@
+package org.paradise.functional
+
 import geb.spock.GebReportingSpec
 import org.paradise.microservice.App
 import org.springframework.boot.test.SpringApplicationContextLoader
