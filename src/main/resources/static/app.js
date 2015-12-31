@@ -192,19 +192,19 @@ var PostalAddressForm = React.createClass({displayName: "PostalAddressForm",
     render: function () {
         return (
             React.createElement("form", {className: "form-address", onSubmit: this.handleSubmit},
-                React.createElement("input", {type: "text", className: "form-control", placeholder: "To whom", ref: "addressee"}),
-                React.createElement("input", {type: "text", className: "form-control", placeholder: "Street number", ref: "houseNumber1"}),
-                React.createElement("input", {type: "text", className: "form-control", placeholder: "Street name", ref: "streetName"}),
-                React.createElement("select", {className: "form-control", ref: "streetType"},
+                React.createElement("input", {type: "text", className: "form-control", placeholder: "To whom", ref: "addressee", id: "addressee"}),
+                React.createElement("input", {type: "text", className: "form-control", placeholder: "Street number", ref: "houseNumber1", id: "houseNumber1"}),
+                React.createElement("input", {type: "text", className: "form-control", placeholder: "Street name", ref: "streetName", id: "streetName"}),
+                React.createElement("select", {className: "form-control", ref: "streetType", id: "streetType"},
                     renderStreetTypeOptions(this.props.streetTypeData)
                 ),
-                React.createElement("select", {className: "form-control", ref: "localityNameStatePostcode", onChange: this.suburbChange},
+                React.createElement("select", {className: "form-control", ref: "localityNameStatePostcode", id: "localityNameStatePostcode", onChange: this.suburbChange},
                     renderSuburbOptions(this.props.suburbData)
                 ),
-                React.createElement("input", {type: "hidden", className: "form-control", placeholder: "Suburb", ref: "localityName"}),
-                React.createElement("input", {type: "hidden", className: "form-control", placeholder: "State", ref: "state"}),
-                React.createElement("input", {type: "hidden", className: "form-control", placeholder: "Postcode", ref: "postcode"}),
-                React.createElement("input", {type: "submit", className: "btn btn-lg btn-primary btn-block", value: "Generate QR Code"})
+                React.createElement("input", {type: "hidden", className: "form-control", placeholder: "Suburb", ref: "localityName", id: "localityName"}),
+                React.createElement("input", {type: "hidden", className: "form-control", placeholder: "State", ref: "state", id: "state"}),
+                React.createElement("input", {type: "hidden", className: "form-control", placeholder: "Postcode", ref: "postcode", id: "postcode"}),
+                React.createElement("input", {type: "submit", className: "btn btn-lg btn-primary btn-block", value: "Generate QR Code", id: "generateQRCode"})
             )
         );
     }
