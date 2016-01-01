@@ -25,6 +25,7 @@ buildscript {
         classpath "mysql:mysql-connector-java:${dependencyVersionMySQLConnector}"
         classpath "com.h2database:h2:${dependencyVersionH2}"
         classpath "org.liquibase:liquibase-gradle-plugin:${dependencyVersionLiquibasePlugin}"
+        classpath "se.transmode.gradle:gradle-docker:${dependencyVersionGradleDocker}"
     }
 }
 
@@ -53,6 +54,9 @@ apply plugin: 'org.liquibase.gradle'
 apply plugin: 'groovy'
 
 apply from: "gradle/osSpecificDownloads.gradle"
+
+// Docker
+apply plugin: 'docker'
 
 repositories {
     maven(nexus)
@@ -215,6 +219,18 @@ release {
     git {
         requireBranch = /master|integration.*/
         pushToCurrentBranch = true
+    }
+}
+
+task buildDocker(type: Docker, dependsOn: build) {
+    push = false
+    applicationName = jar.baseName
+    dockerfile = file('src/main/docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
     }
 }
 
