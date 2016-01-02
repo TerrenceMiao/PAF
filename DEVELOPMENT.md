@@ -1,3 +1,14 @@
+# How to build and run application as Java application#
+```
+terrence@Silencer ~/Projects/PAF
+00:20:42 1 $ $GRADLE/bin/gradle clean build
+
+terrence@Silencer ~/Projects/PAF
+00:21:42 2 $ $JAVA_HOME/bin/java -Djava.security.egd=file:/dev/./urandom -jar build/libs/paf-1.0.0-SNAPSHOT.jar
+```
+Then go to: [http://localhost:8080/](http://localhost:8080/)
+
+
 # How to build and run application in Docker #
 
 On Mac OS X, start docker Quickstart Terminal, then run:
@@ -27,4 +38,4 @@ terrence@Silencer ~/Projects/PAF
 terrence@Silencer ~/Projects/PAF
 00:55:01 9 $ docker run -e "SPRING_PROFILES_ACTIVE=docker" -p 8080:8080 -t org.paradise/paf:1.0.0-SNAPSHOT /Users/terrence/Projects/PAF/build/docker
 ```
-Then go to: http://192.168.99.100:8080/
+Then go to: [http://192.168.99.100:8080/](http://192.168.99.100:8080/)
