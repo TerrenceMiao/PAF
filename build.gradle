@@ -269,9 +269,11 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-security:${dependencyVersionSpringBoot}"
     compile "org.springframework.boot:spring-boot-starter-thymeleaf:${dependencyVersionSpringBoot}"
 
-    compile "org.springframework.boot:spring-boot-starter-jetty:${dependencyVersionSpringBoot}"
+    // Disable Jetty and return back to Tomcat due to Liquibase doesn't work with Jetty when app in Docker with WARNING:
+    //      No Liquibase-Packages entry found in MANIFEST.MF. Using fallback of entire 'liquibase' package
+//    compile "org.springframework.boot:spring-boot-starter-jetty:${dependencyVersionSpringBoot}"
     compile ("org.springframework.boot:spring-boot-starter-web:${dependencyVersionSpringBoot}") {
-        exclude module: "spring-boot-starter-tomcat:${dependencyVersionSpringBoot}"
+//        exclude module: "spring-boot-starter-tomcat:${dependencyVersionSpringBoot}"
     }
 
     compile "com.h2database:h2:${dependencyVersionH2}"
