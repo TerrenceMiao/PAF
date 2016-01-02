@@ -7,3 +7,4 @@ data/
 # Or the files
 *.iml
 *.swp
+phantomjsdriver.log
