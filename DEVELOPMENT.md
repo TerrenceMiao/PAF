@@ -45,3 +45,5 @@ Then go to: [http://192.168.99.100:8080/](http://192.168.99.100:8080/)
 API docs - [http://localhost:8080/v2/api-docs](http://localhost:8080/v2/api-docs)
 
 API UI - [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+Swagger Resources - [http://localhost:8080/swagger-resources](http://localhost:8080/swagger-resources)
