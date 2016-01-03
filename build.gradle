@@ -293,6 +293,12 @@ dependencies {
     // Groovy
     compile "org.codehaus.groovy:groovy-all:${dependencyVersionGroovy}"
 
+    // Swagger API doc
+    compile "io.springfox:springfox-swagger2:${dependencyVersionSpringfoxSwagger}"
+    compile "io.springfox:springfox-swagger-ui:${dependencyVersionSpringfoxSwagger}"
+    // Hacky way to let springfox-swagger-ui work with webjar convention which contains the swagger-ui static content
+    compile "org.webjars:swagger-ui:${dependencyVersionSwaggerUI}"
+
     // test dependencies
     testCompile "org.springframework.boot:spring-boot-starter-test:${dependencyVersionSpringBoot}"
 

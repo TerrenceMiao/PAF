@@ -28,8 +28,8 @@ vboxnet0: flags=8943<UP,BROADCAST,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500
 	ether 0a:00:27:00:00:00
 	inet 192.168.99.1 netmask 0xffffff00 broadcast 192.168.99.255
 ```
-   * The Guest OS in run on IP 192.168.99.100
-   * Docker client or Host is on gateway IP 192.168.99.1
+    * The Guest OS in run on IP 192.168.99.100
+    * Docker client or Host is on gateway IP 192.168.99.1
 
 ```
 terrence@Silencer ~/Projects/PAF
@@ -39,3 +39,9 @@ terrence@Silencer ~/Projects/PAF
 00:55:01 9 $ docker run -e "SPRING_PROFILES_ACTIVE=docker" -p 8080:8080 -t org.paradise/paf:1.0.0-SNAPSHOT /Users/terrence/Projects/PAF/build/docker
 ```
 Then go to: [http://192.168.99.100:8080/](http://192.168.99.100:8080/)
+
+# Swagger interface URLs #
+
+API docs - [http://localhost:8080/v2/api-docs](http://localhost:8080/v2/api-docs)
+
+API UI - [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
