@@ -76,3 +76,25 @@ $PROJECT_HOME/build/reports/chromeTest/
 $PROJECT_HOME/build/reports/firefoxTest/
 $PROJECT_HOME/build/reports/phantomJsTest/
 ```
+
+  * Run test in using Gradle parallel
+
+```
+$GRADLE_HOME/bin/gradle --version
+
+------------------------------------------------------------
+Gradle 2.9
+------------------------------------------------------------
+
+Build time:   2015-11-17 07:02:17 UTC
+Build number: none
+Revision:     b463d7980c40d44c4657dc80025275b84a29e31f
+
+Groovy:       2.4.4
+Ant:          Apache Ant(TM) version 1.9.3 compiled on December 23 2013
+JVM:          1.8.0_25 (Oracle Corporation 25.25-b02)
+OS:           Mac OS X 10.10.5 x86_64
+
+
+$GRADLE_HOME/bin/gradle --parallel --max-workers=2 clean test
+```
