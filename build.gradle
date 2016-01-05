@@ -170,7 +170,8 @@ drivers.each { driver ->
         // If you wanted to set the baseUrl in your build…
         // systemProperty "geb.build.baseUrl", "http://localhost:8080"
 
-        exclude '**/*TestSuite.class', '**/*SpecSuite.class'
+        exclude '**/*TestSuite.class'
+        exclude '**/*SpecSuite.class'
     }
 }
 
@@ -199,7 +200,8 @@ test {
         classDumpFile = file("$buildDir/jacoco/classpathdumps")
     }
 
-    exclude '**/*TestSuite.class', '**/*SpecSuite.class'
+    exclude '**/*TestSuite.class'
+    exclude '**/*SpecSuite.class'
 
     // Disable Functional test
 //    dependsOn drivers.collect { tasks["${it}Test"] }

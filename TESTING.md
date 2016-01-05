@@ -2,6 +2,12 @@
 
   * Run Test Suite in parallel mode on Gradle command line
 
+Comment line:
+```
+exclude '**/*TestSuite.class'
+```
+in "test" task.
+
 ```
 $GRADLE_HOME/bin/gradle clean -Dtest.single=AllParallelTestSuite test
 ```
@@ -28,6 +34,11 @@ $GRADLE_HOME/bin/gradle clean -Dtest.single=*Spec test
 
   * Run BDD test Suite in parallel mode on Gradle command line
 
+Comment line:
+```
+exclude '**/*SpecSuite.class'
+```
+in "test" task.
 ```
 $GRADLE_HOME/bin/gradle clean -Dtest.single=AllParallelSpecSuite test
 ```
