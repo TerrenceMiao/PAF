@@ -17,6 +17,7 @@ buildscript {
 
     repositories {
         maven(nexus)
+        jcenter()
     }
 
     dependencies {
@@ -313,6 +314,11 @@ dependencies {
     }
 
     testCompile "org.spockframework:spock-spring:${dependencyVersionSpock}"
+
+    testCompile( 'com.athaydes:spock-reports:1.2.8' ) {
+        // this avoids affecting your version of Groovy / Spock
+        transitive = false
+    }
 
     testCompile "org.codehaus.groovy.modules.http-builder:http-builder:${dependencyVersionHttpBuilder}"
 
