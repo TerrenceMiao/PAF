@@ -77,6 +77,12 @@ $PROJECT_HOME/build/reports/firefoxTest/
 $PROJECT_HOME/build/reports/phantomJsTest/
 ```
 
+Or BDD style testing reports under:
+
+```
+$PROJECT_HOME/build/spock-reports/index.html
+```
+
   * Run test in using Gradle parallel
 
 ```
