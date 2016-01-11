@@ -13,13 +13,13 @@ class QRAsPostalAddressSpec extends GebReportingSpec {
 
     def "can get to QR As Postal Address home page"() {
 
-        given:
+        given: "A customer visits QR as Postal Address home page"
         QRAsPostalAddressHomePage qrAsPostalAddressHomePage = to QRAsPostalAddressHomePage
 
-        when:
+        when: "Customer inputs addressee and address and press 'Generate QR Code' button"
         qrAsPostalAddressHomePage.generateQRCode("Terrence", "6", "Scott", "St", "KEW VIC 3101");
 
-        then:
+        then: "A QR code generated and displayed on page, and a label showing addressee and address"
         at QRAsPostalAddressHomePage
 
         assert $("div", class: "postalAddressList").text().contains("Terrence")
