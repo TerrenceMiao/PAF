@@ -61,6 +61,7 @@ apply plugin: 'docker'
 
 repositories {
     maven(nexus)
+    jcenter()
 }
 
 // project artifact info
