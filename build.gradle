@@ -303,6 +303,9 @@ dependencies {
     // Hacky way to let springfox-swagger-ui work with webjar convention which contains the swagger-ui static content
     compile "org.webjars:swagger-ui:${dependencyVersionSwaggerUI}"
 
+    // Hawtio for Spring Boot
+    compile "io.hawt:hawtio-springboot:${dependencyVersionHawtio}"
+
     // test dependencies
     testCompile "org.springframework.boot:spring-boot-starter-test:${dependencyVersionSpringBoot}"
 
