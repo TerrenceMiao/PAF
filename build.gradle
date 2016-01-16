@@ -315,7 +315,7 @@ dependencies {
 
     testCompile "org.spockframework:spock-spring:${dependencyVersionSpock}"
 
-    testCompile("com.athaydes:spock-reports:${dependencyVersionHawtioSpringBoot}") {
+    testCompile("com.athaydes:spock-reports:${dependencyVersionSpockReports}") {
         // this avoids affecting your version of Groovy / Spock
         transitive = false
     }
