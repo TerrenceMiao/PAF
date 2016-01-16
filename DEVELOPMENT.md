@@ -1,4 +1,4 @@
-# How to build and run application as Java application#
+# How to build and run application as Java application
 ```
 terrence@Silencer ~/Projects/PAF
 00:20:42 1 $ $GRADLE/bin/gradle clean build
