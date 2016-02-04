@@ -34,9 +34,41 @@ vboxnet0: flags=8943<UP,BROADCAST,RUNNING,PROMISC,SIMPLEX,MULTICAST> mtu 1500
 ```
 terrence@Silencer ~/Projects/PAF
 00:53:01 8 $ /usr/local/gradle-2.9/bin/gradle clean build buildDocker -x test
+...
+:build
+:buildDocker
+Sending build context to Docker daemon 46.06 MB
+Step 1 : FROM java:8
+ ---> d4849089125b
+Step 2 : VOLUME /tmp
+ ---> Using cache
+ ---> 748468154f06
+Step 3 : ADD paf-1.0.0-SNAPSHOT.jar app.jar
+ ---> 9ce15ff3e952
+Removing intermediate container 4e6c0f315943
+Step 4 : RUN bash -c 'touch /app.jar'
+ ---> Running in 3843a22ef374
+ ---> beca43c5cbb5
+Removing intermediate container 3843a22ef374
+Step 5 : ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom -jar /app.jar
+ ---> Running in d0e03dc9df6f
+ ---> 75345cb98bdc
+Removing intermediate container d0e03dc9df6f
+Successfully built 75345cb98bdc
 
 terrence@Silencer ~/Projects/PAF
 00:55:01 9 $ docker run -e "SPRING_PROFILES_ACTIVE=docker" -p 8080:8080 -t org.paradise/paf:1.0.0-SNAPSHOT /Users/terrence/Projects/PAF/build/docker
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v1.2.7.RELEASE)
+
+2016-02-04 12:22:56.550  INFO 1 --- [           main] org.paradise.microservice.App            : Starting App on f2b654cc8075 with PID 1 (/app.jar started by root in /)
+...
 ```
 Then go to: [http://192.168.99.100:8080/](http://192.168.99.100:8080/)
 
