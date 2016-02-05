@@ -69,6 +69,27 @@ terrence@Silencer ~/Projects/PAF
 
 2016-02-04 12:22:56.550  INFO 1 --- [           main] org.paradise.microservice.App            : Starting App on f2b654cc8075 with PID 1 (/app.jar started by root in /)
 ...
+
+terrence@Silencer ~
+23:27:02 153 𝜆 docker-machine ssh default
+                        ##         .
+                  ## ## ##        ==
+               ## ## ## ## ##    ===
+           /"""""""""""""""""\___/ ===
+      ~~~ {~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===- ~~~
+           \______ o           __/
+             \    \         __/
+              \____\_______/
+ _                 _   ____     _            _
+| |__   ___   ___ | |_|___ \ __| | ___   ___| | _____ _ __
+| '_ \ / _ \ / _ \| __| __) / _` |/ _ \ / __| |/ / _ \ '__|
+| |_) | (_) | (_) | |_ / __/ (_| | (_) | (__|   <  __/ |
+|_.__/ \___/ \___/ \__|_____\__,_|\___/ \___|_|\_\___|_|
+Boot2Docker version 1.9.1, build master : cef800b - Fri Nov 20 19:33:59 UTC 2015
+Docker version 1.9.1, build a34a1d5
+
+docker@default:~$ ps axuw | grep java
+root      1155 26.9 14.6 2533744 299672 pts/1  Ssl+ 12:26   0:31 java -Djava.security.egd=file:/dev/./urandom -jar /app.jar /Users/terrence/Projects/PAF/build/docker
 ```
 Then go to: [http://192.168.99.100:8080/](http://192.168.99.100:8080/)
 
