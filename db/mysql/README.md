@@ -1,3 +1,9 @@
+### Allow "root" access MySQL database from anywhere
+
+```
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password';
+```
+
 ### Set up MySQL database and user
 
 ```
@@ -7,6 +13,8 @@ terrence@Silencer ~/Projects/PAF/db/mysql
 terrence@Silencer ~/Projects/PAF/db/mysql
 20:57:56 127 𝜆 /usr/local/mysql/bin/mysql -h localhost -u root < create_user.sql
 ```
+##### try 127.0.0.1 instead of localhost in case of error like:
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysql.sock'
 
 ### Set up PAF (Postal Address File) tables 
 
