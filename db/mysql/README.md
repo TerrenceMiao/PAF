@@ -151,3 +151,5 @@ mysql> SELECT * FROM locality WHERE locality_id = "00011762";
 +------+------------------+-------------+---------------+----------+-------+--------------+
 1 row in set (0.00 sec)
 ```
+
+So Postal Address **"35 Bradshaw St, Kingsbury VIC 3083"** matches DPID **"45535128"**
