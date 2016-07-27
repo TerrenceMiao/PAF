@@ -3,20 +3,21 @@ import org.apache.tools.ant.taskdefs.condition.Os
 buildscript {
 
     ext {
-        nexus = {
-            credentials {
-                username nexusBuildUserToken
-                password nexusBuildPassToken
-            }
-            url nexusRepoURL
-        }
+//        nexus = {
+//            credentials {
+//                username nexusBuildUserToken
+//                password nexusBuildPassToken
+//            }
+//            url nexusRepoURL
+//        }
 
         // The drivers we want to use
         drivers = ["firefox", "chrome", "phantomJs"]
     }
 
     repositories {
-        maven(nexus)
+//        maven(nexus)
+        mavenCentral()
         jcenter()
     }
 
@@ -60,7 +61,8 @@ apply from: "gradle/osSpecificDownloads.gradle"
 apply plugin: 'docker'
 
 repositories {
-    maven(nexus)
+//    maven(nexus)
+    mavenCentral()
     jcenter()
 }
 
@@ -138,18 +140,18 @@ liquibase {
 }
 
 // configure plugins
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: nexusReleaseURL) {
-                authentication(userName: nexusBuildUserToken, password: nexusBuildPassToken);
-            }
-            snapshotRepository(url: nexusSnapshotURL) {
-                authentication(userName: nexusBuildUserToken, password: nexusBuildPassToken);
-            }
-        }
-    }
-}
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: nexusReleaseURL) {
+//                authentication(userName: nexusBuildUserToken, password: nexusBuildPassToken);
+//            }
+//            snapshotRepository(url: nexusSnapshotURL) {
+//                authentication(userName: nexusBuildUserToken, password: nexusBuildPassToken);
+//            }
+//        }
+//    }
+//}
 
 jacoco {
     toolVersion = "${dependencyVersionJacocoTool}"
