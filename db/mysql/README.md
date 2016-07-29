@@ -159,9 +159,10 @@ So Postal Address **"35 Bradshaw St, Kingsbury VIC 3083"** matches DPID **"45535
 ### Query ALL Postal Addresses
 
 ```
-mysql> SELECT dp.delivy_point_id, dp.postal_delivery_nbr, dpg.postal_delivery_type, dp.lot_nbr, dp.floor_level_type, dp.floor_level_nbr, dp.flat_unit_type, dp.flat_unit_nbr, dp.house_nbr_1,
-              dpg.street_name, dpg.street_type, l.locality_name, l.postcode, l.state FROM delivery_point dp
-   INNER JOIN delivery_point_group dpg ON dp.delivy_point_group_id = dpg.delivy_point_group_id
-   INNER JOIN locality l ON l.locality_id = dpg.locality_id
-     ORDER BY l.state, l.locality_name, dpg.street_name, dpg.street_type, dp.house_nbr_1, dp.flat_unit_type, dp.flat_unit_nbr, dp.lot_nbr, dpg.postal_delivery_type, dp.postal_delivery_nbr;
+    SELECT dp.delivy_point_id, dp.postal_delivery_nbr, dpg.postal_delivery_type, dp.lot_nbr, dp.floor_level_type, dp.floor_level_nbr, dp.flat_unit_type, dp.flat_unit_nbr, dp.house_nbr_1, dp.house_nbr_sfx_1,
+           dpg.street_name, dpg.street_type, l.locality_name, l.postcode, l.state
+      FROM delivery_point dp
+INNER JOIN delivery_point_group dpg ON dp.delivy_point_group_id = dpg.delivy_point_group_id
+INNER JOIN locality l ON l.locality_id = dpg.locality_id
+  ORDER BY l.state, l.locality_name, dpg.street_name, dpg.street_type, dp.house_nbr_1, dp.house_nbr_sfx_1, dp.flat_unit_type, dp.flat_unit_nbr, dp.lot_nbr, dpg.postal_delivery_type, dp.postal_delivery_nbr;
 ```
