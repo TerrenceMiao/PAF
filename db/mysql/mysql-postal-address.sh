@@ -28,7 +28,7 @@ echo '
         "type_mapping": {
             "postaladdress": {
                 "_source": {
-                    "enabled": false
+                    "enabled": true
                 },
                 "properties": {
                     "delivy_point_id": {
