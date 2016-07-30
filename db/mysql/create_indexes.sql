@@ -23,7 +23,3 @@ CREATE INDEX flat_unit_type_index on delivery_point(flat_unit_type) USING HASH;
 CREATE INDEX flat_unit_nbr_index on delivery_point(flat_unit_nbr) USING HASH;
 CREATE INDEX lot_nbr_index on delivery_point(lot_nbr) USING HASH;
 CREATE INDEX postal_delivery_nbr_index on delivery_point(postal_delivery_nbr) USING HASH;
-
-
-
-dp.house_nbr_1, dp.house_nbr_sfx_1, dp.flat_unit_type, dp.flat_unit_nbr, dp.lot_nbr, dpg.postal_delivery_type, dp.postal_delivery_nbr
