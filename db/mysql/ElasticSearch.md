@@ -65,3 +65,5 @@ Response from ElasticSearch:
 ### References
 - JDBC importer for Elasticsearch, https://github.com/jprante/elasticsearch-jdbc
 - elasticsearch-head, A web front end for an Elasticsearch cluster, https://github.com/mobz/elasticsearch-head
+- ElasticSearch 101 – a getting started tutorial, http://joelabrahamsson.com/elasticsearch-101/
+- Elasticsearch Cheatsheet, http://elasticsearch-cheatsheet.jolicode.com/
