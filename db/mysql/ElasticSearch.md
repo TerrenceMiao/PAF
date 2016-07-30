@@ -1,4 +1,4 @@
-### Postal Address in ElasticSearch
+# Postal Address in ElasticSearch
 
 - Install ElasticSearch JDBC
 - Copy mysql-postal-address.sh file into /usr/local/elasticsearch-jdbc/bin directory
@@ -83,6 +83,6 @@ Response from ElasticSearch:
 }
 ```
 
-##### References
+### References
 - JDBC importer for Elasticsearch, https://github.com/jprante/elasticsearch-jdbc
 - elasticsearch-head, A web front end for an Elasticsearch cluster, https://github.com/mobz/elasticsearch-head
