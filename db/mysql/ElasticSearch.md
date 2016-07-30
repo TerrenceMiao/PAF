@@ -4,38 +4,17 @@
 - Copy mysql-postal-address.sh file into /usr/local/elasticsearch-jdbc/bin directory
 - Run mysql-postal-address.sh. It takes about 15 minutes import ALL 13 millions addresses into ElasticSearch
 - Go to ElasticSearch Head http://localhost:9200/_plugin/head/
-- Go to Kibana, ElasticSearch web interface http://localhost:5601/app/kibana. Create and configure an index pattern "postaladdress*". Then search address e.g. "00018 Balfour Cl Point Cook VIC 3030"
-- Go to Sense http://localhost:5601/app/sense, input Server http://localhost:9200, query:
+- Go to Kibana, ElasticSearch web interface http://localhost:5601/app/kibana. Create and configure an index pattern "postaladdress*". Then search address e.g. **"00018 Balfour Cl Point Cook VIC 3030"**
+- Go to Sense http://localhost:5601/app/sense, input Server http://localhost:9200, query address **"00018 Balfour Cl Point Cook VIC 3030"**:
 
 ```
 GET /postaladdress/_search
 {
   "query": {
-    "and": [{
-      "match": {
-        "house_nbr_1": "00018"
-      }
-    }, {
-      "match": {
-        "street_name": "BALFOUR"
-      }
-    }, {
-      "match": {
-        "street_type": "CL"
-      }
-    }, {
-      "match": {
-        "locality_name": "POINT COOK"
-      }
-    }, {
-      "match": {
-        "postcode": "3030"
-      }
-    }, {
-      "match": {
-        "state": "VIC"
-      }
-    }]
+    "query_string": {
+      "fields": ["house_nbr_1", "street_name", "street_type", "locality_name", "state", "postcode"],
+      "query": "00018 Balfour Cl Point Cook VIC 3030"
+    }
   }
 }
 ```
@@ -44,7 +23,7 @@ Response from ElasticSearch:
 
 ```
 {
-  "took": 13,
+  "took": 23,
   "timed_out": false,
   "_shards": {
     "total": 2,
@@ -53,13 +32,13 @@ Response from ElasticSearch:
   },
   "hits": {
     "total": 1,
-    "max_score": 14.93693,
+    "max_score": 5.6779156,
     "hits": [
       {
         "_index": "postaladdress",
         "_type": "postaladdress",
         "_id": "AVY8zY0ydD5mzQSfZW_t",
-        "_score": 14.93693,
+        "_score": 5.6779156,
         "_source": {
           "delivy_point_id": "83983570",
           "postal_delivery_nbr": "00000",
