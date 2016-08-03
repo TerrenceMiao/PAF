@@ -19,6 +19,41 @@ GET /postaladdress/_search
 }
 ```
 
+OR:
+
+```
+GET /postaladdress/_search
+{
+  "query": {
+    "and": [{
+      "match": {
+        "house_nbr_1": "00018"
+      }
+    }, {
+      "match": {
+        "street_name": "BALFOUR"
+      }
+    }, {
+      "match": {
+        "street_type": "CL"
+      }
+    }, {
+      "match": {
+        "locality_name": "POINT COOK"
+      }
+    }, {
+      "match": {
+        "postcode": "3030"
+      }
+    }, {
+      "match": {
+        "state": "VIC"
+      }
+    }]
+  }
+}
+```
+
 Response from ElasticSearch:
 
 ```
