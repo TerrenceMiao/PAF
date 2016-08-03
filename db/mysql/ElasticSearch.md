@@ -7,6 +7,8 @@
 - Go to Kibana, ElasticSearch web interface http://localhost:5601/app/kibana. Create and configure an index pattern "postaladdress*". Then search address e.g. **"00018 Balfour Cl Point Cook VIC 3030"**
 - Go to Sense http://localhost:5601/app/sense, input Server http://localhost:9200, query address **"00018 Balfour Cl Point Cook VIC 3030"**:
 
+Fuzzy Search:
+
 ```
 GET /postaladdress/_search
 {
@@ -19,7 +21,7 @@ GET /postaladdress/_search
 }
 ```
 
-OR:
+or Exact Match:
 
 ```
 GET /postaladdress/_search
@@ -54,7 +56,28 @@ GET /postaladdress/_search
 }
 ```
 
-Response from ElasticSearch:
+or Combining Queries:
+
+```
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "house_nbr_1": "00018" }},
+        { "match": { "postcode": "3030" }}
+      ],
+      "should": {
+        "query_string": {
+          "fields": ["street_name", "street_type", "locality_name", "state"],
+          "query": "Balfour Cl Point Cook VIC"
+        }
+      }
+    }
+  }
+}
+```
+
+Response from ElasticSearch with matched Postal Address:
 
 ```
 {
