@@ -8,7 +8,7 @@ echo '
 {
     "type": "jdbc",
     "jdbc": {
-        "url": "jdbc:mysql://localhost:3306/paf?verifyServerCertificate=false",
+        "url": "jdbc:mysql://localhost:3306/paf?verifyServerCertificate=false&useSSL=false",
         "user": "paf",
         "password": "password",
         "locale": "en_US",
