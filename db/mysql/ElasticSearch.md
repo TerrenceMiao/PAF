@@ -21,7 +21,7 @@ GET /postaladdress/_search
 }
 ```
 
-or Exact Match:
+Exact Match:
 
 ```
 GET /postaladdress/_search
@@ -56,7 +56,27 @@ GET /postaladdress/_search
 }
 ```
 
-or Combining Queries:
+Combining Queries:
+
+```
+{
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "house_nbr_1": "00018" }}
+      ],
+      "should": {
+        "query_string": {
+          "fields": ["street_name", "street_type", "locality_name", "state", "postcode"],
+          "query": "Balfour Cl Point Cook VIC 3030"
+        }
+      }
+    }
+  }
+}
+```
+
+or
 
 ```
 {
