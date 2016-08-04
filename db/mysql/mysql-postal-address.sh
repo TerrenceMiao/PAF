@@ -12,7 +12,7 @@ echo '
         "user": "paf",
         "password": "password",
         "locale": "en_US",
-        "sql": "SELECT dp.delivy_point_id as delivy_point_id, dp.postal_delivery_nbr as postal_delivery_nbr, dpg.postal_delivery_type as postal_delivery_type, dp.lot_nbr as lot_nbr, dp.floor_level_type as floor_level_type, dp.floor_level_nbr as floor_level_nbr, dp.flat_unit_type as flat_unit_type, dp.flat_unit_nbr as flat_unit_nbr, dp.house_nbr_1 as house_nbr_1, dp.house_nbr_sfx_1 as house_nbr_sfx_1, dpg.street_name as street_name, dpg.street_type as street_type, l.locality_name as locality_name, l.postcode as postcode, l.state as state FROM delivery_point dp INNER JOIN delivery_point_group dpg ON dp.delivy_point_group_id = dpg.delivy_point_group_id INNER JOIN locality l ON l.locality_id = dpg.locality_id",
+        "sql": "SELECT dp.delivy_point_id as delivy_point_id, dp.postal_delivery_nbr as postal_delivery_nbr, dpg.postal_delivery_type as postal_delivery_type, dp.lot_nbr as lot_nbr, dp.floor_level_type as floor_level_type, dp.floor_level_nbr as floor_level_nbr, dp.flat_unit_type as flat_unit_type, dp.flat_unit_nbr as flat_unit_nbr, CONVERT(dp.house_nbr_1, UNSIGNED INTEGER) as house_nbr_1, dp.house_nbr_sfx_1 as house_nbr_sfx_1, dpg.street_name as street_name, dpg.street_type as street_type, l.locality_name as locality_name, l.postcode as postcode, l.state as state FROM delivery_point dp INNER JOIN delivery_point_group dpg ON dp.delivy_point_group_id = dpg.delivy_point_group_id INNER JOIN locality l ON l.locality_id = dpg.locality_id",
         "elasticsearch": {
             "cluster": "elasticsearch",
             "host": "localhost",
@@ -56,7 +56,7 @@ echo '
                         "type": "string"
                     },
                     "house_nbr_1": {
-                        "type": "string"
+                        "type": "integer"
                     },
                     "house_nbr_sfx_1": {
                         "type": "string"
