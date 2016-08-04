@@ -56,7 +56,7 @@ echo '
                         "type": "string"
                     },
                     "house_nbr_1": {
-                        "type": "integer"
+                        "type": "string"
                     },
                     "house_nbr_sfx_1": {
                         "type": "string"
