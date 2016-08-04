@@ -84,7 +84,7 @@ or
     "bool": {
       "must": [
         { "match": { "house_nbr_1": "00018" }},
-        { "match": { "postcode": "3030" }}
+        { "wildcard": { "postcode": "30*" }}
       ],
       "should": {
         "query_string": {
