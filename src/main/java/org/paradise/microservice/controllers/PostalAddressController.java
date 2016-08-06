@@ -79,7 +79,7 @@ public class PostalAddressController {
 
         for (String st : postalAddressService.getAllStreetType()) {
             StreetType streetType = new StreetType();
-            streetType.setStreet(st);
+            streetType.setStreet(st.toUpperCase());
             streetTypeList.add(streetType);
         }
 
