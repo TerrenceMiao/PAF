@@ -1,20 +1,22 @@
 package org.paradise.microservice.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.modelmapper.TypeToken;
 import org.paradise.microservice.Constants;
 import org.paradise.microservice.JavaScriptEngine;
 import org.paradise.microservice.domain.Locality;
 import org.paradise.microservice.dto.PostalAddress;
+import org.paradise.microservice.dto.PropertiesFilterMixIn;
 import org.paradise.microservice.model.Suburb;
 import org.paradise.microservice.services.PostalAddressService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.PostConstruct;
@@ -71,7 +73,13 @@ public class AppController {
 
     @ResponseBody
     @RequestMapping(value = "/postaladdress", method = RequestMethod.GET)
-    List<PostalAddress> getPostalAddressList() {
+    List<PostalAddress> getPostalAddressList(@RequestParam(value = "filter", defaultValue = "on") String filter) {
+
+        if ("off".equalsIgnoreCase(filter)) {
+            // turn off the properties filter
+        } else {
+            objectMapper.addMixIn(PostalAddress.class, PropertiesFilterMixIn.class);
+        }
 
         return reversePostalAddressList();
     }

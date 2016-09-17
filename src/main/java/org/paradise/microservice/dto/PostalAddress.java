@@ -1,5 +1,7 @@
 package org.paradise.microservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 /**
@@ -23,6 +25,12 @@ public class PostalAddress {
     private String localityName;
     private String postcode;
     private String state;
+
+    @JsonProperty("rubbishes")
+    private String rubbish = "rubbishes";
+
+    @JsonProperty("junks")
+    private String junk = "junks";
 
     public PostalAddress() {
     }
@@ -137,6 +145,15 @@ public class PostalAddress {
     public void setState(String state) {
         this.state = state;
     }
+
+    public String getRubbish() {
+        return rubbish;
+    }
+
+    public String getJunk() {
+        return junk;
+    }
+
 
     @Override
     public String toString() {
