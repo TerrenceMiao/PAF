@@ -150,10 +150,17 @@ public class PostalAddress {
         return rubbish;
     }
 
+    public void setRubbish(String rubbish) {
+        this.rubbish = rubbish;
+    }
+
     public String getJunk() {
         return junk;
     }
 
+    public void setJunk(String junk) {
+        this.junk = junk;
+    }
 
     @Override
     public String toString() {

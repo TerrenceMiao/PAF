@@ -48,6 +48,9 @@ public class AppController {
     void init() {
 
         initiatePostalAddressList();
+
+        // ignore properties during serialization, deserialization / marshalling, unmarshalling
+        objectMapper.addMixIn(PostalAddress.class, PropertiesFilterMixIn.class);
     }
 
     @RequestMapping("/")
@@ -75,9 +78,8 @@ public class AppController {
     @RequestMapping(value = "/postaladdress", method = RequestMethod.GET)
     List<PostalAddress> getPostalAddressList(@RequestParam(value = "filter", defaultValue = "on") String filter) {
 
-        if ("off".equalsIgnoreCase(filter)) {
-            // turn off the properties filter
-        } else {
+        if (!"off".equalsIgnoreCase(filter)) {
+            // ignore properties during serialization / marshalling
             objectMapper.addMixIn(PostalAddress.class, PropertiesFilterMixIn.class);
         }
 
