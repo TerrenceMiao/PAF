@@ -7,7 +7,7 @@ import org.paradise.microservice.Constants;
 import org.paradise.microservice.JavaScriptEngine;
 import org.paradise.microservice.domain.Locality;
 import org.paradise.microservice.dto.PostalAddress;
-import org.paradise.microservice.dto.PropertiesFilterMixIn;
+import org.paradise.microservice.dto.PostalAddressPropertiesFilterMixIn;
 import org.paradise.microservice.model.Suburb;
 import org.paradise.microservice.services.PostalAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +50,7 @@ public class AppController {
         initiatePostalAddressList();
 
         // ignore properties during serialization, deserialization / marshalling, unmarshalling
-        objectMapper.addMixIn(PostalAddress.class, PropertiesFilterMixIn.class);
+        objectMapper.addMixIn(PostalAddress.class, PostalAddressPropertiesFilterMixIn.class);
     }
 
     @RequestMapping("/")
@@ -80,7 +80,7 @@ public class AppController {
 
         if (!"off".equalsIgnoreCase(filter)) {
             // ignore properties during serialization / marshalling
-            objectMapper.addMixIn(PostalAddress.class, PropertiesFilterMixIn.class);
+            objectMapper.addMixIn(PostalAddress.class, PostalAddressPropertiesFilterMixIn.class);
         }
 
         return reversePostalAddressList();
