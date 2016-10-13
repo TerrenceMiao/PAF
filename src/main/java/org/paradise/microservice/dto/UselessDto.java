@@ -1,6 +1,7 @@
 package org.paradise.microservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.joda.time.DateTime;
 
 /**
  * Created by terrence on 11/10/2016.
@@ -13,6 +14,8 @@ public class UselessDto {
 
     private String hidden;
     private String notHidden;
+
+    private DateTime aDateTime;
 
     public String getaString() {
         return aString;
@@ -53,6 +56,14 @@ public class UselessDto {
 
     public void setNotHidden(String notHidden) {
         this.notHidden = notHidden;
+    }
+
+    public DateTime getaDateTime() {
+        return aDateTime;
+    }
+
+    public void setaDateTime(DateTime aDateTime) {
+        this.aDateTime = aDateTime;
     }
 
 }

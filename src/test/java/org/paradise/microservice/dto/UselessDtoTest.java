@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Test;
 
 import java.util.Date;
@@ -22,6 +26,8 @@ public class UselessDtoTest {
     private String hidden = "Hide";
     private String notHidden = "Not Hide";
 
+    private DateTime aDateTime = new DateTime(DateTimeZone.UTC);
+
     @Test
     public void testClone() throws Exception {
 
@@ -36,6 +42,9 @@ public class UselessDtoTest {
         // but Disable USE_ANNOTATIONS overrides ALL / ANY annotations including MixIn
         objectMapper.disable(MapperFeature.USE_ANNOTATIONS);
 
+        objectMapper.registerModule(new JodaModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
         UselessDto uselessDto = generateUselessDto();
         UselessDto clonedUselessDto = null;
 
@@ -43,7 +52,7 @@ public class UselessDtoTest {
 
         int loop = 100000;
 
-        for(int i = 0; i < loop; i++) {
+        for (int i = 0; i < loop; i++) {
             String json = objectMapper.writeValueAsString(uselessDto);
             clonedUselessDto = objectMapper.readValue(json, UselessDto.class);
         }
@@ -59,6 +68,7 @@ public class UselessDtoTest {
         assertEquals("Cloning should be SAME", uselessDto.getaBoolean(), clonedUselessDto.getaBoolean());
         assertEquals("Cloning should be SAME", uselessDto.getHidden(), clonedUselessDto.getHidden());
         assertEquals("Cloning should be SAME", uselessDto.getNotHidden(), clonedUselessDto.getNotHidden());
+        assertEquals("Cloning should be SAME", uselessDto.getaDateTime(), clonedUselessDto.getaDateTime());
     }
 
     private UselessDto generateUselessDto() {
@@ -70,6 +80,7 @@ public class UselessDtoTest {
         uselessDto.setaBoolean(aBoolean);
         uselessDto.setHidden(hidden);
         uselessDto.setNotHidden(notHidden);
+        uselessDto.setaDateTime(aDateTime);
 
         return uselessDto;
     }
