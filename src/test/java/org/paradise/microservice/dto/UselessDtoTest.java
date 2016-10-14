@@ -9,6 +9,8 @@ import com.fasterxml.jackson.datatype.joda.JodaModule;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 
@@ -18,6 +20,8 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
  * Created by terrence on 11/10/2016.
  */
 public class UselessDtoTest {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UselessDto.class);
 
     private String aString = "I'm a string";
     private Integer anInteger = 99;
@@ -61,7 +65,7 @@ public class UselessDtoTest {
 
         long timeTaken = endTime - startTime;
 
-        System.out.println("Time taken to complete " + loop + " times serializations: " + timeTaken + "ms");
+        LOG.info("Time taken to complete " + loop + " times serializations: " + timeTaken + "ms");
 
         assertEquals("Cloning should be SAME", uselessDto.getaString(), clonedUselessDto.getaString());
         assertEquals("Cloning should be SAME", uselessDto.getAnInteger(), clonedUselessDto.getAnInteger());
