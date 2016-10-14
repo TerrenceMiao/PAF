@@ -22,10 +22,10 @@ class ApiStreetTypeSpec extends ApiAbstractSpec {
         response.responseData.streetTypes.size == totalNumberOfStreetTypes
 
         and: "Correct street type of 1st record"
-        response.responseData.streetTypes[0].streetType == "Accs"
+        response.responseData.streetTypes[0].streetType == "ACCS"
 
         and: "Correct street type of last record"
-        response.responseData.streetTypes[totalNumberOfStreetTypes - 1].streetType == "Wynd"
+        response.responseData.streetTypes[totalNumberOfStreetTypes - 1].streetType == "WYND"
     }
 
 }
