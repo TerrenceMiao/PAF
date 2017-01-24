@@ -1,7 +1,7 @@
 ### Allow "root" access MySQL database from anywhere
 
 ```
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password';
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'Welcome1';
 ```
 
 ### Set up MySQL database and user
