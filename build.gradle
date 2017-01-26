@@ -17,6 +17,7 @@ buildscript {
 
     repositories {
         maven(nexus)
+        mavenCentral()
         jcenter()
     }
 
@@ -61,6 +62,7 @@ apply plugin: 'docker'
 
 repositories {
     maven(nexus)
+    mavenCentral()
     jcenter()
 }
 

@@ -3,6 +3,8 @@ import org.apache.commons.io.FileUtils
 
 buildscript {
 	repositories {
+		maven(nexus)
+		mavenCentral()
 		jcenter()
 	}
 	dependencies {
