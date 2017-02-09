@@ -23,7 +23,8 @@ This service potentially could be used by anyone who wants to benefit from Austr
 
 
 ### References
-- Jackson Annotations, https://github.com/FasterXML/jackson-annotations/wiki/Jackson-Annotations
-- A Guide to Jackson Annotations, http://www.baeldung.com/jackson-annotations
-- Decide What Fields Get Serialized/Deserialized, http://www.baeldung.com/jackson-field-serializable-deserializable-or-not
-- Unmarshall to Collection/Array, http://www.baeldung.com/jackson-collection-array
+- Jackson Annotations, _https://github.com/FasterXML/jackson-annotations/wiki/Jackson-Annotations_
+- A Guide to Jackson Annotations, _http://www.baeldung.com/jackson-annotations_
+- Decide What Fields Get Serialized/Deserialized, _http://www.baeldung.com/jackson-field-serializable-deserializable-or-not_
+- Unmarshall to Collection/Array, _http://www.baeldung.com/jackson-collection-array_
+- Spring Data JPA Reference Documentation, _http://docs.spring.io/spring-data/jpa/docs/current/reference/html/_
