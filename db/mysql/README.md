@@ -283,3 +283,204 @@ mysql> SELECT COUNT(*) FROM locality_view;
 +----------+
 1 row in set (0.01 sec)
 ```
+
+### Fun Queries
+```
+mysql> SELECT full_address FROM address_view WHERE full_address LIKE "35 Bradshaw ST%";
++------------------------------------+
+| full_address                       |
++------------------------------------+
+| 35 BRADSHAW ST MORDIALLOC VIC 3195 |
+| 35 BRADSHAW ST ESSENDON VIC 3040   |
+| 35 BRADSHAW ST KINGSBURY VIC 3083  |
+| 35 BRADSHAW ST EDEN HILL WA 6054   |
+| 35 BRADSHAW ST FRANKSTON VIC 3199  |
++------------------------------------+
+5 rows in set (11.76 sec)
+
+mysql> SELECT DISTINCT state FROM address_view WHERE state <> '' ORDER BY state;
++-------+
+| state |
++-------+
+| ACT   |
+| NSW   |
+| NT    |
+| QLD   |
+| SA    |
+| TAS   |
+| VIC   |
+| WA    |
++-------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT street_sfx FROM address_view WHERE street_sfx <> '' ORDER BY street_sfx;
++------------+
+| street_sfx |
++------------+
+| CN         |
+| E          |
+| EX         |
+| LR         |
+| N          |
+| NE         |
+| S          |
+| SE         |
+| SW         |
+| W          |
++------------+
+10 rows in set (9.55 sec)
+
+mysql> SELECT DISTINCT flat_unit_type FROM address_view WHERE flat_unit_type <> '' ORDER BY flat_unit_type;
++----------------+
+| flat_unit_type |
++----------------+
+| CTGE           |
+| DUP            |
+| FY             |
+| HSE            |
+| KSK            |
+| MSNT           |
+| OFF            |
+| PTHS           |
+| REAR           |
+| RM             |
+| SE             |
+| SHED           |
+| SHOP           |
+| SITE           |
+| SL             |
+| STU            |
+| TNHS           |
+| U              |
+| VLLA           |
+| WARD           |
++----------------+
+20 rows in set (9.88 sec)
+
+mysql> SELECT DISTINCT floor_level_type FROM address_view WHERE floor_level_type <> '' ORDER BY floor_level_type;
+
++------------------+
+| floor_level_type |
++------------------+
+| B                |
+| G                |
+| L                |
+| LG               |
+| M                |
+| UG               |
++------------------+
+6 rows in set (9.07 sec)
+
+mysql> SELECT DISTINCT postal_delivery_type FROM address_view WHERE postal_delivery_type <> '' ORDER BY postal_delivery_type;
++----------------------+
+| postal_delivery_type |
++----------------------+
+| CARE PO              |
+| CMA                  |
+| CMB                  |
+| CPA                  |
+| GPO BOX              |
+| LOCKED BAG           |
+| MS                   |
+| PO BOX               |
+| PRIVATE BAG          |
+| RMB                  |
+| RMS                  |
+| RSD                  |
++----------------------+
+12 rows in set (8.91 sec)
+
+```
+
+### References
+* Australian Antarctic Territory (AAT), https://en.wikipedia.org/wiki/Australian_Antarctic_Territory
+
+* Address - road suffix, street suffix code A, http://meteor.aihw.gov.au/content/index.phtml/itemId/429869
+
+| Value   | Meaning    |
+|:------- |:---------- |
+| CN	  | Central    |
+| E	      | East       |
+| EX	  | Extension  |
+| LR	  | Lower      |
+| N	      | North      |
+| NE	  | North East |
+| NW	  | North West |
+| S	      | South      |
+| SE	  | South East |
+| SW	  | South West |
+| UP	  | Upper      |
+| W	      | West       |
+
+* Address - building/complex sub-unit type, code AA, http://meteor.aihw.gov.au/content/index.phtml/itemId/429004
+
+| Value   | Meaning                  |
+|:------- |:------------------------ |
+| ANT	  | Antenna                  |
+| APT	  | Apartment                |
+| ATM	  | Automated Teller Machine |
+| BBQ	  | Barbecue                 |
+| BTSD	  | Boatshed                 |
+| BLDG	  | Building                 |
+| BNGW	  | Bungalow                 |
+| CAGE	  | Cage                     |
+| CARP	  | Carpark                  |
+| CARS	  | Carspace                 |
+| CLUB	  | Club                     |
+| COOL	  | Coolroom                 |
+| CTGE	  | Cottage                  |
+| DUPL	  | Duplex                   |
+| FCTY	  | Factory                  |
+| FLAT	  | Flat                     |
+| GRGE	  | Garage                   |
+| HALL	  | Hall                     |
+| HSE	  | House                    |
+| KSK	  | Kiosk                    |
+| LSE	  | Lease                    |
+| LBBY	  | Lobby                    |
+| LOFT	  | Loft                     |
+| LOT	  | Lot                      |
+| MSNT	  | Maisonette               |
+| MBTH	  | Marine Berth             |
+| OFFC	  | Office                   |
+| RESV	  | Reserve                  |
+| ROOM	  | Room                     |
+| SHED	  | Shed                     |
+| SHOP	  | Shop                     |
+| SHRM	  | Showroom                 |
+| SIGN	  | Sign                     |
+| SITE	  | Site                     |
+| STLL	  | Stall                    |
+| STOR	  | Store                    |
+| STR	  | Strata unit              |
+| STU	  | Studio/studio apartment  |
+| SUBS	  | Substation               |
+| SE	  | Suite                    |
+| TNCY	  | Tenancy                  |
+| TWR	  | Tower                    |
+| TNHS	  | Townhouse                |
+| UNIT	  | Unit                     |
+| VLT	  | Vault                    |
+| VLLA	  | Villa                    |
+| WARD	  | Ward                     |
+| WHSE	  | Warehouse                |
+| WKSH	  | Workshop                 |
+
+* Address - floor/level type, code A, http://meteor.aihw.gov.au/content/index.phtml/itemId/429016/meteorItemView/long
+
+| Value   | Meaning            |
+|:------- |:------------------ |
+| B	      | Basement           |
+| FL	  | Floor              |
+| G	      | Ground             |
+| L	      | Level              |
+| LG	  | Lower ground floor |
+| M	      | Mezzanine          |
+| OD	  | Observation deck   |
+| P	      | Parking            |
+| PTHS	  | Penthouse          |
+| PLF	  | Platform           |
+| PDM	  | Podium             |
+| RT	  | Rooftop            |
+| SB	  | Sub-basement       |
+| UG	  | Upper ground floor |
