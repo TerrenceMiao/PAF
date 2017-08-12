@@ -169,3 +169,117 @@ INNER JOIN delivery_point_group dpg ON dp.delivy_point_group_id = dpg.delivy_poi
 INNER JOIN locality l ON l.locality_id = dpg.locality_id
   ORDER BY l.state, l.locality_name, dpg.street_name, dpg.street_type, dp.house_nbr_1, dp.house_nbr_sfx_1, dp.flat_unit_type, dp.flat_unit_nbr, dp.lot_nbr, dpg.postal_delivery_type, dp.postal_delivery_nbr;
 ```
+
+### Data in bird view
+
+* Tables
+
+```
+mysql> SELECT COUNT(*) FROM bordering_locality;
++----------+
+| COUNT(*) |
++----------+
+|    78852 |
++----------+
+1 row in set (0.02 sec)
+
+mysql> SELECT COUNT(*) FROM building_property_name;
++----------+
+| COUNT(*) |
++----------+
+|   197457 |
++----------+
+1 row in set (0.06 sec)
+
+mysql> SELECT COUNT(*) FROM code;
++----------+
+| COUNT(*) |
++----------+
+|      945 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) FROM delivery_point;
++----------+
+| COUNT(*) |
++----------+
+| 13592848 |
++----------+
+1 row in set (2.13 sec)
+
+mysql> SELECT COUNT(*) FROM delivery_point_group;
++----------+
+| COUNT(*) |
++----------+
+|   459033 |
++----------+
+1 row in set (0.08 sec)
+
+mysql> SELECT COUNT(*) FROM locality;
++----------+
+| COUNT(*) |
++----------+
+|    15790 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) FROM street_alternate;
++----------+
+| COUNT(*) |
++----------+
+|      589 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) FROM synonym;
++----------+
+| COUNT(*) |
++----------+
+|     6366 |
++----------+
+1 row in set (0.01 sec)
+```
+
+* Views
+
+```
+mysql> SELECT COUNT(*) FROM address_view;
++----------+
+| COUNT(*) |
++----------+
+| 13592848 |
++----------+
+1 row in set (4.51 sec)
+
+mysql> SELECT COUNT(*) FROM building_property_name_view;
++----------+
+| COUNT(*) |
++----------+
+|   196694 |
++----------+
+1 row in set (0.05 sec)
+
+mysql> SELECT COUNT(*) FROM compact_address_view;
++----------+
+| COUNT(*) |
++----------+
+|     7861 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) FROM delivery_point_group_view;
++----------+
+| COUNT(*) |
++----------+
+|   459033 |
++----------+
+1 row in set (0.16 sec)
+
+mysql> SELECT COUNT(*) FROM locality_view;
++----------+
+| COUNT(*) |
++----------+
+|    15790 |
++----------+
+1 row in set (0.01 sec)
+```
