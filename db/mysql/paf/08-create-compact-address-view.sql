@@ -35,8 +35,7 @@ INSERT INTO compact_address_view
 INSERT INTO compact_address_view
   SELECT *
   FROM address_view
-  WHERE TRIM(LEADING '0' FROM house_nbr_1) <> '' AND flat_unit_nbr <> ''
-        AND floor_level <> ''
+  WHERE TRIM(LEADING '0' FROM house_nbr_1) <> '' AND flat_unit_nbr <> '' AND floor_level <> ''
   LIMIT 100;
 
 -- postal delivery type - CARE PO
