@@ -71,6 +71,10 @@ CREATE TABLE IF NOT EXISTS address_view AS
                                 THEN CONCAT(floor_level_type, ' ')
                             ELSE CONCAT(floor_level_type, ' ', floor_level_nbr,
                                         ' ') END,
+                            CASE WHEN TRIM(lot_nbr) = ''
+                              THEN ''
+                            ELSE CONCAT(lot_nbr)
+                            END,
                             CONCAT(TRIM(LEADING '0' FROM dp.house_nbr_1),
                                    dp.house_nbr_sfx_1,
                                    CASE WHEN TRIM(LEADING '0' FROM dp.house_nbr_2) =
