@@ -1,3 +1,7 @@
+--
+-- This is test data, for some issues to investigate used only
+--
+
 USE paf;
 
 DROP TABLE IF EXISTS `compact_address_view`;
