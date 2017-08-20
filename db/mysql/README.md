@@ -172,6 +172,8 @@ INNER JOIN locality l ON l.locality_id = dpg.locality_id
 
 ### Data in bird view
 
+[![asciicast](https://asciinema.org/a/bVpQJFri2a8o1l0DFS5fIaW1L.png)](https://asciinema.org/a/bVpQJFri2a8o1l0DFS5fIaW1L)
+
 * Tables
 
 ```
