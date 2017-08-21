@@ -28,3 +28,4 @@ This service potentially could be used by anyone who wants to benefit from Austr
 - Decide What Fields Get Serialized/Deserialized, _http://www.baeldung.com/jackson-field-serializable-deserializable-or-not_
 - Unmarshall to Collection/Array, _http://www.baeldung.com/jackson-collection-array_
 - Spring Data JPA Reference Documentation, _http://docs.spring.io/spring-data/jpa/docs/current/reference/html/_
+- asciinema, install and run, _https://asciinema.org/docs/installation_
